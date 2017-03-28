@@ -74,7 +74,7 @@ Example:
 
 Annotator is the only class you need. Create an annotator object.
 ```python
->>>from practnlptools.tools import Annotator
+>>>from pntl.tools import Annotator
 >>>annotator=Annotator()
 ```
 
