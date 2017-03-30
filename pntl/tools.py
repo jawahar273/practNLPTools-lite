@@ -86,7 +86,7 @@ class Annotator:
     def getSennaTag(self,sentence):
         input_data=sentence
         package_directory = os.path.dirname(self.senna_path)
-        print("testing dir",self.dep_par_path, package_directory)
+        #print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable=self.get_cos_name(os_name)
         senna_executable = os.path.join(package_directory,executable)
@@ -118,13 +118,8 @@ class Annotator:
         else:
             senna_tags=[x.strip() for x in senna_tags.split("\n")]
         no_verbs=len(senna_tags[0].split("\t"))-6
-        words=[]
-        pos=[]
-        chunk=[]
-        ner=[]
-        verb=[]
-        srls=[]
-        syn=[]
+
+        words=[];pos=[];chunk=[];ner=[];verb=[];srls=[];syn=[]
         for senna_tag in senna_tags:
             senna_tag=senna_tag.split("\t")
             words+=[senna_tag[0].strip()]
@@ -200,7 +195,13 @@ class Annotator:
         return annotations
 
 def test():  
-              
+    """
+     please replace the dir of 
+     :senna_path: path for senna location
+     :dep_path: stanford dependency parser location 
+     :dep_model: stanford dependency parser model location
+     with your directory 
+    """
     annotator=Annotator(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna")
     #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
