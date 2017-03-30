@@ -41,11 +41,12 @@ class Annotator:
     Example:
     """
 
-    def __init__(self, senna_path="", dep_path="", dep_model=""):
-        self.senna_path = senna_path
+    def __init__(self, senna_path, dep_path="", dep_model=""):
+        self.senna_path = senna_path+os.path.sep
         self.dep_par_path = dep_path
         self.dep_par_model = dep_model
-        self.os_dir_pre = os.path.sep
+         
+        
 
     def get_cos_name(self, os_name):
         """"
@@ -85,6 +86,7 @@ class Annotator:
     def getSennaTag(self,sentence):
         input_data=sentence
         package_directory = os.path.dirname(self.senna_path)
+        print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable=self.get_cos_name(os_name)
         senna_executable = os.path.join(package_directory,executable)
@@ -98,6 +100,7 @@ class Annotator:
     def getDependency(self,parse):
         package_directory = os.path.dirname(self.dep_par_path)
         cwd=os.getcwd()
+        
         os.chdir(package_directory)
         with open(cwd+"/in.parse","w", encoding='utf-8') as parsefile:
              parsefile.write(parse)
@@ -196,20 +199,19 @@ class Annotator:
             annotations['dep_parse']=self.getDependency(annotations['syntax_tree'])
         return annotations
 
-def test():            
-    annotator=Annotator(senna_path="/media/jawahar/jon/ubuntu/senna", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna")
+def test():  
+              
+    annotator=Annotator(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna")
     #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
-    print((annotator.getAnnotations("He killed the man with a knife and murdered him with a dagger.",dep_parse=True)['srl']))
-    print((annotator.getAnnotations("In this paper, we tackle the SRL detection task.",dep_parse=True)['srl']))
-    print((annotator.getAnnotations("He created the robot and broke it after making it.",dep_parse=True)['srl']))
-    """
-    print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['dep_parse']))
-    print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['chunk']))
-    #print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['pos']))
-    print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['ner']))
-    #print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['srl']))
-    #print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['syntax_tree']))
-    #print((annotator.getAnnotations("Republican candidate George Bush was great.",dep_parse=True)['words']))
+    sent = "He created the robot and broke it after making it."
+    #"""
+    print((annotator.getAnnotations(sent,dep_parse=True)['dep_parse']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['chunk']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['pos']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['ner']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['srl']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['syntax_tree']))
+    print((annotator.getAnnotations(sent,dep_parse=True)['words']))
     #"""
 
 if __name__ == "__main__":
