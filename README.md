@@ -73,6 +73,12 @@ Example:
   
 
 Annotator is the only class you need. Create an annotator object.
+
+pntl
+| -- tools
+     | --class-- Annotator
+| -- utils
+     | --function-- skipgrams
 ```python
 >>>from pntl.tools import Annotator
 >>>annotator=Annotator()

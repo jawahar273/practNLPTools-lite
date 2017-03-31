@@ -202,6 +202,7 @@ def test():
      :dep_model: stanford dependency parser model location
      with your directory 
     """
+    from utils import skipgrams 
     annotator=Annotator(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna")
     #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
@@ -213,6 +214,7 @@ def test():
     print((annotator.getAnnotations(sent,dep_parse=True)['srl']))
     print((annotator.getAnnotations(sent,dep_parse=True)['syntax_tree']))
     print((annotator.getAnnotations(sent,dep_parse=True)['words']))
+    print( list(skipgrams(sent.split(), n=3, k=2)) )
     #"""
 
 if __name__ == "__main__":
