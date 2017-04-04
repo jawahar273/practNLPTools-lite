@@ -45,15 +45,14 @@ class Annotator:
     Example:
     """
 
-    def __init__(self, senna_path="", dep_path="", dep_model=""):
+    def __init__(self, senna_path="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure'):
         """
         :senna_path: path where is located
-        :dep_path: path where stanford dependencie jar is located
-        :dep_model: path where Stanford dependencie mode is located
+        :dep_model: Stanford dependencie mode
         """
         self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = dep_path+os.path.sep
-        self.dep_par_model = dep_model+os.path.sep
+        self.dep_par_path = os.getcwd()+os.path.sep
+        self.dep_par_model = dep_model
 
 
 
@@ -118,20 +117,23 @@ class Annotator:
         return senna_stdout
 
     def getDependency(self, parse):
+        """
+         :parse: parse is the input and it is writen in as file
+         change to the Stanford parser direction and process the works
+        """
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
-
         os.chdir(package_directory)
         with open(cwd+"/in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
-        pipe = subprocess.Popen(['java','-cp', 'stanford-parser.jar',\
-         'edu.stanford.nlp.trees.EnglishGrammaticalStructure' , \
+        pipe = subprocess.Popen(['java', '-cp', 'stanford-parser.jar',\
+         self.dep_par_model , \
          '-treeFile', '{}{}in.parse'.format(cwd, os.path.sep), '-collapsed'], \
          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         pipe.wait()
         stanford_out = pipe.stdout.read()
         os.chdir(cwd)
-        return stanford_out.strip()
+        return stanford_out.decode("utf-8").strip()
 
     def getAnnotations(self,sentence="", senna_tags=None, dep_parse=False):
         """
@@ -220,7 +222,7 @@ class Annotator:
             annotations['dep_parse'] = self.getDependency(annotations['syntax_tree'])
         return annotations
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna"):  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna"):  
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
@@ -228,7 +230,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_path="/media/jawahar/
      :dep_model: stanford dependency parser model location
     """
     from utils import skipgrams
-    annotator = Annotator(senna_path, dep_path, dep_model)
+    annotator = Annotator(senna_path)
     #print((annotator.getBatchAnnotations(\
     # ["He killed the man with a knife and murdered him with a dagger.",\
     # "He is a good boy."],dep_parse=True)))
