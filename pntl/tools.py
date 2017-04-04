@@ -93,8 +93,8 @@ class Annotator:
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
-        p = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = p.communicate(input=input_data.encode('utf-8'))[0]
+        pipe = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
 
@@ -109,11 +109,11 @@ class Annotator:
         #print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable = self.get_cos_name(os_name)
-        senna_executable = os.path.join(package_directory,executable)
-        cwd=os.getcwd()
+        senna_executable = os.path.join(package_directory, executable)
+        cwd = os.getcwd()
         os.chdir(package_directory)
-        p = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = p.communicate(input=input_data.encode('utf-8'))[0]
+        pipe = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
 
@@ -124,12 +124,12 @@ class Annotator:
         os.chdir(package_directory)
         with open(cwd+"/in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
-        p = subprocess.Popen(['java','-cp', 'stanford-parser.jar',\
+        pipe = subprocess.Popen(['java','-cp', 'stanford-parser.jar',\
          'edu.stanford.nlp.trees.EnglishGrammaticalStructure' , \
          '-treeFile', '{}{}in.parse'.format(cwd, os.path.sep), '-collapsed'], \
          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        p.wait()
-        stanford_out = p.stdout.read()
+        pipe.wait()
+        stanford_out = pipe.stdout.read()
         os.chdir(cwd)
         return stanford_out.strip()
 
@@ -209,7 +209,7 @@ class Annotator:
         annotations['pos'] = list(zip(words, pos))
         annotations['ner'] = list(zip(words, ner))
         annotations['srl'] = roles
-        annotations['verbs'] = [x for x in verb if x!="-"]
+        annotations['verbs'] = [x for x in verb if x != "-"]
         annotations['chunk'] = list(zip(words, chunk))
         annotations['dep_parse'] = ""
         annotations['syntax_tree'] = ""
@@ -224,22 +224,24 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_path="/media/jawahar/
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
-     :dep_path: stanford dependency parser location 
+     :dep_path: stanford dependency parser location
      :dep_model: stanford dependency parser model location
     """
-    from utils import skipgrams 
-    annotator=Annotator(senna_path, dep_path, dep_model)
-    #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
+    from utils import skipgrams
+    annotator = Annotator(senna_path, dep_path, dep_model)
+    #print((annotator.getBatchAnnotations(\
+    # ["He killed the man with a knife and murdered him with a dagger.",\
+    # "He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
     #"""
-    print('dep_parse:\n',(annotator.getAnnotations(sent,dep_parse=True)['dep_parse']))
-    print('chunk:\n',(annotator.getAnnotations(sent,dep_parse=True)['chunk']))
-    print('pos:\n',(annotator.getAnnotations(sent,dep_parse=True)['pos']))
-    print('ner:\n',(annotator.getAnnotations(sent,dep_parse=True)['ner']))
-    print('srl:\n',(annotator.getAnnotations(sent,dep_parse=True)['srl']))
-    print('syntax tree:\n',(annotator.getAnnotations(sent,dep_parse=True)['syntax_tree']))
-    print('words:\n',(annotator.getAnnotations(sent,dep_parse=True)['words']))
-    print('skip gram\n', list(skipgrams(sent.split(), n=3, k=2)) )
+    print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
+    print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
+    print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
+    print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
+    print('srl:\n', (annotator.getAnnotations(sent, dep_parse=True)['srl']))
+    print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
+    print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
+    print('skip gram\n', list(skipgrams(sent.split(), n=3, k=2)))
     #"""
 
 if __name__ == "__main__":
