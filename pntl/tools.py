@@ -195,28 +195,28 @@ class Annotator:
                                 role[splits[1]] = role[splits[1]].strip()
                             else:
                                 role[splits[1]] = temp.strip()
-                    elif len(splits)==3:
+                    elif len(splits) == 3:
                         if splits[1]+"-"+splits[2] in role:
-                            role[splits[1]+"-"+splits[2]]+=" "+temp
-                            role[splits[1]+"-"+splits[2]]=role[splits[1]+"-"+splits[2]].strip()
+                            role[splits[1]+"-"+splits[2]] += " "+temp
+                            role[splits[1]+"-"+splits[2]] = role[splits[1]+"-"+splits[2]].strip()
                         else:
-                            role[splits[1]+"-"+splits[2]]=temp.strip()
-                    temp=""
+                            role[splits[1]+"-"+splits[2]] = temp.strip()
+                    temp = ""
                 i += 1
             if "V" in role:
                 roles += [role]
         annotations['words'] = words
-        annotations['pos'] = list(zip(words,pos))
-        annotations['ner'] = list(zip(words,ner))
+        annotations['pos'] = list(zip(words, pos))
+        annotations['ner'] = list(zip(words, ner))
         annotations['srl'] = roles
-        annotations['verbs'] =[x for x in verb if x!="-"]
-        annotations['chunk'] = list(zip(words,chunk))
+        annotations['verbs'] = [x for x in verb if x!="-"]
+        annotations['chunk'] = list(zip(words, chunk))
         annotations['dep_parse'] = ""
         annotations['syntax_tree'] = ""
-        for (w,s,p) in zip(words,syn,pos):
-            annotations['syntax_tree'] += s.replace("*","("+p+" "+w+")")
+        for (w,s,p) in zip(words, syn, pos):
+            annotations['syntax_tree'] += s.replace("*", "("+p+" "+w+")")
         #annotations['syntax_tree']=annotations['syntax_tree'].replace("S1","S")
-        if(dep_parse):
+        if dep_parse:
             annotations['dep_parse'] = self.getDependency(annotations['syntax_tree'])
         return annotations
 
