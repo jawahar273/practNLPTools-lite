@@ -194,7 +194,7 @@ class Annotator:
             annotations['dep_parse']=self.getDependency(annotations['syntax_tree'])
         return annotations
 
-def test():  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna"):  
     """
      please replace the dir of 
      :senna_path: path for senna location
@@ -203,7 +203,7 @@ def test():
      with your directory 
     """
     from utils import skipgrams 
-    annotator=Annotator(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna")
+    annotator=Annotator(senna_path, dep_path, dep_model)
     #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
     #"""
