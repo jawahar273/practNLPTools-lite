@@ -35,7 +35,7 @@ class Annotator:
     Named Entity Recognisation (NER), 
     Dependency Parse 
     and
-     Syntactic Constituency Parse.
+    Syntactic Constituency Parse.
     Applying multiple operations at once has the speed advantage. For example,
     senna v3.0 will calculate the POS tags in case you are extracting the named
     entities. Applying both of the operations will cost only the time of
@@ -45,7 +45,6 @@ class Annotator:
     the MAX_SENTENCE_SIZE value in SENNA_main.c should be considered and your
     system specific binary should be rebuilt. Otherwise this could introduce
     misalignment errors.
-    Example:
     """
 
     def __init__(self, senna_path="", dep_model=""):
@@ -59,7 +58,7 @@ class Annotator:
             self.dep_par_model = dep_model
         else:
             self.dep_par_model = 'edu.stanford.nlp.trees.EnglishGrammaticalStructure'
-    
+
     @property
     def senna_chdir(self):
         return self.senna_path
@@ -247,9 +246,12 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     """
     from utils import skipgrams
     annotator = Annotator(senna_path, dep_model)
-    #print((annotator.getBatchAnnotations(\
-    # ["He killed the man with a knife and murdered him with a dagger.",\
-    # "He is a good boy."],dep_parse=True)))
+    """
+    print((annotator.getBatchAnnotations(\
+     ["He killed the man with a knife and murdered him with a dagger.",\
+     "He is a good boy."],dep_parse=True)))
+    #"""
+
     sent = "He created the robot and broke it after making it."
 
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
