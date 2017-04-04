@@ -238,7 +238,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
-     :dep_path: stanford dependency parser location
      :dep_model: stanford dependency parser model location
     """
     from utils import skipgrams
