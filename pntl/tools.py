@@ -32,7 +32,10 @@ class Annotator:
     Part of Speech Tags,
      Semantic Role Labels,
     Shallow Parsing (Chunking),
-    Named Entity Recognisation (NER), Dependency Parse and Syntactic Constituency Parse.
+    Named Entity Recognisation (NER), 
+    Dependency Parse 
+    and
+     Syntactic Constituency Parse.
     Applying multiple operations at once has the speed advantage. For example,
     senna v3.0 will calculate the POS tags in case you are extracting the named
     entities. Applying both of the operations will cost only the time of
@@ -111,7 +114,7 @@ class Annotator:
 
     def getSennaTag(self, sentence):
         """
-        :sentence: a sentence string for processing
+        :sentence: a sentence string 
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
         """
@@ -139,7 +142,7 @@ class Annotator:
         with open(cwd+"/in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(['java', '-cp', 'stanford-parser.jar',\
-         self.dep_par_model , \
+         self.dep_par_model, \
          '-treeFile', '{}{}in.parse'.format(cwd, os.path.sep), '-collapsed'], \
          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         pipe.wait()
@@ -149,7 +152,9 @@ class Annotator:
 
     def getAnnotations(self,sentence="", senna_tags=None, dep_parse=False):
         """
-        
+        :sentence: a sentence string
+        passing the string to senna and performing aboue given process 
+        and the returning them in a form of `Dict()`
         """
         annotations = {}
         if not senna_tags:
