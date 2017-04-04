@@ -196,7 +196,7 @@ class Annotator:
 
 def test(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar/jon/ubuntu/senna", dep_model="/media/jawahar/jon/ubuntu/senna"):  
     """
-     please replace the dir of 
+     please replace the path of yours environment 
      :senna_path: path for senna location
      :dep_path: stanford dependency parser location 
      :dep_model: stanford dependency parser model location
@@ -207,13 +207,13 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna/", dep_path="/media/jawahar
     #print((annotator.getBatchAnnotations(["He killed the man with a knife and murdered him with a dagger.","He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
     #"""
-    print((annotator.getAnnotations(sent,dep_parse=True)['dep_parse']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['chunk']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['pos']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['ner']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['srl']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['syntax_tree']))
-    print((annotator.getAnnotations(sent,dep_parse=True)['words']))
+    print('dep_parse:\n',(annotator.getAnnotations(sent,dep_parse=True)['dep_parse']))
+    print('chunk:\n',(annotator.getAnnotations(sent,dep_parse=True)['chunk']))
+    print('pos:\n',(annotator.getAnnotations(sent,dep_parse=True)['pos']))
+    print('ner:\n',(annotator.getAnnotations(sent,dep_parse=True)['ner']))
+    print('srl:\n',(annotator.getAnnotations(sent,dep_parse=True)['srl']))
+    print('syntax tree:\n',(annotator.getAnnotations(sent,dep_parse=True)['syntax_tree']))
+    print('words:\n',(annotator.getAnnotations(sent,dep_parse=True)['words']))
     print( list(skipgrams(sent.split(), n=3, k=2)) )
     #"""
 
