@@ -235,7 +235,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna"):
     # ["He killed the man with a knife and murdered him with a dagger.",\
     # "He is a good boy."],dep_parse=True)))
     sent = "He created the robot and broke it after making it."
-    #"""
+
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
     print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
