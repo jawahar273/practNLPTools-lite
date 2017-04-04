@@ -45,16 +45,28 @@ class Annotator:
     Example:
     """
 
-    def __init__(self, senna_path="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure'):
+    def __init__(self, senna_path="", dep_model=""):
         """
         :senna_path: path where is located
         :dep_model: Stanford dependencie mode
         """
         self.senna_path = senna_path+os.path.sep
         self.dep_par_path = os.getcwd()+os.path.sep
-        self.dep_par_model = dep_model
+        if dep_model:
+            self.dep_par_model = dep_model
+        else:
+            self.dep_par_model = 'edu.stanford.nlp.trees.EnglishGrammaticalStructure'
+    
+    @property
+    def senna_chdir(self):
+        return self.senna_path
 
-
+    @senna_chdir.setter
+    def senna_chdir(self, val):
+        if os.path.isdir(val):
+            self.senna_path = val+os.path.sep
+            return True
+        return False
 
     def get_cos_name(self, os_name):
         """"
@@ -222,7 +234,7 @@ class Annotator:
             annotations['dep_parse'] = self.getDependency(annotations['syntax_tree'])
         return annotations
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna"):  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):  
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
@@ -230,7 +242,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna"):
      :dep_model: stanford dependency parser model location
     """
     from utils import skipgrams
-    annotator = Annotator(senna_path)
+    annotator = Annotator(senna_path, dep_model)
     #print((annotator.getBatchAnnotations(\
     # ["He killed the man with a knife and murdered him with a dagger.",\
     # "He is a good boy."],dep_parse=True)))
