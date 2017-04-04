@@ -1,4 +1,4 @@
-
+#_
 from itertools import chain, combinations                                            
 import copy                                                                      
 #from nltk.util import ngrams                                                        
@@ -52,5 +52,5 @@ def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False, pad_symbol=No
      # len(sequence) < n+k
      for ng in list(skipgrams(history, n, k-1)):
          yield ng
-
-print( list(skipgrams("hello there, how are you".split())) )
+#If_
+#print( list(skipgrams("hello there, how are you".split())) )
