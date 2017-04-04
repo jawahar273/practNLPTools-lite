@@ -179,7 +179,7 @@ class Annotator:
                         if splits[1]+"-"+splits[2] in role:
                             role[splits[1]+"-"+splits[2]] += " "+words[i]
                         else:
-                            role[splits[1]+"-"+splits[2]] = words[i]  
+                            role[splits[1]+"-"+splits[2]] = words[i]
                 elif splits[0] == "B":
                     temp = temp+" "+words[i]
                 elif splits[0] == "I":
@@ -187,20 +187,20 @@ class Annotator:
                 elif splits[0] == "E":
                     temp = temp+" "+words[i]
                     if len(splits) == 2:
-                            if splits[1] == "V":
-                                    role[splits[1]] = temp.strip()
+                        if splits[1] == "V":
+                            role[splits[1]] = temp.strip()
+                        else:
+                            if splits[1] in role:
+                                role[splits[1]] += " "+temp
+                                role[splits[1]] = role[splits[1]].strip()
                             else:
-                                       if splits[1] in role:
-                                            role[splits[1]] += " "+temp
-                                            role[splits[1]] = role[splits[1]].strip()
-                                       else:
-                                            role[splits[1]] = temp.strip()
+                                role[splits[1]] = temp.strip()
                     elif len(splits)==3:
-                                 if splits[1]+"-"+splits[2] in role:
-                                      role[splits[1]+"-"+splits[2]]+=" "+temp
-                                      role[splits[1]+"-"+splits[2]]=role[splits[1]+"-"+splits[2]].strip()
-                                 else:
-                                    role[splits[1]+"-"+splits[2]]=temp.strip()
+                        if splits[1]+"-"+splits[2] in role:
+                            role[splits[1]+"-"+splits[2]]+=" "+temp
+                            role[splits[1]+"-"+splits[2]]=role[splits[1]+"-"+splits[2]].strip()
+                        else:
+                            role[splits[1]+"-"+splits[2]]=temp.strip()
                     temp=""
                 i += 1
             if "V" in role:
