@@ -61,6 +61,10 @@ class Annotator:
 
     @property
     def senna_chdir(self):
+        """
+        The return the path of senna location
+        and set the path for senna at run time
+        """
         return self.senna_path
 
     @senna_chdir.setter
