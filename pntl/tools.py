@@ -63,8 +63,15 @@ class Annotator:
         self.default_jar_clr =  ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
                       '-treeFile', 'in.parse', '-collapsed']
+
+        self.print_values()
+
+
+    def print_values(self):
+        print("*"*50)
         print("default values:\nsenna path:\n", self.senna_path, "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_clr))
+        print("*"*50)
 
 
     @property
@@ -261,7 +268,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
      :senna_path: path for senna location
      :dep_model: stanford dependency parser model location
     """
-    from utils import skipgrams
+    from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model)
     """
     print((annotator.getBatchAnnotations(\
