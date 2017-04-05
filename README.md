@@ -93,6 +93,7 @@ pntl
 >>>annotator.senna_chdir# path is set as "/home/"
 True
 ```
+
 ###Self-testing
 
 To test for your self please use function `test()` 
