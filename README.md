@@ -89,9 +89,14 @@ pntl
 >>>from pntl.tools import Annotator
 >>>annotator = Annotator()
 >>>#changing senna path at run time is also possible
+>>>
 >>>annotator.senna_chdir = "/home"
 >>>annotator.senna_chdir# path is set as "/home/"
 True
+>>>annotator.java_clr
+java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse -collapsed
+>>>
+>>>annotator.java_clr = java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse 
 ```
 
 Self-testing
