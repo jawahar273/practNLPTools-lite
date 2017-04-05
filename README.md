@@ -74,20 +74,55 @@ Example:
   
 
 Annotator is the only class you need. Create an annotator object.
+
 <pre>
 pntl
 | -- tools
      | --class-- Annotator
+     | --jar-- stanford-parser
 | -- utils
      | --function-- skipgrams
-<<<<<<< HEAD
-=======
+
 </pre>
->>>>>>> 6145c0806b08fc6b0d628bbd1aa59e19e0ca1818
 
 ```python
 >>>from pntl.tools import Annotator
->>>annotator=Annotator()
+>>>annotator = Annotator()
+>>>#changing senna path at run time is also possible
+>>>annotator.senna_chdir = "/home"
+>>>annotator.senna_chdir# path is set as "/home/"
+True
+```
+###Self-testing
+To test for your self please use function `test()` 
+
+```python
+>>>from pntl.tools import test
+>>>test("/home/user/senna")# sample output
+dep_parse:
+ nsubj(created-2, He-1)
+root(ROOT-0, created-2)
+det(robot-4, the-3)
+dobj(created-2, robot-4)
+conj_and(created-2, broke-6)
+dobj(broke-6, it-7)
+prepc_after(broke-6, making-9)
+dobj(making-9, it.-10)
+chunk:
+ [('He', 'S-NP'), ('created', 'S-VP'), ('the', 'B-NP'), ('robot', 'E-NP'), ('and', 'O'), ('broke', 'S-VP'), ('it', 'S-NP'), ('after', 'S-PP'), ('making', 'S-VP'), ('it.', 'S-NP')]
+pos:
+ [('He', 'PRP'), ('created', 'VBD'), ('the', 'DT'), ('robot', 'NN'), ('and', 'CC'), ('broke', 'VBD'), ('it', 'PRP'), ('after', 'IN'), ('making', 'VBG'), ('it.', 'PRP')]
+ner:
+ [('He', 'O'), ('created', 'O'), ('the', 'O'), ('robot', 'O'), ('and', 'O'), ('broke', 'O'), ('it', 'O'), ('after', 'O'), ('making', 'O'), ('it.', 'O')]
+srl:
+ [{'A1': 'the robot', 'V': 'created', 'A0': 'He'}, {'A1': 'it', 'AM-TMP': 'after making it.', 'V': 'broke', 'A0': 'He'}, {'A1': 'it.', 'V': 'making', 'A0': 'He'}]
+syntax tree:
+ (S1(S(NP(PRP He))(VP(VP(VBD created)(NP(DT the)(NN robot)))(CC and)(VP(VBD broke)(NP(PRP it))(PP(IN after)(S(VP(VBG making)(NP(PRP it.)))))))))
+words:
+ ['He', 'created', 'the', 'robot', 'and', 'broke', 'it', 'after', 'making', 'it.']
+skip gram
+ [('He', 'created', 'the'), ('He', 'created', 'robot'), ('He', 'created', 'and'), ('He', 'the', 'robot'), ('He', 'the', 'and'), ('He', 'robot', 'and'), ('created', 'the', 'robot'), ('created', 'the', 'and'), ('created', 'the', 'broke'), ('created', 'robot', 'and'), ('created', 'robot', 'broke'), ('created', 'and', 'broke'), ('the', 'robot', 'and'), ('the', 'robot', 'broke'), ('the', 'robot', 'it'), ('the', 'and', 'broke'), ('the', 'and', 'it'), ('the', 'broke', 'it'), ('robot', 'and', 'broke'), ('robot', 'and', 'it'), ('robot', 'and', 'after'), ('robot', 'broke', 'it'), ('robot', 'broke', 'after'), ('robot', 'it', 'after'), ('and', 'broke', 'it'), ('and', 'broke', 'after'), ('and', 'broke', 'making'), ('and', 'it', 'after'), ('and', 'it', 'making'), ('and', 'after', 'making'), ('broke', 'it', 'after'), ('broke', 'it', 'making'), ('broke', 'it', 'it.'), ('broke', 'after', 'making'), ('broke', 'after', 'it.'), ('broke', 'making', 'it.'), ('it', 'after', 'making'), ('it', 'after', 'it.'), ('it', 'making', 'it.'), ('after', 'making', 'it.')]
+
 ```
 
 Using Function getAnnoations(sentence) returns a dictionary of annotations.
@@ -164,6 +199,7 @@ Better method is:
 ```python
 >>>from pntl.utils import skipgrams
 >>>sent = "He created the robot and broke it after making it."
+>>>#return generators
 >>>list(skipgrams(sent.split(), n=3, k=2))
 [('He', 'created', 'the'), ('He', 'created', 'robot'), ('He', 'created', 'and'), ('He', 'the', 'robot'), ('He', 'the', 'and'), ('He', 'robot', 'and'), ('created', 'the', 'robot'), ('created', 'the', 'and'), ('created', 'the', 'broke'), ('created', 'robot', 'and'), ('created', 'robot', 'broke'), ('created', 'and', 'broke'), ('the', 'robot', 'and'), ('the', 'robot', 'broke'), ('the', 'robot', 'it'), ('the', 'and', 'broke'), ('the', 'and', 'it'), ('the', 'broke', 'it'), ('robot', 'and', 'broke'), ('robot', 'and', 'it'), ('robot', 'and', 'after'), ('robot', 'broke', 'it'), ('robot', 'broke', 'after'), ('robot', 'it', 'after'), ('and', 'broke', 'it'), ('and', 'broke', 'after'), ('and', 'broke', 'making'), ('and', 'it', 'after'), ('and', 'it', 'making'), ('and', 'after', 'making'), ('broke', 'it', 'after'), ('broke', 'it', 'making'), ('broke', 'it', 'it.'), ('broke', 'after', 'making'), ('broke', 'after', 'it.'), ('broke', 'making', 'it.'), ('it', 'after', 'making'), ('it', 'after', 'it.'), ('it', 'making', 'it.'), ('after', 'making', 'it.')]
 ```
