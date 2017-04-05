@@ -94,7 +94,8 @@ pntl
 True
 ```
 
-###Self-testing
+Self-testing
+============
 
 To test for your self please use function `test()` 
 
