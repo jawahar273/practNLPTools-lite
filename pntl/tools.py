@@ -62,7 +62,7 @@ class Annotator:
 
         self.default_jar_clr =  ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
-                      '-treeFile', '{}{}in.parse'.format(cwd, os.path.sep), '-collapsed']
+                      '-treeFile', 'in.parse', '-collapsed']
 
 
     @property
@@ -155,13 +155,13 @@ class Annotator:
         """
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
-        os.chdir(package_directory)
-        with open(cwd+"/in.parse", "w", encoding='utf-8') as parsefile:
+        #os.chdir(package_directory)
+        with open("/in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_clr, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         pipe.wait()
         stanford_out = pipe.stdout.read()
-        os.chdir(cwd)
+        #os.chdir(cwd)
         return stanford_out.decode("utf-8").strip()
 
     def getAnnotations(self,sentence="", senna_tags=None, dep_parse=False):
