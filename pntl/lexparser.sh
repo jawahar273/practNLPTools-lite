@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # Runs the English PCFG parser on one or more files, printing trees only
+# first run depparser.sh
 
 if [ ! $# -ge 1 ]; then
   echo Usage: `basename $0` 'file(s)'
