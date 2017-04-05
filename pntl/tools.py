@@ -94,7 +94,7 @@ class Annotator:
         return " ".join(self.default_jar_clr)
 
     @jar_clr.setter
-    def jar_clr(self):
+    def jar_clr(self, val):
          self.default_jar_clr = val.split()
 
     def get_cos_name(self, os_name):
@@ -286,6 +286,8 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
     print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
     print('skip gram\n', list(skipgrams(sent.split(), n=3, k=2)))
+    #annotator.jar_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
+    #print(annotator.senna_chdir, annotator.jar_clr)
     #"""
 
 if __name__ == "__main__":

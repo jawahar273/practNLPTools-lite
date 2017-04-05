@@ -218,9 +218,9 @@ Issues
 1. You cannot give sentence with '(' ')', that is left bracket aor right bracket. It will end up in returning no result. So please clean Sentences before sending to annotator.
 2. Other issue might be senna executable built for various platforms. I have not experienced it, but its highly probable. If you get this issuse:
 
-Go to folder practnlptools
+Go to folder senna location
 ```c
-    cd practnlptools
+    cd senna
     gcc -O3 -o senna-linux64 *.c  (For linux 64 bit)
     gcc -O3 -o senna-linux32 *.c  (For linux 32 bit)
     gcc -O3 -o senna-senna-osx *.c (For Mac)
