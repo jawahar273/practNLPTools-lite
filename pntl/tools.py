@@ -153,7 +153,7 @@ class Annotator:
         cwd = os.getcwd()
         os.chdir(package_directory)
         pipe = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
+        senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
 
@@ -173,7 +173,23 @@ class Annotator:
         #os.chdir(cwd)
         return stanford_out.decode("utf-8").strip()
 
-    def getAnnotations(self,sentence="", senna_tags=None, dep_parse=False):
+    def getBatchAnnotations(self,sentences,dep_parse=False):
+        annotations=[]	
+        batch_senna_tags=self.getSennaTagBatch(sentences)
+        for senna_tags in batch_senna_tags:
+                annotations+=[self.getAnnotationsTagging(senna_tags=senna_tags)]
+        if(dep_parse):
+                syntax_tree=""
+                for annotation in annotations:
+                        syntax_tree+=annotation['syntax_tree']
+                dependencies=self.getDependency(syntax_tree).split("\n\n")
+                #print dependencies
+                if (len(annotations)==len(dependencies)):
+                        for (d,a) in zip(dependencies,annotations):
+                                a["dep_parse"]=d
+        return annotations
+
+    def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=False):
         """
         :sentence: a sentence string
         passing the string to senna and performing aboue given process 
@@ -271,13 +287,14 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model)
     """
-    print((annotator.getBatchAnnotations(\
-     ["He killed the man with a knife and murdered him with a dagger.",\
-     "He is a good boy."],dep_parse=True)))
     #"""
-
+    print((annotator.getAnnotations(\
+     ["He killed the man with a knife and murdered him with a dagger.",\
+     "He is a good boy.", "He created the robot and broke it after making it."], batch=True,dep_parse=True)))
+    
+    
     sent = "He created the robot and broke it after making it."
-
+    """
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
     print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -292,5 +309,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
 
 if __name__ == "__main__":
     test()
+
 
 
