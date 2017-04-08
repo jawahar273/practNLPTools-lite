@@ -58,11 +58,11 @@ By using the `time` command in ubuntu on running the `testsrl.py` on this [link]
 
 | pntl | NLTK-senna |
 | --   | ---  |
-| at fist run |
+| at fist run 
 |real	0m1.674s | real	0m2.484s
 |user	0m1.564s | user	0m1.868s
 |sys	0m0.228s | sys	0m0.524s
-| at second run |
+| at second run 
 | real	0m1.245s | real	0m3.359s
 | user	0m1.560s | user	0m2.016s
 | sys	0m0.152s   | sys	0m1.168s
