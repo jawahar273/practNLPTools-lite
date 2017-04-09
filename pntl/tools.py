@@ -159,7 +159,7 @@ class Annotator:
 
     def getDependency(self, parse):
         """
-         :parse: parse is the input and it is writen in as file
+         :parse: parse is the input(tree format) and it is writen in as file
          change to the Stanford parser direction and process the works
         """
         package_directory = os.path.dirname(self.dep_par_path)
