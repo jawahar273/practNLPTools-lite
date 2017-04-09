@@ -18,7 +18,11 @@ Functionality
 * Named Entity Recognisation (NER)
 * Dependency Parsing
 * Shallow Chunking
-* Skip-gram
+* Skip-gram(in-case)
+
+Futur work
+==========
+* custome input format for stanford parser insted of tree format
 
 Features
 =============
@@ -116,6 +120,10 @@ java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure 
 >>>
 >>>annotator.java_clr = java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse 
 ```
+#### alter option for -treeFile
+Usage: java GrammaticalStructure [options]* [-sentFile|-treeFile|-conllxFile file] [-testGraph]
+  options: -basic, -collapsed, -CCprocessed [the default], -collapsedTree, -parseTree, -test, -parserFile file, -conllx, -keepPunct, -altprinter -altreader -altreaderfile
+> use -treeFile as default and defaultly the `getDependency()` write in tree format in `in.parser`, to use other pls it might need proper CoreNlp(stanford files) and please know what your doing to have favourable output or have to write custome module before passing to `getDependency()`. 
 
 Self-testing
 ============
