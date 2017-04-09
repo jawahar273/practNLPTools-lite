@@ -107,6 +107,9 @@ pntl
 
 </pre>
 
+>`in.parser` file consite syntax tree(for now) which is use as input for dependencie parser. One more thing the last runned sentence output only 
+will be stored.
+
 ```python
 >>>from pntl.tools import Annotator
 >>>annotator = Annotator()
