@@ -278,6 +278,7 @@ class Annotator:
             annotations['dep_parse'] = self.getDependency(annotations['syntax_tree'])
         return annotations
 
+
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):  
     """
      please replace the path of yours environment(accouding to OS path)
