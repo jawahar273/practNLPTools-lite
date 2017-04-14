@@ -164,7 +164,7 @@ skip gram
 
 >Run the `depParser.sh` for English PCFG parser on one or more files, printing trees only
 
-if have error like this means
+Error:
 (Unable to resolve "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz" as either class path, filename or URL)
 then you should have CoreNLP(Stanford).
 
