@@ -136,7 +136,7 @@ To test for your self please use function `test()`
 
 ```python
 >>>from pntl.tools import test
->>>test("/home/user/senna")# input the location of senna file,
+>>>test("/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
 dep_parse:
  nsubj(created-2, He-1)
 root(ROOT-0, created-2)
@@ -270,10 +270,11 @@ Go to folder senna location
 ```
 3. Any other, you can la la laa la laaaa to  biplab12  (A T) cse d0t iitb d0t ac d0t in or Jawahar273@gmail.com
 4. Issues with "pip install practnlptools" <- **this only for original tool**
+
+> This is not possible until a proper package release in PyPi.
    
   
 You might receive following Error while running:
-> This is not possible until a proper package release in PyPi.
 
 ```python
  Traceback (most recent call last):
