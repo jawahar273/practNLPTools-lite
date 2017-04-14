@@ -18,5 +18,9 @@ matrix:
              - "3.4"
              - "3.5"
     
-#install: python3 setup.py install
-script: trial tools
+before_install:
+- sudo apt-get update
+- sudo apt-get install python3
+
+#install: pythen3 setup.py install
+script: "python tools.py"
