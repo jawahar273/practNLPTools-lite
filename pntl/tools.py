@@ -287,15 +287,14 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     """
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model)
+    
     """
-    #"""
     print((annotator.getAnnotations(\
      ["He killed the man with a knife and murdered him with a dagger.",\
      "He is a good boy.", "He created the robot and broke it after making it."], batch=True,dep_parse=True)))
-    
-    
-    sent = "He created the robot and broke it after making it."
-    """
+    #"""
+    #sent = "He created the robot and broke it after making it."
+    sent = "Last summer, they met every Tuesday afternoon, from 1:00 pm to 3:00 pm.".split()
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
     print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -303,7 +302,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
     print('srl:\n', (annotator.getAnnotations(sent, dep_parse=True)['srl']))
     print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
     print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
-    print('skip gram\n', list(skipgrams(sent.split(), n=3, k=2)))
+    print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
     #annotator.jar_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
     #print(annotator.senna_chdir, annotator.jar_clr)
     #"""
