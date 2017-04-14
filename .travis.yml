@@ -22,5 +22,5 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install python3
 
-#install: pythen3 setup.py install
-script: "python tools.py"
+install: pythen3 setup.py install
+script: "python3 tools.py"
