@@ -121,12 +121,13 @@ True
 >>>annotator.java_clr
 java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse -collapsed
 >>>
->>>annotator.java_clr = java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse 
+>>>annotator.java_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
+>>>#setting the cli
 ```
 #### alter option for -treeFile
 Usage: java GrammaticalStructure [options]* [-sentFile|-treeFile|-conllxFile file] [-testGraph]
   options: -basic, -collapsed, -CCprocessed [the default], -collapsedTree, -parseTree, -test, -parserFile file, -conllx, -keepPunct, -altprinter -altreader -altreaderfile
-> use -treeFile as default and defaultly the `getDependency()` write in tree format in `in.parser`, to use other pls it might need proper CoreNlp(stanford files) and please know what your doing to have favourable output or have to write custome module before passing to `getDependency()`. 
+> use -treeFile as default format and the `getDependency()` write tree format in `in.parser`, to use other pls it might need CoreNlp(stanford files) and please know what your doing to get favourable output or have to write custome module before passing to `getDependency()`(comming soon). 
 
 Self-testing
 ============
@@ -135,7 +136,7 @@ To test for your self please use function `test()`
 
 ```python
 >>>from pntl.tools import test
->>>test("/home/user/senna")# sample output
+>>>test("/home/user/senna")# input the location of senna file,
 dep_parse:
  nsubj(created-2, He-1)
 root(ROOT-0, created-2)
