@@ -18,5 +18,5 @@ matrix:
              - "3.4"
              - "3.5"
     
-install: python setup.py install
+#install: python3 setup.py install
 script: trial tools
