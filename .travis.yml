@@ -3,6 +3,6 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
-
+sudo: true
 install: python setup.py install
 script: trial tools
