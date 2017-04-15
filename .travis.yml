@@ -1,3 +1,4 @@
+language: python 
 
 python:
   - "3.3"
@@ -8,11 +9,7 @@ matrix:
   allow_failures:
     - python: "2.7"
   include:
-   - os: windows
-     python:
-         - "3.3"
-         - "3.4"
-         - "3.5"
+ 
    - os: linux
      sudo: required
      python:
@@ -22,9 +19,9 @@ matrix:
 
  
 before_install:
-- sudo apt-get update
+#- sudo apt-get update
 - chmod +x setup.py
-- sudo apt-get install python3
+#- sudo apt-get install python3
 
 install: pythen3 setup.py install
 script: "python3 tools.py"
