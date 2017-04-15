@@ -23,5 +23,5 @@ before_install:
 - chmod +x setup.py
 #- sudo apt-get install python3
 
-install: pythen3 setup.py install
+install: python3 setup.py install
 script: "python3 tools.py"
