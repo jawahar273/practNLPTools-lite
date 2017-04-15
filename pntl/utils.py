@@ -1,4 +1,4 @@
-#_
+from __future__ import generators, print_function, unicode_literals
 from itertools import chain, combinations                                            
 import copy                                                                      
 #from nltk.util import ngrams                                                        

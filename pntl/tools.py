@@ -21,7 +21,9 @@ Syntactic Constituency Parse.
 Skip Gram
 Requirement: Java Runtime Environment :)
 """
+from __future__ import generators, print_function, unicode_literals
 import subprocess
+
 import os
 from platform import architecture, system
 class Annotator:
@@ -294,7 +296,11 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model=""):
      "He is a good boy.", "He created the robot and broke it after making it."], batch=True,dep_parse=True)))
     #"""
     #sent = "He created the robot and broke it after making it."
-    sent = "Last summer, they met every Tuesday afternoon, from 1:00 pm to 3:00 pm.".split()
+    sent = """ROWAN
+
+ is a professor""".split()
+    print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
+    """
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
     print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))

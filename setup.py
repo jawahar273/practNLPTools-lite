@@ -1,4 +1,5 @@
-#! usr/bin/python 3
+
+from __future__ import generators, print_function, unicode_literals
 from distutils.core import setup
 from distutils.command.install import INSTALL_SCHEMES
 files = ["pntl/*"]
