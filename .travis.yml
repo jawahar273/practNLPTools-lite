@@ -12,16 +12,15 @@ matrix:
  
    - os: linux
      sudo: required
-     python:
-             - "3.3"
-             - "3.4"
-             - "3.5"
 
- 
 before_install:
 #- sudo apt-get update
 - chmod +x setup.py
 #- sudo apt-get install python3
 
-install: python3 setup.py install
-script: "python3 tools.py"
+install: 
+ - python setup.py install
+ - python3 setup.py install
+script: 
+ - python3 pntl/tools.py
+ - python pntl/tools.py
