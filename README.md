@@ -24,7 +24,6 @@ Functionality
 
 Futur work
 ==========
-* make working for windows 
 * copying stanford parser and depPaser file into installed direction
 * creating depParser for corresponding os environment
 * custome input format for stanford parser insted of tree format
