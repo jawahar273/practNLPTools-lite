@@ -22,7 +22,7 @@ Functionality
 * Shallow Chunking
 * Skip-gram(in-case)
 
-Futur work
+Future work
 ==========
 * copying stanford parser and depPaser file into installed direction
 * creating depParser for corresponding os environment
@@ -172,6 +172,8 @@ skip gram
 Error:
 (Unable to resolve "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz" as either class path, filename or URL)
 then you should have CoreNLP(Stanford).
+
+> Issue with Dependency Parsing after installing the it is better to take a look at [wiki page](https://github.com/jawahar273/practNLPTools-lite/wiki)
 
 Using Function getAnnoations(sentence) returns a dictionary of annotations.
 ```python
