@@ -23,6 +23,7 @@ Functionality
 
 Future work
 ==========
+* automatic takes senna path if it install in system
 * copying stanford parser and depPaser file into installed direction
 * creating depParser for corresponding os environment
 * custome input format for stanford parser insted of tree format
