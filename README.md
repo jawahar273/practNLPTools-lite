@@ -6,8 +6,7 @@ Creating practNLPTools in lite mode.
 ![Python-version](https://img.shields.io/badge/from-to-yellowgreen.svg) 
 ![Python-version](https://img.shields.io/badge/Python%20Version-Python--3.5-green.svg)
 
-[![Build Status](https://travis-ci.org/jawahar273/practNLPTools-lite.svg?branch=master)](https://travis-ci.org/jawahar273/practNLPTools-lite)
-
+[![Build Status](https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master)](https://travis-ci.org/jawahar273/practNLPTools)
 
 Practical Natural Language Processing Tools for Humans.<br>
 practNLPTools is a pythonic library over SENNA and Stanford Dependency Extractor.
