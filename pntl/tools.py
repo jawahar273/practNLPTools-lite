@@ -281,7 +281,7 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent=""):  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", batch=False):  
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
@@ -291,16 +291,20 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent=""):
     annotator = Annotator(senna_path, dep_model)
     
     """
-    print((annotator.getAnnotations(\
-     ["He killed the man with a knife and murdered him with a dagger.",\
-     "He is a good boy.", "He created the robot and broke it after making it."], batch=True,dep_parse=True)))
+
     #"""
     #sent = "He created the robot and broke it after making it."
     if not sent:
-      sent = "He created the robot and broke it after making it.".split()
+      if not batch:
+        sent = "He created the robot and broke it after making it.".split()
+       else:
+         sent = ["He killed the man with a knife and murdered him with a dagger.",\
+             "He is a good boy.", "He created the robot and broke it after making it."]
     #print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
-
+    if batch:
+       print((annotator.getAnnotations(sent, batch=True,dep_parse=True)))
     #"""
+    else:
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
     print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
