@@ -281,7 +281,7 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model="", sent=""):  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent=""):  
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
@@ -297,10 +297,9 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", dep_model="", sent=""):
     #"""
     #sent = "He created the robot and broke it after making it."
     if not sent:
-      sent = """ROWAN
-
-         is a professor""".split()
+      sent = "He created the robot and broke it after making it.".split()
     #print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
+
     #"""
     print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
     print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
