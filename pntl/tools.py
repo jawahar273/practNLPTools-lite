@@ -281,7 +281,7 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", batch=False):  
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False):  
     """
      please replace the path of yours environment(accouding to OS path)
      :senna_path: path for senna location
@@ -297,25 +297,26 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", batch=False):
     if not sent:
       if not batch:
         sent = "He created the robot and broke it after making it.".split()
-       else:
+      else:
          sent = ["He killed the man with a knife and murdered him with a dagger.",\
              "He is a good boy.", "He created the robot and broke it after making it."]
     #print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
     if batch:
-       print((annotator.getAnnotations(sent, batch=True,dep_parse=True)))
-    #"""
+       print((annotator.getBatchAnnotations(sent, batch=True,dep_parse=True)))
+    
     else:
-    print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
-    print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
-    print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
-    print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
-    print('srl:\n', (annotator.getAnnotations(sent, dep_parse=True)['srl']))
-    print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
-    print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
-    print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-    #annotator.jar_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
-    #print(annotator.senna_chdir, annotator.jar_clr)
-    #"""
+      #"""
+      print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
+      print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
+      print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
+      print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
+      print('srl:\n', (annotator.getAnnotations(sent, dep_parse=True)['srl']))
+      print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
+      print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
+      print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+      #annotator.jar_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
+      #print(annotator.senna_chdir, annotator.jar_clr)
+      #"""
 
 if __name__ == "__main__":
     test()

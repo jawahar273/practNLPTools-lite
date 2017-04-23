@@ -11,7 +11,7 @@ Creating practNLPTools in lite mode.
 Practical Natural Language Processing Tools for Humans.<br>
 practNLPTools is a pythonic library over SENNA and Stanford Dependency Extractor.
 
-> If you have issue after installed then follow my [wiki](https://github.com/jawahar273/practNLPTools-lite/wiki)
+
 
 Functionality
 =============
@@ -121,9 +121,9 @@ will be stored.
 >>>annotator = Annotator()
 >>>#changing senna path at run time is also possible
 >>>
->>>annotator.senna_chdir = "/home"
->>>annotator.senna_chdir# path is set as "/home/"
-True
+>>>annotator.senna_chdir = "/home/user/senna"
+>>>annotator.senna_chdir# return path name
+"/home/user/senna"
 >>>annotator.java_clr
 java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse -collapsed
 >>>
@@ -139,10 +139,15 @@ Self-testing
 ============
 
 To test for your self please use function `test()` 
+### test(senna_path="",  sent="", dep_model="", batch=False)
+senna_path: location of senna 
+sent = tokenized string or list of string 
+batch =  batch must be `True` if sent is a list of strings
+
 
 ```python
 >>>from pntl.tools import test
->>>test("/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
+>>>test(senna_path="/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
 dep_parse:
  nsubj(created-2, He-1)
 root(ROOT-0, created-2)
@@ -266,6 +271,7 @@ Issues
 
 1. You cannot give sentence with '(' ')', that is left bracket aor right bracket. It will end up in returning no result. So please clean Sentences before sending to annotator.
 2. Other issue might be senna executable built for various platforms. I have not experienced it, but its highly probable. If you get this issuse:
+3. If you have issue after installed then follow my [wiki](https://github.com/jawahar273/practNLPTools-lite/wiki)
 
 Go to folder senna location
 ```c
