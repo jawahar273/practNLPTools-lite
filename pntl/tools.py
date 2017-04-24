@@ -55,7 +55,7 @@ class Annotator:
         :dep_model: Stanford dependencie mode
         """
         self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = os.getcwd()+os.path.sep
+        self.dep_par_path = "empty"
 
         if dep_model:
             self.dep_par_model = dep_model
@@ -75,6 +75,18 @@ class Annotator:
         print("Stanford parser clr", " ".join(self.default_jar_clr))
         print("*"*50)
 
+    @property
+    def stp_chdir(self):
+        """
+        The return the path of senna location
+        and set the path for senna at run time
+        """
+        return self.dep_par_path
+
+    @stp_chdir.setter
+    def stp_chdir(self, val):
+        if os.path.isdir(val):
+            self.dep_par_path = val+os.path.sep
 
     @property
     def senna_chdir(self):
@@ -88,8 +100,7 @@ class Annotator:
     def senna_chdir(self, val):
         if os.path.isdir(val):
             self.senna_path = val+os.path.sep
-            return True
-        return False
+
 
     @property
     def jar_clr(self):
@@ -164,9 +175,10 @@ class Annotator:
          :parse: parse is the input(tree format) and it is writen in as file
          change to the Stanford parser direction and process the works
         """
+        print("\nrunning.........")
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
-        #os.chdir(package_directory)
+        os.chdir(package_directory)
         with open("in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_clr, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -175,7 +187,7 @@ class Annotator:
         #os.chdir(cwd)
         return stanford_out.decode("utf-8").strip()
 
-    def getBatchAnnotations(self,sentences,dep_parse=False):
+    def getBatchAnnotations(self,sentences,dep_parse=True):
         annotations=[]	
         batch_senna_tags=self.getSennaTagBatch(sentences)
         for senna_tags in batch_senna_tags:
@@ -191,7 +203,7 @@ class Annotator:
                                 a["dep_parse"]=d
         return annotations
 
-    def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=False):
+    def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=True):
         """
         :sentence: a sentence string
         passing the string to senna and performing aboue given process 
