@@ -5,7 +5,7 @@ Creating practNLPTools in lite mode.
 ![Python-version](https://img.shields.io/badge/Python%20Version-Python--2.7-red.svg) 
 ![Python-version](https://img.shields.io/badge/from-to-yellowgreen.svg) 
 ![Python-version](https://img.shields.io/badge/Python%20Version-Python--3.5-green.svg)
-![[SENNA](http://ronan.collobert.com/senna/)(https://img.shields.io/badge/senna-location-blue.svg)
+![![SENNA](http://ronan.collobert.com/senna/)](https://img.shields.io/badge/senna-location-blue.svg)
 
 [![Build Status](https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master)](https://travis-ci.org/jawahar273/practNLPTools) - on click this built this might take you to build of [practNLPTools](https://github.com/jawahar273/practNLPTools) which is testing ground for this repository so don't worry.
 
