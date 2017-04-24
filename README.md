@@ -122,9 +122,10 @@ will be stored.
 >>>annotator = Annotator()
 >>>#changing senna path at run time is also possible
 >>>
->>>annotator.senna_chdir = "/home/user/senna"
->>>annotator.senna_chdir# return path name
+>>>annotator.senna_dir = "/home/user/senna"
+>>>annotator.senna_dir# return path name
 "/home/user/senna"
+>>>annotator.stp_dir = "/home/user/stanford_parser_folder"# stanfordparser.jar must present inside it.
 >>>annotator.java_clr
 java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse -collapsed
 >>>

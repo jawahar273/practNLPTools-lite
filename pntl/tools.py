@@ -62,7 +62,7 @@ class Annotator:
         else:
             self.dep_par_model = 'edu.stanford.nlp.trees.EnglishGrammaticalStructure'
 
-        self.default_jar_clr =  ['java', '-cp', 'stanford-parser.jar',\
+        self.default_jar_cli =  ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
                       '-treeFile', 'in.parse', '-collapsed']
 
@@ -72,11 +72,17 @@ class Annotator:
     def print_values(self):
         print("*"*50)
         print("default values:\nsenna path:\n", self.senna_path, "\nDependencie parser:\n", self.dep_par_path)
-        print("Stanford parser clr", " ".join(self.default_jar_clr))
+        print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("*"*50)
 
+    def check_stp_jar(self, path, raise_exp=False, nested=False):
+        """
+          input: 
+                path: path of where the stanford parser is present
+          
+        """
     @property
-    def stp_chdir(self):
+    def stp_dir(self):
         """
         The return the path of senna location
         and set the path for senna at run time
@@ -84,31 +90,31 @@ class Annotator:
         return self.dep_par_path
 
     @stp_chdir.setter
-    def stp_chdir(self, val):
+    def stp_dir(self, val):
         if os.path.isdir(val):
             self.dep_par_path = val+os.path.sep
 
     @property
-    def senna_chdir(self):
+    def senna_dir(self):
         """
         The return the path of senna location
         and set the path for senna at run time
         """
         return self.senna_path
 
-    @senna_chdir.setter
-    def senna_chdir(self, val):
+    @senna_dir.setter
+    def senna_dir(self, val):
         if os.path.isdir(val):
             self.senna_path = val+os.path.sep
 
 
     @property
-    def jar_clr(self):
-        return " ".join(self.default_jar_clr)
+    def jar_cli(self):
+        return " ".join(self.default_jar_cli)
 
-    @jar_clr.setter
-    def jar_clr(self, val):
-         self.default_jar_clr = val.split()
+    @jar_cli.setter
+    def jar_cli(self, val):
+         self.default_jar_cli = val.split()
 
     def get_cos_name(self, os_name):
         """"
@@ -181,7 +187,7 @@ class Annotator:
         os.chdir(package_directory)
         with open("in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
-        pipe = subprocess.Popen(self.default_jar_clr, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        pipe = subprocess.Popen(self.default_jar_cli, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         pipe.wait()
         stanford_out = pipe.stdout.read()
         #os.chdir(cwd)
@@ -326,8 +332,8 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
       print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
       print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
       print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-      #annotator.jar_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
-      #print(annotator.senna_chdir, annotator.jar_clr)
+      #annotator.jar_cli = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
+      #print(annotator.senna_chdir, annotator.jar_cli)
       #"""
 
 if __name__ == "__main__":
