@@ -96,6 +96,7 @@ class Annotator:
           :type nested: boolean
           :return: given path if it is valid one or return boolean `False` or
              if raise Exception on raise_exp=True
+          :rtype: bool or string
         Work in progess...........................
         """
     @property
@@ -119,6 +120,7 @@ class Annotator:
         """
         The return the path of senna location
         and set the path for senna at run time
+        :rtype: string
         """
         return self.senna_path
 
@@ -142,6 +144,7 @@ class Annotator:
         :param os_name: os name like Linux, Darwin, Windows
         :type os_name: string
         :return: the corresponding exceutable object file of senna 
+        :rtype: string
         """
 
         if os_name == 'Linux':
@@ -165,6 +168,7 @@ class Annotator:
         On batch processing each end is add with new line.
         :param sentences: list of sentences for batch processes
         :type sentences:list of strings
+        :rtype: string
         """
         input_data = ""
         for sentence in sentences:
@@ -188,6 +192,7 @@ class Annotator:
         :param sentences: list of sentences for batch processes
         :type sentences:strings
         :return: senna tagged output
+        :rtype: string
         """
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
@@ -208,6 +213,7 @@ class Annotator:
          :param parse: parse is the input(tree format) and it is writen in as file
          :type parse: string
          :return: stanford dependency universal format
+         :rtype: string
         """
         #print("\nrunning.........")
         package_directory = os.path.dirname(self.dep_par_path)
@@ -227,6 +233,7 @@ class Annotator:
           .. Deprecation function:: getBatchAnnotations
           :param sentences: list of sentences
           :type sentences: list
+          :rtype: dict
         """
         annotations=[]
         batch_senna_tags = self.getSennaTagBatch(sentences)
@@ -257,6 +264,7 @@ class Annotator:
         :type batch: bool
         :type dep_parse: bool
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
+        :rtype: dict
         """
         annotations = {}
         if not senna_tags:
