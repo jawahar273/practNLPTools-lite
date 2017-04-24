@@ -28,6 +28,7 @@ import os
 from platform import architecture, system
 class Annotator:
     """
+    Author:: Jawahar
     A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of the
     operations specified in SUPPORTED_OPERATIONS.
     SUPPORTED_OPERATIONS: It provides
@@ -49,20 +50,25 @@ class Annotator:
     misalignment errors.
     """
 
-    def __init__(self, senna_path="", dep_model=""):
+    def __init__(self, senna_path="", dep_model="", jar_path=""):
         """
-        :senna_path: path where is located
-        :dep_model: Stanford dependencie mode
+
+        :param senna_path: path where is located
+        :param dep_model: Stanford dependencie mode
+        :param jar_path: path of stanford parser jar
+        :type senna_path: string
+        :type dep_model: string
+        :type jar_path: string
         """
         self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = "empty"
+        self.dep_par_path = jar_path
 
         if dep_model:
             self.dep_par_model = dep_model
         else:
             self.dep_par_model = 'edu.stanford.nlp.trees.EnglishGrammaticalStructure'
 
-        self.default_jar_cli =  ['java', '-cp', 'stanford-parser.jar',\
+        self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
                       '-treeFile', 'in.parse', '-collapsed']
 
@@ -70,6 +76,10 @@ class Annotator:
 
 
     def print_values(self):
+        """
+        displays the current set of values such as SENNA location, stanford parser jar,
+          jar command interface
+        """
         print("*"*50)
         print("default values:\nsenna path:\n", self.senna_path, "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
@@ -77,9 +87,15 @@ class Annotator:
 
     def check_stp_jar(self, path, raise_exp=False, nested=False):
         """
-          input: 
-                path: path of where the stanford parser is present
-          
+          :param path: path of where the stanford parser is present 
+          :param raise_exp: to raise exception with user wise and default `False` 
+              don't raises exception
+          :param nested: walk through each sub-direction on the given location
+          :type path: string
+          :type raise_exp: boolean
+          :type nested: boolean
+          :return: given path if it is valid one or return boolean `False` or 
+             if raise Exception on raise_exp=True    
         """
     @property
     def stp_dir(self):
@@ -89,7 +105,7 @@ class Annotator:
         """
         return self.dep_par_path
 
-    @stp_chdir.setter
+    @stp_dir.setter
     def stp_dir(self, val):
         if os.path.isdir(val):
             self.dep_par_path = val+os.path.sep
@@ -137,10 +153,11 @@ class Annotator:
 
     def getSennaTagBatch(self, sentences):
         """
-        :sentences: list of sentences for batch processes
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
         On batch processing each end is add with new line.
+        :param sentences: list of sentences for batch processes
+        :type sentences:list of strings
         """
         input_data = ""
         for sentence in sentences:
@@ -159,9 +176,10 @@ class Annotator:
 
     def getSennaTag(self, sentence):
         """
-        :sentence: a sentence string 
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
+        :param sentences: list of sentences for batch processes
+        :type sentences:strings
         """
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
@@ -178,8 +196,9 @@ class Annotator:
 
     def getDependency(self, parse):
         """
-         :parse: parse is the input(tree format) and it is writen in as file
          change to the Stanford parser direction and process the works
+         :parse: parse is the input(tree format) and it is writen in as file
+         
         """
         print("\nrunning.........")
         package_directory = os.path.dirname(self.dep_par_path)
