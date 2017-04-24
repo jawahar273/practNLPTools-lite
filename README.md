@@ -5,12 +5,12 @@ Creating practNLPTools in lite mode.
 ![Python-version](https://img.shields.io/badge/Python%20Version-Python--2.7-red.svg) 
 ![Python-version](https://img.shields.io/badge/from-to-yellowgreen.svg) 
 ![Python-version](https://img.shields.io/badge/Python%20Version-Python--3.5-green.svg)
-[![SENNA](http://ronan.collobert.com/senna/)](https://img.shields.io/badge/senna-location-blue.svg)
+
 
 [![Build Status](https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master)](https://travis-ci.org/jawahar273/practNLPTools) - on click this built this might take you to build of [practNLPTools](https://github.com/jawahar273/practNLPTools) which is testing ground for this repository so don't worry.
 
 Practical Natural Language Processing Tools for Humans.<br>
-practNLPTools is a pythonic library over SENNA and Stanford Dependency Extractor.
+practNLPTools is a pythonic library over [SENNA](http://ronan.collobert.com/senna/) and Stanford Dependency Extractor.
 
 
 
@@ -142,9 +142,10 @@ Self-testing
 To test for your self please use function `test()` 
 ### test(senna_path="",  sent="", dep_model="", batch=False)
 senna_path: location of senna 
-sent = tokenized string or list of string 
-batch =  batch must be `True` if sent is a list of strings
 
+sent = tokenized string or list of string 
+
+batch =  batch must be `True` if sent is a list of strings
 
 ```python
 >>>from pntl.tools import test
