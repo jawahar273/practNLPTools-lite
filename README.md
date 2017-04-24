@@ -125,10 +125,10 @@ will be stored.
 >>>annotator.senna_dir# return path name
 "/home/user/senna"
 >>>annotator.stp_dir = "/home/user/stanford_parser_folder"# stanfordparser.jar must present inside it.
->>>annotator.java_clr
+>>>annotator.java_cli
 java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse -collapsed
 >>>
->>>annotator.java_clr = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
+>>>annotator.java_cli = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
 >>>#setting the cli
 ```
 #### alter option for -treeFile
