@@ -221,13 +221,12 @@ class Annotator:
         stanford_out = pipe.stdout.read()
         os.chdir(cwd)
         return stanford_out.decode("utf-8").strip()
-    
-    
+
     def getBatchAnnotations(self, sentences, dep_parse=True):
         """
           .. Deprecation function:: getBatchAnnotations
           :param sentences: list of sentences
-          :type sentences: list 
+          :type sentences: list
         """
         annotations=[]
         batch_senna_tags = self.getSennaTagBatch(sentences)
@@ -243,7 +242,7 @@ class Annotator:
                 for d, a in zip(dependencies, annotations):
                     a["dep_parse"] = d
         return annotations
-    
+
 
     def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=True):
         """
@@ -253,8 +252,8 @@ class Annotator:
         :parama senna_tags: this on use value and this values are by SENNA processed string
         :parama batch: the change the mode into batch processing process
         :param dep_parse: to tell the code and user need to communicate with stanford parser
-        :type sentence: string or list 
-        :type senna_tags: string or list 
+        :type sentence: string or list
+        :type senna_tags: string or list
         :type batch: bool
         :type dep_parse: bool
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
@@ -371,7 +370,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
-             
             print(annotator.getAnnotations(sent, batch=True, dep_parse=True))
 
        #"""
