@@ -26,6 +26,7 @@ import subprocess
 
 import os
 from platform import architecture, system
+
 class Annotator:
     """
     .. Author:: Jawahar
@@ -35,8 +36,8 @@ class Annotator:
     Part of Speech Tags,
      Semantic Role Labels,
     Shallow Parsing (Chunking),
-    Named Entity Recognisation (NER), 
-    Dependency Parse 
+    Named Entity Recognisation (NER),
+    Dependency Parse
     and
     Syntactic Constituency Parse.
     Applying multiple operations at once has the speed advantage. For example,
@@ -60,7 +61,13 @@ class Annotator:
         :type jar_path: string
         """
         self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = jar_path+os.path.sep
+        self.dep_par_path = None
+        self.dep_par_model = None
+
+        if jar_path:
+             self.dep_par_path = jar_path+os.path.sep
+        else:
+             self.dep_par_path = __file__+os.path.sep+"pntl"+os.path
 
         if dep_model:
             self.dep_par_model = dep_model
@@ -73,7 +80,7 @@ class Annotator:
 
         self.print_values()
 
-
+  
     def print_values(self):
         """
         displays the current set of values such as SENNA location, stanford parser jar,
@@ -84,7 +91,7 @@ class Annotator:
              "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("*"*50)
-
+    
     def check_stp_jar(self, path, raise_exp=False, nested=False):
         """
           :param path: path of where the stanford parser is present
@@ -99,6 +106,7 @@ class Annotator:
           :rtype: bool or string
         Work in progess...........................
         """
+    
     @property
     def stp_dir(self):
         """
@@ -111,9 +119,7 @@ class Annotator:
     def stp_dir(self, val):
         if os.path.isdir(val):
             self.dep_par_path = val+os.path.sep
-            self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
-                        self.dep_par_model, \
-                      '-treeFile', 'in.parse', '-collapsed']
+
 
     @property
     def senna_dir(self):
@@ -350,7 +356,7 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=True, 
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False, 
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
      please replace the path of yours environment(accouding to OS path)
@@ -359,7 +365,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     """
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model, jar_path)
-
+    corpus = Corpus()
     """
 
     #"""
@@ -367,6 +373,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it.".split()
+            """
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -375,16 +382,15 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
             print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+            ptb_trees = annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']
+            #"""
+
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
             print(annotator.getAnnotations(sent, batch=True, dep_parse=True))
 
-       #"""
-        #annotator.jar_cli = "java -cp stanford-parser.jar \
-        #  edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
-        #print(annotator.senna_chdir, annotator.jar_cli)
-        #"""
+
 
 if __name__ == "__main__":
     test()
