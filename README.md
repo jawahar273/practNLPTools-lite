@@ -131,10 +131,10 @@ java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure 
 >>>annotator.java_cli = "java -cp stanford-parser.jar edu.stanford.nlp.trees.EnglishGrammaticalStructure -treeFile in.parse"
 >>>#setting the cli
 ```
-#### alter option for -treeFile
+#### alter option for -treeFile <futur work>
 Usage: java GrammaticalStructure [options]* [-sentFile|-treeFile|-conllxFile file] [-testGraph]
   options: -basic, -collapsed, -CCprocessed [the default], -collapsedTree, -parseTree, -test, -parserFile file, -conllx, -keepPunct, -altprinter -altreader -altreaderfile
-> use -treeFile as default format and the `getDependency()` write tree format in `in.parser`, to use other pls it might need CoreNlp(stanford files) and please know what your doing to get favourable output or have to write custome module before passing to `getDependency()`(comming soon). 
+> use -treeFile as default format and the `getDependency()` write tree format in `in.parser`, to use other option pls note write custome function is the best option taking `syntax_tree` as input format and by coverting into require format of users and please know what your doing to get favourable output or have to write custome module before passing to `getDependency()`(comming soon). 
 
 Self-testing
 ============
