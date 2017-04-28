@@ -30,6 +30,9 @@ from platform import architecture, system
 class Annotator:
     """
     .. Author:: Jawahar
+    .. py:class:: Annotator(senna_path="", dep_model="", jar_path="")
+
+
     A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of the
     operations specified in SUPPORTED_OPERATIONS.
     SUPPORTED_OPERATIONS: It provides
@@ -49,16 +52,18 @@ class Annotator:
     the MAX_SENTENCE_SIZE value in SENNA_main.c should be considered and your
     system specific binary should be rebuilt. Otherwise this could introduce
     misalignment errors.
+
+    :param senna_path: path where is located
+    :param dep_model: Stanford dependencie mode
+    :param jar_path: path of stanford parser jar
+    :type senna_path: string
+    :type dep_model: string
+    :type jar_path: string
     """
 
     def __init__(self, senna_path="", dep_model="", jar_path=""):
         """
-        :param senna_path: path where is located
-        :param dep_model: Stanford dependencie mode
-        :param jar_path: path of stanford parser jar
-        :type senna_path: string
-        :type dep_model: string
-        :type jar_path: string
+        init function of Annotator class
         """
         self.senna_path = senna_path+os.path.sep
         self.dep_par_path = None
@@ -83,6 +88,8 @@ class Annotator:
   
     def print_values(self):
         """
+        .. py:method:: print_values
+
         displays the current set of values such as SENNA location, stanford parser jar,
           jar command interface
         """
@@ -94,6 +101,8 @@ class Annotator:
     
     def check_stp_jar(self, path, raise_exp=False, nested=False):
         """
+          .. py:function:: check_stp_jar(path, raise_exp=False, nested=False)
+
           :param path: path of where the stanford parser is present
           :param raise_exp: to raise exception with user wise and default `False`
               don't raises exception
@@ -110,6 +119,8 @@ class Annotator:
     @property
     def stp_dir(self):
         """
+        .. py:property::stp_dir
+
         The return the path of senna location
         and set the path for senna at run time
         """
@@ -124,6 +135,8 @@ class Annotator:
     @property
     def senna_dir(self):
         """
+        .. py:property::senna_dir
+
         The return the path of senna location
         and set the path for senna at run time
         :rtype: string
@@ -138,6 +151,12 @@ class Annotator:
 
     @property
     def jar_cli(self):
+        """
+        .. py:property::jar_cli
+
+        The return cli for standford-parser.jar
+        :rtype: string
+        """
         return " ".join(self.default_jar_cli)
 
     @jar_cli.setter
@@ -146,7 +165,10 @@ class Annotator:
 
     def get_cos_name(self, os_name):
         """"
+        .. py:method:: get_cos_name
+
         get the executable binary with respect to the Os name.
+
         :param os_name: os name like Linux, Darwin, Windows
         :type os_name: string
         :return: the corresponding exceutable object file of senna 
@@ -169,9 +191,12 @@ class Annotator:
 
     def getSennaTagBatch(self, sentences):
         """
+        .. py:method:: getSennaTagBatch(sentences)
+
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
         On batch processing each end is add with new line.
+
         :param sentences: list of sentences for batch processes
         :type sentences:list of strings
         :rtype: string
@@ -193,8 +218,11 @@ class Annotator:
 
     def getSennaTag(self, sentence):
         """
+        .. py:method:: getSennaTag(sentence)
+
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
+
         :param sentences: list of sentences for batch processes
         :type sentences:strings
         :return: senna tagged output
@@ -215,7 +243,10 @@ class Annotator:
 
     def getDependency(self, parse):
         """
+         .. py:method:: getDependency(parse)
+
          change to the Stanford parser direction and process the works
+
          :param parse: parse is the input(tree format) and it is writen in as file
          :type parse: string
          :return: stanford dependency universal format
@@ -237,6 +268,7 @@ class Annotator:
     def getBatchAnnotations(self, sentences, dep_parse=True):
         """
           .. Deprecation function:: getBatchAnnotations
+
           :param sentences: list of sentences
           :type sentences: list
           :rtype: dict
@@ -259,8 +291,11 @@ class Annotator:
 
     def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=True):
         """
+        .. py:method:: getAnnotations(sentence="", senna_tags=None, batch=False, dep_parse=True)
+
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
+
         :parama sentence: a sentence or list of sentence for nlp process.
         :parama senna_tags: this on use value and this values are by SENNA processed string
         :parama batch: the change the mode into batch processing process
@@ -359,7 +394,10 @@ class Annotator:
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False, 
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
+     .. py:function:: test(senna_path="", sent="", dep_model="", batch=False, jar_path="")
+
      please replace the path of yours environment(accouding to OS path)
+
      :senna_path: path for senna location
      :dep_model: stanford dependency parser model location
     """
@@ -373,7 +411,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it.".split()
-            """
+            #"""
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
