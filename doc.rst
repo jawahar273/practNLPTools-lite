@@ -1,6 +1,6 @@
 
 .. py:property::senna_dir
-=======================
+==========================
 The return the path of senna location
 and set the path for senna at run time
 :rtype: string
@@ -16,8 +16,7 @@ encoding defaults to sys.getdefaultencoding().
 errors defaults to 'strict'.
 
  py:method:: getDependency(parse)
-=======================
-
+==========================================
 change to the Stanford parser direction and process the works
 
 :param parse: parse is the input(tree format) and it is writen in as file
@@ -26,8 +25,7 @@ change to the Stanford parser direction and process the works
 :rtype: string
 
  py:method:: getSennaTagBatch(sentences)
-=======================
-
+==========================================
 Communicates with senna through lower level communiction(sub process)
 and converted the console output(default is file writing).
 On batch processing each end is add with new line.
@@ -38,8 +36,7 @@ On batch processing each end is add with new line.
 dictionary for instance variables (if defined)list of weak references to the object (if defined)
 
 py:function:: check_stp_jar(path, raise_exp=False, nested=False)
-=======================
-
+===============================================================
 :param path: path of where the stanford parser is present
 :param raise_exp: to raise exception with user wise and default `False`
 don't raises exception
@@ -53,14 +50,12 @@ if raise Exception on raise_exp=True
 Work in progess...........................
 
  py:property::stp_dir
-=======================
-
+===================== 
 The return the path of senna location
 and set the path for senna at run time
 
  py:method:: getAnnotations(sentence="", senna_tags=None, batch=False, dep_parse=True)
-=======================
-
+======================================================================================
 passing the string to senna and performing aboue given nlp process
 and the returning them in a form of `dict()`
 
@@ -76,14 +71,12 @@ and the returning them in a form of `dict()`
 :rtype: dict
 
  py:method:: print_values
-=======================
-
+========================== 
 displays the current set of values such as SENNA location, stanford parser jar,
   jar command interface
 "
 py:method:: get_cos_name
-=======================
-
+========================= 
 get the executable binary with respect to the Os name.
 
 :param os_name: os name like Linux, Darwin, Windows
@@ -100,16 +93,15 @@ Otherwise, returns the result of object.__str__() (if defined)
 or repr(object).
 encoding defaults to sys.getdefaultencoding().
 errors defaults to 'strict'.
- Deprecation function:: getBatchAnnotations
-=======================
 
+ Deprecation function:: getBatchAnnotations
+==========================================
 :param sentences: list of sentences
 :type sentences: list
 :rtype: dict
 
 py:property::jar_cli
-=======================
-
+====================== 
 The return cli for standford-parser.jar
 :rtype: string
 
@@ -125,7 +117,6 @@ and converted the console output(default is file writing)
 
  py:property::senna_dir
 =======================
-
 The return the path of senna location
 and set the path for senna at run time
 :rtype: string
@@ -143,8 +134,7 @@ encoding defaults to sys.getdefaultencoding().
 errors defaults to 'strict'.
 
 py:method:: getDependency(parse)
-=======================
-
+================================
  change to the Stanford parser direction and process the works
 
  :param parse: parse is the input(tree format) and it is writen in as file
@@ -153,8 +143,7 @@ py:method:: getDependency(parse)
  :rtype: string
 
 py:method:: getSennaTagBatch(sentences)
-=======================
-
+=======================================
 Communicates with senna through lower level communiction(sub process)
 and converted the console output(default is file writing).
 On batch processing each end is add with new line.
@@ -179,7 +168,6 @@ Work in progess...........................
 
 py:property::stp_dir
 =======================
-
 The return the path of senna location
 and set the path for senna at run time
 
@@ -201,14 +189,12 @@ and the returning them in a form of `dict()`
 :rtype: dict
 
  py:method:: print_values
-=======================
-
+=========================
 displays the current set of values such as SENNA location, stanford parser jar,
   jar command interface
 "
  py:method:: get_cos_name
-=======================
-
+=========================
 get the executable binary with respect to the Os name.
 
 :param os_name: os name like Linux, Darwin, Windows
@@ -227,21 +213,18 @@ encoding defaults to sys.getdefaultencoding().
 errors defaults to 'strict'.
 
 Deprecation function:: getBatchAnnotations
-=======================
-
+==========================================
 :param sentences: list of sentences
 :type sentences: list
 :rtype: dict
 
  py:property::jar_cli
 =======================
-
 The return cli for standford-parser.jar
 :rtype: string
 
  py:method:: getSennaTag(sentence)
 =======================
-
 Communicates with senna through lower level communiction(sub process)
 and converted the console output(default is file writing)
 
