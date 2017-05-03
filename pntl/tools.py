@@ -47,12 +47,10 @@ class Annotator:
     system specific binary should be rebuilt. Otherwise this could introduce
     misalignment errors.
 
-    :param senna_path: path where is located
-    :param dep_model: Stanford dependencie mode
-    :param jar_path: path of stanford parser jar
-    :type senna_path: string
-    :type dep_model: string
-    :type jar_path: string
+    :param str senna_path: path where is located
+    :param str dep_model: Stanford dependencie mode
+    :param str jar_path: path of stanford parser jar
+
 
     """
 
@@ -95,16 +93,13 @@ class Annotator:
     def check_stp_jar(self, path, raise_exp=False, nested=False):
         """
 
-          :param path: path of where the stanford parser is present
-          :param raise_exp: to raise exception with user wise and default `False`
+          :param str path: path of where the stanford parser is present
+          :param bool raise_exp: to raise exception with user wise and default `False`
               don't raises exception
-          :param nested: walk through each sub-direction on the given location
-          :type path: string
-          :type raise_exp: boolean
-          :type nested: boolean
+          :param bool nested: walk through each sub-direction on the given location
           :return: given path if it is valid one or return boolean `False` or
              if raise Exception on raise_exp=True
-          :rtype: bool or string
+          :rtype: bool 
 
           Work in progess...........................
         """
@@ -112,8 +107,6 @@ class Annotator:
     @property
     def stp_dir(self):
         """
-        .. py:property::stp_dir
-
         The return the path of stanford parser jar location
         and set the path for Dependency Parse at run time(this is python @property)
         """
@@ -128,8 +121,6 @@ class Annotator:
     @property
     def senna_dir(self):
         """
-        .. py:property::senna_dir
-
         The return the path of senna location
         and set the path for senna at run time(this is python @property)
         :rtype: string
@@ -146,8 +137,6 @@ class Annotator:
     @property
     def jar_cli(self):
         """
-        .. py:property::jar_cli
-
         The return cli for standford-parser.jar(this is python @property)
         :rtype: string
         """
@@ -159,14 +148,11 @@ class Annotator:
 
     def get_cos_name(self, os_name):
         """"
-        .. py:method:: get_cos_name
-
         get the executable binary with respect to the Os name.
 
-        :param os_name: os name like Linux, Darwin, Windows
-        :type os_name: string
+        :param str os_name: os name like Linux, Darwin, Windows
         :return: the corresponding exceutable object file of senna 
-        :rtype: string
+        :rtype: str
 
         """
 
@@ -192,9 +178,8 @@ class Annotator:
         and converted the console output(default is file writing).
         On batch processing each end is add with new line.
 
-        :param sentences: list of sentences for batch processes
-        :type sentences:list of strings
-        :rtype: string
+        :param list sentences: list of sentences for batch processes
+        :rtype: str
 
         """
         input_data = ""
@@ -219,10 +204,9 @@ class Annotator:
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
 
-        :param sentences: list of sentences for batch processes
-        :type sentences:strings
-        :return: senna tagged output
-        :rtype: string
+        :param str or listsentences: list of sentences for batch processes
+        :return: senna tagged output 
+        :rtype: str
 
         """
         input_data = sentence
@@ -244,10 +228,10 @@ class Annotator:
 
          change to the Stanford parser direction and process the works
 
-         :param parse: parse is the input(tree format) and it is writen in as file
-         :type parse: string
+         :param str parse: parse is the input(tree format) and it is writen in as file
+         
          :return: stanford dependency universal format
-         :rtype: string
+         :rtype: str
 
         """
         #print("\nrunning.........")
@@ -267,8 +251,7 @@ class Annotator:
         """
           .. Deprecation function:: getBatchAnnotations
 
-          :param sentences: list of sentences
-          :type sentences: list
+          :param list sentences: list of sentences
           :rtype: dict
 
         """
@@ -288,21 +271,16 @@ class Annotator:
         return annotations
 
 
-    def getAnnotations(self,sentence="", senna_tags=None, batch=False, dep_parse=True):
+    def getAnnotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
         """
-        .. py:method:: getAnnotations(sentence="", senna_tags=None, batch=False, dep_parse=True)
 
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
 
-        :parama sentence: a sentence or list of sentence for nlp process.
-        :parama senna_tags: this on use value and this values are by SENNA processed string
-        :parama batch: the change the mode into batch processing process
-        :param dep_parse: to tell the code and user need to communicate with stanford parser
-        :type sentence: string or list
-        :type senna_tags: string or list
-        :type batch: bool
-        :type dep_parse: bool
+        :parama str or list sentence: a sentence or list of sentence for nlp process.
+        :parama str or list senna_tags: this on use value and this values are by SENNA processed string
+        :parama bool  batch: the change the mode into batch processing process
+        :param bool dep_parse: to tell the code and user need to communicate with stanford parser
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
         :rtype: dict
 
@@ -398,11 +376,11 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
 
      please replace the path of yours environment(accouding to OS path)
 
-     :parama senna_path: path for senna location
-     :parama dep_model: stanford dependency parser model location
-     :parama sent: the sentense to process with Senna
-     :parama batch: makeing as batch process with one or more sentense passing
-     :parama jar_path: location of stanford-parser.jar file
+     :parama str senna_path: path for senna location
+     :parama str dep_model: stanford dependency parser model location
+     :parama str or list sent: the sentense to process with Senna
+     :parama bool batch: makeing as batch process with one or more sentense passing
+     :parama str jar_path: location of stanford-parser.jar file
 
     """
     from pntl.utils import skipgrams
