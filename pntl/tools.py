@@ -9,18 +9,6 @@
 # URL: http://jawahar273.gitbooks.io (or) http://github.com/jawahar273
 
 
-"""
-A module for interfacing with the SENNA and Stanford Dependency Extractor.
-SUPPORTED_OPERATIONS: It provides
-Part of Speech Tags,
-Semantic Role Labels,
-Shallow Parsing (Chunking),
-Named Entity Recognisation (NER),
-Dependency Parse and
-Syntactic Constituency Parse.
-Skip Gram
-Requirement: Java Runtime Environment :)
-"""
 from __future__ import generators, print_function, unicode_literals
 import subprocess
 
@@ -28,10 +16,7 @@ import os
 from platform import architecture, system
 
 class Annotator:
-    """
-    .. Author:: Jawahar
-
-    A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of the
+    """A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of the
     operations specified in SUPPORTED_OPERATIONS.
     SUPPORTED_OPERATIONS: It provides
     Part of Speech Tags, Semantic Role Labels, Shallow Parsing (Chunking),
@@ -45,13 +30,12 @@ class Annotator:
     By default it is 1024 token/sentence. If you have larger sentences, changing
     the MAX_SENTENCE_SIZE value in SENNA_main.c should be considered and your
     system specific binary should be rebuilt. Otherwise this could introduce
-    misalignment errors.
+    misalignment errors
+    and for Dependency Parser the requirement is Java Runtime Environment :)
 
     :param str senna_path: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str jar_path: path of stanford parser jar
-
-
     """
 
     def __init__(self, senna_path="", dep_model="", jar_path=""):
@@ -80,8 +64,7 @@ class Annotator:
 
   
     def print_values(self):
-        """
-        displays the current set of values such as SENNA location, stanford parser jar,
+        """displays the current set of values such as SENNA location, stanford parser jar,
           jar command interface
         """
         print("*"*50)
@@ -91,23 +74,21 @@ class Annotator:
         print("*"*50)
     
     def check_stp_jar(self, path, raise_exp=False, nested=False):
-        """
+        """Check the stanford parser is present in the given directions 
+          and Work in progess...........................
 
-          :param str path: path of where the stanford parser is present
-          :param bool raise_exp: to raise exception with user wise and default `False`
+        :param str path: path of where the stanford parser is present
+        :param bool raise_exp: to raise exception with user wise and default `False`
               don't raises exception
-          :param bool nested: walk through each sub-direction on the given location
-          :return: given path if it is valid one or return boolean `False` or
+        :param bool nested: walk through each sub-direction on the given location
+        :return: given path if it is valid one or return boolean `False` or
              if raise Exception on raise_exp=True
-          :rtype: bool 
-
-          Work in progess...........................
+        :rtype: bool 
         """
     
     @property
     def stp_dir(self):
-        """
-        The return the path of stanford parser jar location
+        """The return the path of stanford parser jar location
         and set the path for Dependency Parse at run time(this is python @property)
         """
         return self.dep_par_path
@@ -120,11 +101,9 @@ class Annotator:
 
     @property
     def senna_dir(self):
-        """
-        The return the path of senna location
+        """The return the path of senna location
         and set the path for senna at run time(this is python @property)
         :rtype: string
-
         """
         return self.senna_path
 
@@ -136,8 +115,8 @@ class Annotator:
 
     @property
     def jar_cli(self):
-        """
-        The return cli for standford-parser.jar(this is python @property)
+        """The return cli for standford-parser.jar(this is python @property)
+
         :rtype: string
         """
         return " ".join(self.default_jar_cli)
@@ -147,13 +126,11 @@ class Annotator:
          self.default_jar_cli = val.split()
 
     def get_cos_name(self, os_name):
-        """"
-        get the executable binary with respect to the Os name.
+        """get the executable binary with respect to the Os name.
 
         :param str os_name: os name like Linux, Darwin, Windows
         :return: the corresponding exceutable object file of senna 
         :rtype: str
-
         """
 
         if os_name == 'Linux':
@@ -171,16 +148,12 @@ class Annotator:
         return self.senna_path+executable
 
     def getSennaTagBatch(self, sentences):
-        """
-        .. py:method:: getSennaTagBatch(sentences)
-
-        Communicates with senna through lower level communiction(sub process)
+        """Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
         On batch processing each end is add with new line.
 
         :param list sentences: list of sentences for batch processes
         :rtype: str
-
         """
         input_data = ""
         for sentence in sentences:
@@ -198,16 +171,12 @@ class Annotator:
         return senna_stdout.decode().split("\n\n")[0:-1]
 
     def getSennaTag(self, sentence):
-        """
-        .. py:method:: getSennaTag(sentence)
-
-        Communicates with senna through lower level communiction(sub process)
+        """Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
 
         :param str or listsentences: list of sentences for batch processes
         :return: senna tagged output 
         :rtype: str
-
         """
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
@@ -223,16 +192,12 @@ class Annotator:
         return senna_stdout
 
     def getDependency(self, parse):
-        """
-         .. py:method:: getDependency(parse)
+        """Change to the Stanford parser direction and process the works
 
-         change to the Stanford parser direction and process the works
-
-         :param str parse: parse is the input(tree format) and it is writen in as file
+        :param str parse: parse is the input(tree format) and it is writen in as file
          
-         :return: stanford dependency universal format
-         :rtype: str
-
+        :return: stanford dependency universal format
+        :rtype: str
         """
         #print("\nrunning.........")
         package_directory = os.path.dirname(self.dep_par_path)
@@ -249,11 +214,8 @@ class Annotator:
 
     def getBatchAnnotations(self, sentences, dep_parse=True):
         """
-          .. Deprecation function:: getBatchAnnotations
-
           :param list sentences: list of sentences
           :rtype: dict
-
         """
         annotations=[]
         batch_senna_tags = self.getSennaTagBatch(sentences)
@@ -272,9 +234,7 @@ class Annotator:
 
 
     def getAnnotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
-        """
-
-        passing the string to senna and performing aboue given nlp process
+        """passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
 
         :parama str or list sentence: a sentence or list of sentence for nlp process.
@@ -283,7 +243,6 @@ class Annotator:
         :param bool dep_parse: to tell the code and user need to communicate with stanford parser
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
         :rtype: dict
-
         """
         annotations = {}
         if not senna_tags:
@@ -371,17 +330,13 @@ class Annotator:
 
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False, 
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
-    """
-     .. py:function:: test(senna_path="", sent="", dep_model="", jar_path="", batch=False)
+    """please replace the path of yours environment(accouding to OS path)
 
-     please replace the path of yours environment(accouding to OS path)
-
-     :parama str senna_path: path for senna location
-     :parama str dep_model: stanford dependency parser model location
-     :parama str or list sent: the sentense to process with Senna
-     :parama bool batch: makeing as batch process with one or more sentense passing
-     :parama str jar_path: location of stanford-parser.jar file
-
+    :parama str senna_path: path for senna location
+    :parama str dep_model: stanford dependency parser model location
+    :parama str or list sent: the sentense to process with Senna
+    :parama bool batch: makeing as batch process with one or more sentense passing
+    :parama str jar_path: location of stanford-parser.jar file
     """
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model, jar_path)

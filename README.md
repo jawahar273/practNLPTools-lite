@@ -81,5 +81,5 @@ By using the `time` command in ubuntu on running the `testsrl.py` on this [link]
 ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I will change to it. 
 
 
-> To know about examples and issues look at my [wiki page](https://github.com/jawahar273/practNLPTools-lite/wiki)
+
 
