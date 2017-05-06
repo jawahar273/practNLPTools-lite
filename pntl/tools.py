@@ -16,8 +16,8 @@ import os
 from platform import architecture, system
 
 class Annotator:
-    """A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of the
-    operations specified in SUPPORTED_OPERATIONS.
+    """A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of
+    the operations specified in SUPPORTED_OPERATIONS.
     SUPPORTED_OPERATIONS: It provides
     Part of Speech Tags, Semantic Role Labels, Shallow Parsing (Chunking),
     Named Entity Recognisation (NER), Dependency Parse and
@@ -47,9 +47,9 @@ class Annotator:
         self.dep_par_model = None
 
         if jar_path:
-             self.dep_par_path = jar_path+os.path.sep
+            self.dep_par_path = jar_path+os.path.sep
         else:
-             self.dep_par_path = __file__+os.path.sep+"pntl"+os.path
+            self.dep_par_path = __file__+os.path.sep+"pntl"+os.path
 
         if dep_model:
             self.dep_par_model = dep_model
@@ -62,7 +62,7 @@ class Annotator:
 
         self.print_values()
 
-  
+
     def print_values(self):
         """displays the current set of values such as SENNA location, stanford parser jar,
           jar command interface
@@ -72,9 +72,9 @@ class Annotator:
              "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("*"*50)
-    
+
     def check_stp_jar(self, path, raise_exp=False, nested=False):
-        """Check the stanford parser is present in the given directions 
+        """Check the stanford parser is present in the given directions
           and Work in progess...........................
 
         :param str path: path of where the stanford parser is present
@@ -82,10 +82,23 @@ class Annotator:
               don't raises exception
         :param bool nested: walk through each sub-direction on the given location
         :return: given path if it is valid one or return boolean `False` or
-             if raise Exception on raise_exp=True
-        :rtype: bool 
+             if raise FileNotFoundError on raise_exp=True
+        :rtype: bool
+
         """
-    
+        path = os.listdir(path)
+        file_found = False
+        if not nested:
+            for file in path:
+                if file.endwith(".jar"):
+                    if file.startwith("stanford-parser"):
+                        file_found = True
+        else:
+            pass
+        if not file_found and raise_exp:
+            raise FileNotFoundError("`stanford-parser.jar` is not found in the given path")
+        return file_found
+
     @property
     def stp_dir(self):
         """The return the path of stanford parser jar location
@@ -123,13 +136,13 @@ class Annotator:
 
     @jar_cli.setter
     def jar_cli(self, val):
-         self.default_jar_cli = val.split()
+        self.default_jar_cli = val.split()
 
     def get_cos_name(self, os_name):
         """get the executable binary with respect to the Os name.
 
         :param str os_name: os name like Linux, Darwin, Windows
-        :return: the corresponding exceutable object file of senna 
+        :return: the corresponding exceutable object file of senna
         :rtype: str
         """
 
@@ -195,7 +208,7 @@ class Annotator:
         """Change to the Stanford parser direction and process the works
 
         :param str parse: parse is the input(tree format) and it is writen in as file
-         
+
         :return: stanford dependency universal format
         :rtype: str
         """
@@ -217,19 +230,19 @@ class Annotator:
           :param list sentences: list of sentences
           :rtype: dict
         """
-        annotations=[]
+        annotations = []
         batch_senna_tags = self.getSennaTagBatch(sentences)
         for senna_tags in batch_senna_tags:
             annotations += [self.getAnnotations(senna_tags=senna_tags)]
         if dep_parse:
             syntax_tree = ""
             for annotation in annotations:
-                        syntax_tree += annotation['syntax_tree']
+                syntax_tree += annotation['syntax_tree']
             dependencies = self.getDependency(syntax_tree).split("\n\n")
             #print dependencies
             if len(annotations) == len(dependencies):
-                for d, a in zip(dependencies, annotations):
-                    a["dep_parse"] = d
+                for dependencie, annotation in zip(dependencies, annotations):
+                    annotation["dep_parse"] = dependencie
         return annotations
 
 
@@ -238,7 +251,7 @@ class Annotator:
         and the returning them in a form of `dict()`
 
         :parama str or list sentence: a sentence or list of sentence for nlp process.
-        :parama str or list senna_tags: this on use value and this values are by SENNA processed string
+        :parama str or list senna_tags:  this values are by SENNA processed string
         :parama bool  batch: the change the mode into batch processing process
         :param bool dep_parse: to tell the code and user need to communicate with stanford parser
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
@@ -340,11 +353,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     """
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model, jar_path)
-    corpus = Corpus()
-    """
-
-    #"""
-    #sent = "He created the robot and broke it after making it."
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it.".split()
