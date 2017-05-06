@@ -75,7 +75,6 @@ class Annotator:
 
     def check_stp_jar(self, path, raise_exp=False, nested=False):
         """Check the stanford parser is present in the given directions
-          and Work in progess...........................
 
         :param str path: path of where the stanford parser is present
         :param bool raise_exp: to raise exception with user wise and default `False`
