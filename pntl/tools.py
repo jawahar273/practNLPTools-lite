@@ -188,7 +188,7 @@ class Annotator:
         and converted the console output(default is file writing)
 
         :param str or listsentences: list of sentences for batch processes
-        :return: senna tagged output 
+        :return: senna tagged output
         :rtype: str
         """
         input_data = sentence
@@ -356,7 +356,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it.".split()
-            #"""
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -365,9 +364,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
             print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-            ptb_trees = annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']
-            #"""
-
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
