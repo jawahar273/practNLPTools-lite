@@ -91,8 +91,6 @@ class Annotator:
             if file.endwith(".jar"):
                 if file.startwith("stanford-parser"):
                     file_found = True
-        else:
-            pass
         if not file_found and raise_exp:
             raise FileNotFoundError("`stanford-parser.jar` is not found in the given path")
         return file_found
