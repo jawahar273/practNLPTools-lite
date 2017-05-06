@@ -354,7 +354,9 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     annotator = Annotator(senna_path, dep_model, jar_path)
     if not sent:
         if not batch:
-            sent = "He created the robot and broke it after making it.".split()
+            sent = "He created the robot and broke it after making it."
+            print("\n", sent, "\n")
+            sent = sent.split()
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -366,12 +368,13 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
+            print("\n\nrunning batch process", "\n", "="*20, "\n", sent, "\n",)
             print(annotator.getAnnotations(sent, batch=True, dep_parse=True))
 
 
 
 if __name__ == "__main__":
-    test()
+    test(batch=True)
 
 
 
