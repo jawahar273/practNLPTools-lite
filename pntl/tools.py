@@ -73,13 +73,13 @@ class Annotator:
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("*"*50)
 
-    def check_stp_jar(self, path, raise_exp=False, nested=False):
-        """Check the stanford parser is present in the given directions
+    def check_stp_jar(self, path, raise_exp=False):
+        """Check the stanford parser is present in the given directions 
+        and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
         :param bool raise_exp: to raise exception with user wise and default `False`
               don't raises exception
-        :param bool nested: walk through each sub-direction on the given location
         :return: given path if it is valid one or return boolean `False` or
              if raise FileNotFoundError on raise_exp=True
         :rtype: bool
@@ -87,11 +87,10 @@ class Annotator:
         """
         path = os.listdir(path)
         file_found = False
-        if not nested:
-            for file in path:
-                if file.endwith(".jar"):
-                    if file.startwith("stanford-parser"):
-                        file_found = True
+        for file in path:
+            if file.endwith(".jar"):
+                if file.startwith("stanford-parser"):
+                    file_found = True
         else:
             pass
         if not file_found and raise_exp:
