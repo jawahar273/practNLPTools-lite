@@ -11,7 +11,7 @@ If the stanford parser can not be copy into installing location. So for quick wo
 or for Anaconda Python distribution `C:\anaconda3\Lib\site-packages\pntl`
 
  Eg:
-`c:\users\<user_name_here>\local\programs\python35\lib\site-packages\pntl`
-this is an example path with Python 3.5 installed in Windows system
+`c:\users\jawahar\local\programs\python35\lib\site-packages\pntl`
+this is an example path with Python 3.5 installed in Windows system with jawahar as its user name.
 
 > Note:- In Anaconda distribution it has its own version number so please change if you have to and change the Python version according which is present in your system. For windows there is no need to `.`(dot) in between version number of Python.
