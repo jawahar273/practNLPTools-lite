@@ -16,7 +16,8 @@ import os
 from platform import architecture, system
 
 class Annotator:
-    """A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of
+    """
+    A general interface of the SENNA/Stanford Dependency Extractor pipeline that supports any of
     the operations specified in SUPPORTED_OPERATIONS.
     SUPPORTED_OPERATIONS: It provides
     Part of Speech Tags, Semantic Role Labels, Shallow Parsing (Chunking),
@@ -67,14 +68,15 @@ class Annotator:
         """displays the current set of values such as SENNA location, stanford parser jar,
           jar command interface
         """
-        print("*"*50)
+        print("**"*50)
         print("default values:\nsenna path:\n", self.senna_path, \
              "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
-        print("*"*50)
+        print("**"*50)
 
     def check_stp_jar(self, path, raise_exp=False):
-        """Check the stanford parser is present in the given directions 
+        """
+        Check the stanford parser is present in the given directions 
         and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
@@ -135,7 +137,8 @@ class Annotator:
         self.default_jar_cli = val.split()
 
     def get_cos_name(self, os_name):
-        """get the executable binary with respect to the Os name.
+        """
+        get the current os executable binary file.
 
         :param str os_name: os name like Linux, Darwin, Windows
         :return: the corresponding exceutable object file of senna
@@ -157,7 +160,8 @@ class Annotator:
         return self.senna_path+executable
 
     def getSennaTagBatch(self, sentences):
-        """Communicates with senna through lower level communiction(sub process)
+        """
+        Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
         On batch processing each end is add with new line.
 
@@ -179,8 +183,58 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
 
+    def get_conll_format(self, sentence, options):
+        """
+        Communicates with senna through lower level communiction(sub process)
+        and converted the console output(default is file writing) with CoNLL format and options to pass 
+
+        -verbose
+          	Display model informations (on the standard error output, so it does not mess up the tag outputs).
+        -notokentags
+          	Do not output tokens (first output column).
+        -offsettags
+        	Output start/end character offset (in the sentence), for each token.
+        -iobtags
+          	Output IOB tags instead of IOBES.
+        -brackettags
+          	Output 'bracket' tags instead of IOBES.
+        -path <path>
+          	Specify the path to the SENNA data/ and hash/ directories, if you do not run SENNA in its original directory. The path must end by "/".
+	-usrtokens          
+  	  	Use user's tokens (space separated) instead of SENNA tokenizer.
+ 	-posvbs
+	 	Use verbs outputed by the POS tagger instead of SRL style verbs for SRL task. You might want to use this, as the SRL training task  		ignore some verbs (many "be" and "have") which might be not what you want.
+ 	-usrvbs <file>
+ 		Use user's verbs (given in <file>) instead of SENNA verbs for SRL task. The file must contain one line per token, with an empty line  	between each sentence. A line which is not a "-" corresponds to a verb.
+	-pos
+	-chk
+	-ner
+	-srl
+	-psg
+	      Instead of outputing tags for all tasks, SENNA will output tags for the specified (one or more) tasks.
+
+        :param str or list: list of sentences for batch processes
+        :param list: list of arguments
+        :return: senna tagged output
+        :rtype: str
+        """
+
+        input_data = sentence
+        package_directory = os.path.dirname(self.senna_path)
+        #print("testing dir",self.dep_par_path, package_directory)
+        os_name = system()
+        executable = self.get_cos_name(os_name)
+        senna_executable = os.path.join(package_directory, executable)
+        cwd = os.getcwd()
+        os.chdir(package_directory)
+        pipe = subprocess.Popen([senna_executable, "-".join(options),],stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
+        os.chdir(cwd)
+        return senna_stdout
+
     def getSennaTag(self, sentence):
-        """Communicates with senna through lower level communiction(sub process)
+        """
+        Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
 
         :param str or listsentences: list of sentences for batch processes
@@ -246,9 +300,9 @@ class Annotator:
         """passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
 
-        :parama str or list sentence: a sentence or list of sentence for nlp process.
-        :parama str or list senna_tags:  this values are by SENNA processed string
-        :parama bool  batch: the change the mode into batch processing process
+        :param str or list sentence: a sentence or list of sentence for nlp process.
+        :param str or list senna_tags:  this values are by SENNA processed string
+        :param bool  batch: the change the mode into batch processing process
         :param bool dep_parse: to tell the code and user need to communicate with stanford parser
         :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
         :rtype: dict
@@ -339,21 +393,25 @@ class Annotator:
 
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False, 
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
-    """please replace the path of yours environment(accouding to OS path)
+    """
+    please replace the path of yours environment(accouding to OS path)
 
-    :parama str senna_path: path for senna location
-    :parama str dep_model: stanford dependency parser model location
-    :parama str or list sent: the sentense to process with Senna
-    :parama bool batch: makeing as batch process with one or more sentense passing
-    :parama str jar_path: location of stanford-parser.jar file
+    :param str senna_path: path for senna location
+    :param str dep_model: stanford dependency parser model location
+    :param str or list sent: the sentense to process with Senna
+    :param bool batch: makeing as batch process with one or more sentense
+                       passing
+    :param str jar_path: location of stanford-parser.jar file
     """
     from pntl.utils import skipgrams
     annotator = Annotator(senna_path, dep_model, jar_path)
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it."
+            
             print("\n", sent, "\n")
             sent = sent.split()
+            print("conll:\n", annotator.get_conll_format(sent).decode("utf-8").strip())
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
@@ -362,6 +420,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
             print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+            
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
@@ -371,7 +430,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
 
 
 if __name__ == "__main__":
-    test(batch=True)
+    test()
 
 
 
