@@ -65,8 +65,9 @@ class Annotator:
 
 
     def print_values(self):
-        """displays the current set of values such as SENNA location, stanford parser jar,
-          jar command interface
+        """
+        displays the current set of values such as SENNA location, stanford parser jar,
+        jar command interface
         """
         print("**"*50)
         print("default values:\nsenna path:\n", self.senna_path, \
@@ -114,6 +115,7 @@ class Annotator:
     def senna_dir(self):
         """The return the path of senna location
         and set the path for senna at run time(this is python @property)
+
         :rtype: string
         """
         return self.senna_path
@@ -126,7 +128,8 @@ class Annotator:
 
     @property
     def jar_cli(self):
-        """The return cli for standford-parser.jar(this is python @property)
+        """
+        The return cli for standford-parser.jar(this is python @property)
 
         :rtype: string
         """
@@ -183,7 +186,7 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
 
-    def get_conll_format(self, sentence, options):
+    def get_conll_format(self, sentence, options=["-srl"]):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing) with CoNLL format and options to pass 
@@ -227,7 +230,9 @@ class Annotator:
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
-        pipe = subprocess.Popen([senna_executable, "-".join(options),],stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        args = [senna_executable]
+        args.extend(options)
+        pipe = subprocess.Popen(args,stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
@@ -255,7 +260,8 @@ class Annotator:
         return senna_stdout
 
     def getDependency(self, parse):
-        """Change to the Stanford parser direction and process the works
+        """
+        Change to the Stanford parser direction and process the works
 
         :param str parse: parse is the input(tree format) and it is writen in as file
 
@@ -277,8 +283,8 @@ class Annotator:
 
     def getBatchAnnotations(self, sentences, dep_parse=True):
         """
-          :param list sentences: list of sentences
-          :rtype: dict
+        :param list sentences: list of sentences
+        :rtype: dict
         """
         annotations = []
         batch_senna_tags = self.getSennaTagBatch(sentences)
@@ -297,7 +303,8 @@ class Annotator:
 
 
     def getAnnotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
-        """passing the string to senna and performing aboue given nlp process
+        """
+        passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
 
         :param str or list sentence: a sentence or list of sentence for nlp process.
@@ -395,7 +402,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
     please replace the path of yours environment(accouding to OS path)
-
+    
     :param str senna_path: path for senna location
     :param str dep_model: stanford dependency parser model location
     :param str or list sent: the sentense to process with Senna
@@ -411,7 +418,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             
             print("\n", sent, "\n")
             sent = sent.split()
-            print("conll:\n", annotator.get_conll_format(sent).decode("utf-8").strip())
+            print("conll:\n", annotator.get_conll_format(sent, ['-srl', '-pos']).decode("utf-8").strip())
             print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
