@@ -2,10 +2,8 @@
 # encoding: utf-8
 # Practical Natural Language Processing Tools (practNLPTools-lite):
 #               Combination of Senna and Stanford dependency Extractor
-# Copyright (C) 2014 PractNLP Project
-# Original Author: Biplab Ch Das' <bipla12@cse.iitb.ac.in>
+# Copyright (C) 2017 PractNLP-lite Project
 # Current Author: Jawahar S <jawahar273@gmail.com>
-# URL: <http://www.cse.iitb.ac.in/biplab12>
 # URL: http://jawahar273.gitbooks.io (or) http://github.com/jawahar273
 
 
@@ -162,7 +160,7 @@ class Annotator:
             executable = 'senna-win32.exe'
         return self.senna_path+executable
 
-    def getSennaTagBatch(self, sentences):
+    def get_sennaTagBatch(self, sentences):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
@@ -237,7 +235,7 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout
 
-    def getSennaTag(self, sentence):
+    def get_sennaTag(self, sentence):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
@@ -259,7 +257,7 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout
 
-    def getDependency(self, parse):
+    def get_dependency(self, parse):
         """
         Change to the Stanford parser direction and process the works
 
@@ -281,20 +279,20 @@ class Annotator:
         os.chdir(cwd)
         return stanford_out.decode("utf-8").strip()
 
-    def getBatchAnnotations(self, sentences, dep_parse=True):
+    def get_batch_annotations(self, sentences, dep_parse=True):
         """
         :param list sentences: list of sentences
         :rtype: dict
         """
         annotations = []
-        batch_senna_tags = self.getSennaTagBatch(sentences)
+        batch_senna_tags = self.get_sennaTagBatch(sentences)
         for senna_tags in batch_senna_tags:
-            annotations += [self.getAnnotations(senna_tags=senna_tags)]
+            annotations += [self.get_annotations(senna_tags=senna_tags)]
         if dep_parse:
             syntax_tree = ""
             for annotation in annotations:
                 syntax_tree += annotation['syntax_tree']
-            dependencies = self.getDependency(syntax_tree).split("\n\n")
+            dependencies = self.get_dependency(syntax_tree).split("\n\n")
             #print dependencies
             if len(annotations) == len(dependencies):
                 for dependencie, annotation in zip(dependencies, annotations):
@@ -302,7 +300,7 @@ class Annotator:
         return annotations
 
 
-    def getAnnotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
+    def get_annotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
@@ -316,7 +314,7 @@ class Annotator:
         """
         annotations = {}
         if not senna_tags:
-            senna_tags = self.getSennaTag(sentence).decode()
+            senna_tags = self.get_sennaTag(sentence).decode()
             senna_tags = [x.strip() for x in senna_tags.split("\n")];senna_tags = senna_tags[0:-2]
         else:
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
@@ -394,7 +392,7 @@ class Annotator:
             annotations['syntax_tree'] += syn_.replace("*", "("+pos_+" "+word_+")")
         #annotations['syntax_tree']=annotations['syntax_tree'].replace("S1","S")
         if dep_parse:
-            annotations['dep_parse'] = self.getDependency(annotations['syntax_tree'])
+            annotations['dep_parse'] = self.get_dependency(annotations['syntax_tree'])
         return annotations
 
 
@@ -419,20 +417,20 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             print("\n", sent, "\n")
             sent = sent.split()
             print("conll:\n", annotator.get_conll_format(sent, ['-srl', '-pos']).decode("utf-8").strip())
-            print('dep_parse:\n', (annotator.getAnnotations(sent, dep_parse=True)['dep_parse']))
-            print('chunk:\n', (annotator.getAnnotations(sent, dep_parse=True)['chunk']))
-            print('pos:\n', (annotator.getAnnotations(sent, dep_parse=True)['pos']))
-            print('ner:\n', (annotator.getAnnotations(sent, dep_parse=True)['ner']))
-            print('srl:\n', (annotator.getAnnotations(sent, dep_parse=True)['srl']))
-            print('syntax tree:\n', (annotator.getAnnotations(sent, dep_parse=True)['syntax_tree']))
-            print('words:\n', (annotator.getAnnotations(sent, dep_parse=True)['words']))
+            print('dep_parse:\n', (annotator.get_annotations(sent, dep_parse=True)['dep_parse']))
+            print('chunk:\n', (annotator.get_annotations(sent, dep_parse=True)['chunk']))
+            print('pos:\n', (annotator.get_annotations(sent, dep_parse=True)['pos']))
+            print('ner:\n', (annotator.get_annotations(sent, dep_parse=True)['ner']))
+            print('srl:\n', (annotator.get_annotations(sent, dep_parse=True)['srl']))
+            print('syntax tree:\n', (annotator.get_annotations(sent, dep_parse=True)['syntax_tree']))
+            print('words:\n', (annotator.get_annotations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
             
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
             print("\n\nrunning batch process", "\n", "="*20, "\n", sent, "\n",)
-            print(annotator.getAnnotations(sent, batch=True, dep_parse=True))
+            print(annotator.get_annotations(sent, batch=True, dep_parse=True))
 
 
 
