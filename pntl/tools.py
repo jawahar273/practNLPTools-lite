@@ -233,7 +233,7 @@ class Annotator:
         pipe = subprocess.Popen(args,stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
         os.chdir(cwd)
-        return senna_stdout
+        return senna_stdout.decode("utf-8").strip()
 
     def get_sennaTag(self, sentence):
         """
@@ -416,7 +416,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             
             print("\n", sent, "\n")
             sent = sent.split()
-            print("conll:\n", annotator.get_conll_format(sent, ['-srl', '-pos']).decode("utf-8").strip())
+            print("conll:\n", annotator.get_conll_format(sent, ['-srl', '-pos']))
             print('dep_parse:\n', (annotator.get_annotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.get_annotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.get_annotations(sent, dep_parse=True)['pos']))

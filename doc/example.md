@@ -67,6 +67,18 @@ batch =  batch must be `True` if sent is a list of strings
 ```python
 >>>from pntl.tools import test
 >>>test(senna_path="/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
+conll:
+ He	       PRP	              -	      S-A0	      S-A0	      S-A0
+        created	       VBD	        created	       S-V	         O	         O
+            the	        DT	              -	      B-A1	         O	         O
+          robot	        NN	              -	      E-A1	         O	         O
+            and	        CC	              -	         O	         O	         O
+          broke	       VBD	          broke	         O	       S-V	         O
+             it	       PRP	              -	         O	      S-A1	         O
+          after	        IN	              -	         O	  B-AM-TMP	         O
+         making	       VBG	         making	         O	  I-AM-TMP	       S-V
+            it.	       PRP	              -	         O	  E-AM-TMP	      S-A1
+
 dep_parse:
  nsubj(created-2, He-1)
 root(ROOT-0, created-2)
