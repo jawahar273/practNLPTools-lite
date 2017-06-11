@@ -184,13 +184,15 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
 
-    def get_conll_format(self, sentence, options=["-srl"]):
+    def get_conll_format(self, sentence, options='-srl -pos -ner -chk -psg'):
         """
         Communicates with senna through lower level communiction(sub process)
-        and converted the console output(default is file writing) with CoNLL format and options to pass 
+          and converted the console output(default is file writing)
+           with CoNLL format and options to pass
 
         -verbose
-          	Display model informations (on the standard error output, so it does not mess up the tag outputs).
+          	Display model informations (on the standard error output,
+               so it does not mess up the tag outputs).
         -notokentags
           	Do not output tokens (first output column).
         -offsettags
@@ -200,25 +202,32 @@ class Annotator:
         -brackettags
           	Output 'bracket' tags instead of IOBES.
         -path <path>
-          	Specify the path to the SENNA data/ and hash/ directories, if you do not run SENNA in its original directory. The path must end by "/".
+          	Specify the path to the SENNA data/ and hash/ directories, if you do not run SENNA in its original directory.
+               The path must end by "/".
 	-usrtokens          
   	  	Use user's tokens (space separated) instead of SENNA tokenizer.
  	-posvbs
-	 	Use verbs outputed by the POS tagger instead of SRL style verbs for SRL task. You might want to use this, as the SRL training task  		ignore some verbs (many "be" and "have") which might be not what you want.
+	 	Use verbs outputed by the POS tagger instead of SRL style verbs for SRL task.
+          You might want to use this, as the SRL training task  		ignore some verbs (many "be" and "have") which might be not what you want.
  	-usrvbs <file>
- 		Use user's verbs (given in <file>) instead of SENNA verbs for SRL task. The file must contain one line per token, with an empty line  	between each sentence. A line which is not a "-" corresponds to a verb.
+ 		Use user's verbs (given in <file>) instead of SENNA verbs for SRL task. 
+          The file must contain one line per token, with an empty line between each sentence. 
+            A line which is not a "-" corresponds to a verb.
 	-pos
 	-chk
 	-ner
 	-srl
 	-psg
-	      Instead of outputing tags for all tasks, SENNA will output tags for the specified (one or more) tasks.
+	      Instead of outputing tags for all tasks, SENNA will output tags for the specified
+              (one or more) tasks.
 
         :param str or list: list of sentences for batch processes
         :param list: list of arguments
         :return: senna tagged output
         :rtype: str
         """
+        if isinstance(options, str):
+            options = options.strip().split()
 
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
@@ -230,7 +239,7 @@ class Annotator:
         os.chdir(package_directory)
         args = [senna_executable]
         args.extend(options)
-        pipe = subprocess.Popen(args,stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        pipe = subprocess.Popen(args, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
@@ -416,7 +425,8 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             
             print("\n", sent, "\n")
             sent = sent.split()
-            print("conll:\n", annotator.get_conll_format(sent, ['-srl', '-pos']))
+            args = '-srl -pos'.strip().split()
+            print("conll:\n", annotator.get_conll_format(sent, args))
             print('dep_parse:\n', (annotator.get_annotations(sent, dep_parse=True)['dep_parse']))
             print('chunk:\n', (annotator.get_annotations(sent, dep_parse=True)['chunk']))
             print('pos:\n', (annotator.get_annotations(sent, dep_parse=True)['pos']))

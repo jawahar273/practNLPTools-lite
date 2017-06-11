@@ -65,8 +65,9 @@ sent = tokenized string or list of string
 batch =  batch must be `True` if sent is a list of strings
 
 ```python
->>>from pntl.tools import test
->>>test(senna_path="/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
+>>> from pntl.tools import test
+>>> # the below CoNLL example consist of srl,  pos, ner, chk, psg
+>>> test(senna_path="/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
 conll:
  He	       PRP	              -	      S-A0	      S-A0	      S-A0
         created	       VBD	        created	       S-V	         O	         O
@@ -78,6 +79,7 @@ conll:
           after	        IN	              -	         O	  B-AM-TMP	         O
          making	       VBG	         making	         O	  I-AM-TMP	       S-V
             it.	       PRP	              -	         O	  E-AM-TMP	      S-A1
+
 
 dep_parse:
  nsubj(created-2, He-1)
@@ -112,40 +114,40 @@ Error:
 then you should have CoreNLP(Stanford).
 
 
-Using Function getAnnoations(sentence) returns a dictionary of annotations.
+Using Function get_annoations(sentence) returns a dictionary of annotations.
 ```python
- >>>annotator.getAnnotations("There are people dying make this world a better place for you and for me.")
+ >>>annotator.get_annoations("There are people dying make this world a better place for you and for me.")
     {'dep_parse': '', 'chunk': [('There', 'S-NP'), ('are', 'S-VP'), ('people', 'S-NP'), ('dying', 'B-VP'), ('make', 'E-VP'), ('this', 'B-NP'), ('world', 'E-NP'), ('a', 'B-NP'), ('better', 'I-NP'), ('place', 'E-NP'), ('for', 'S-PP'), ('you', 'S-NP'), ('and', 'O'), ('for', 'S-PP'), ('me.', 'S-NP')], 'pos': [('There', 'EX'), ('are', 'VBP'), ('people', 'NNS'), ('dying', 'VBG'), ('make', 'VB'), ('this', 'DT'), ('world', 'NN'), ('a', 'DT'), ('better', 'JJR'), ('place', 'NN'), ('for', 'IN'), ('you', 'PRP'), ('and', 'CC'), ('for', 'IN'), ('me.', '.')], 'srl': [{'A1': 'people', 'V': 'dying'}, {'A1': 'people  this world', 'A2': 'a better place for you and for me.', 'V': 'make'}], 'syntax_tree': '(S1(S(NP(EX There))(VP(VBP are)(NP(NP(NNS people))(SBAR(S(VBG dying)(VP(VB make)(S(NP(DT this)(NN world))(NP(DT a)(JJR better)(NN place)))(PP(PP(IN for)(NP(PRP you)))(CC and)(PP(IN for)(NP(. me.)))))))))))', 'verbs': ['dying', 'make'], 'words': ['There', 'are', 'people', 'dying', 'make', 'this', 'world', 'a', 'better', 'place', 'for', 'you', 'and', 'for', 'me.'], 'ner': [('There', 'O'), ('are', 'O'), ('people', 'O'), ('dying', 'O'), ('make', 'O'), ('this', 'O'), ('world', 'O'), ('a', 'O'), ('better', 'O'), ('place', 'O'), ('for', 'O'), ('you', 'O'), ('and', 'O'), ('for', 'O'), ('me.', 'O')]}
 ```
 
-Using Function getAnnoations(sentence,dep_parse=True) returns a dictionary of annotations with dependency parse, by default it is switched off.
+Using Function get_annoations(sentence,dep_parse=True) returns a dictionary of annotations with dependency parse, by default it is switched off.
 ```python
->>>annotator.getAnnotations("There are people dying make this world a better place for you and for me.",dep_parse=True)
+>>>annotator.get_annoations("There are people dying make this world a better place for you and for me.",dep_parse=True)
     {'dep_parse': 'expl(are-2, There-1)\nroot(ROOT-0, are-2)\nnsubj(are-2, people-3)\ndep(make-5, dying-4)\nrcmod(people-3, make-5)\ndet(world-7, this-6)\nnsubj(place-10, world-7)\ndet(place-10, a-8)\namod(place-10, better-9)\nxcomp(make-5, place-10)\nprep_for(make-5, you-12)\nconj_and(you-12, me.-15)', 'chunk': [('There', 'S-NP'), ('are', 'S-VP'), ('people', 'S-NP'), ('dying', 'B-VP'), ('make', 'E-VP'), ('this', 'B-NP'), ('world', 'E-NP'), ('a', 'B-NP'), ('better', 'I-NP'), ('place', 'E-NP'), ('for', 'S-PP'), ('you', 'S-NP'), ('and', 'O'), ('for', 'S-PP'), ('me.', 'S-NP')], 'pos': [('There', 'EX'), ('are', 'VBP'), ('people', 'NNS'), ('dying', 'VBG'), ('make', 'VB'), ('this', 'DT'), ('world', 'NN'), ('a', 'DT'), ('better', 'JJR'), ('place', 'NN'), ('for', 'IN'), ('you', 'PRP'), ('and', 'CC'), ('for', 'IN'), ('me.', '.')], 'srl': [{'A1': 'people', 'V': 'dying'}, {'A1': 'people  this world', 'A2': 'a better place for you and for me.', 'V': 'make'}], 'syntax_tree': '(S1(S(NP(EX There))(VP(VBP are)(NP(NP(NNS people))(SBAR(S(VBG dying)(VP(VB make)(S(NP(DT this)(NN world))(NP(DT a)(JJR better)(NN place)))(PP(PP(IN for)(NP(PRP you)))(CC and)(PP(IN for)(NP(. me.)))))))))))', 'verbs': ['dying', 'make'], 'words': ['There', 'are', 'people', 'dying', 'make', 'this', 'world', 'a', 'better', 'place', 'for', 'you', 'and', 'for', 'me.'], 'ner': [('There', 'O'), ('are', 'O'), ('people', 'O'), ('dying', 'O'), ('make', 'O'), ('this', 'O'), ('world', 'O'), ('a', 'O'), ('better', 'O'), ('place', 'O'), ('for', 'O'), ('you', 'O'), ('and', 'O'), ('for', 'O'), ('me.', 'O')]}
 ```
 You can access individual componets as:
 ```python
->>>annotator.getAnnotations("Biplab is a good boy.")['pos']
+>>>annotator.get_annoations("Biplab is a good boy.")['pos']
   [('Biplab', 'NNP'), ('is', 'VBZ'), ('a', 'DT'), ('good', 'JJ'), ('boy', 'NN'), ('.', '.')]
->>>annotator.getAnnotations("Biplab is a good boy.")['ner']
+>>>annotator.get_annoations("Biplab is a good boy.")['ner']
   [('Biplab', 'S-PER'), ('is', 'O'), ('a', 'O'), ('good', 'O'), ('boy', 'O'), ('.', 'O')]
->>>annotator.getAnnotations("Biplab is a good boy.")['chunk']
+>>>annotator.get_annoations("Biplab is a good boy.")['chunk']
   [('Biplab', 'S-NP'), ('is', 'S-VP'), ('a', 'B-NP'), ('good', 'I-NP'), ('boy', 'E-NP'), ('.', 'O')]
 ```
 
 To list the verbs for which semantic roles are found.
 ```python
->>>annotator.getAnnotations("He created the robot and broke it after making it.")['verbs']
+>>>annotator.get_annoations("He created the robot and broke it after making it.")['verbs']
    ['created', 'broke', 'making']
 ```
 'srl' Returns a list of dictionaries, identifyinging sematic roles for various verbs in sentence.
 ```python
->>>annotator.getAnnotations("He created the robot and broke it after making it.")['srl']
+>>>annotator.get_annoations("He created the robot and broke it after making it.")['srl']
     [{'A1': 'the robot', 'A0': 'He', 'V': 'created'}, {'A1': 'it', 'A0': 'He', 'AM-TMP': 'after making it.', 'V': 'broke'}, {'A1': 'it.', 'A0': 'He', 'V': 'making'}]
 ```
 'syntax_tree' Returns syntax tree in penn Tree Bank Format.
 ```python
->>>annotator.getAnnotations("He created the robot and broke it after making it.")['syntax_tree']
+>>>annotator.get_annoations("He created the robot and broke it after making it.")['syntax_tree']
     '(S1(S(NP(PRP He))(VP(VP(VBD created)(NP(DT the)(NN robot)))(CC and)(VP(VBD broke)(NP(PRP it))(PP(IN after)(S(VP(VBG making)(NP(PRP it.)))))))))'
 ```
 'dep_parse' Returns dependency Relations as a string. Each relation is in new line. You may require some post processing on this.
@@ -155,7 +157,7 @@ To change in the output format from edit `lexparser.sh`(self testing only) if yo
 
 To know about `outputformat` see the Stanford Parser FAQ [link](https://nlp.stanford.edu/software/parser-faq.shtml#u) and manuall [link](https://nlp.stanford.edu/software/dependencies_manual.pdf).
 ```python
->>> annotator.getAnnotations("He created the robot and broke it after making it.",dep_parse=True)['dep_parse']
+>>> annotator.get_annoations("He created the robot and broke it after making it.",dep_parse=True)['dep_parse']
     nsubj(created-2, He-1)
     root(ROOT-0, created-2)
     det(robot-4, the-3)
@@ -174,11 +176,11 @@ If there are many sentences to annotate, Use batch Mode, annotator.getBatchAnnot
 
 Note: For illustration purposes we have used:
 ```python
->>>annotator.getAnnotations("He created the robot and broke it after making it.",dep_parse=True)['dep_parse']
+>>>annotator.get_annoations("He created the robot and broke it after making it.",dep_parse=True)['dep_parse']
 ```
 Better method is:
 ```python
->>>annotation=annotator.getAnnotations("He created the robot and broke it after making it.",dep_parse=True)
+>>>annotation=annotator.get_annoations("He created the robot and broke it after making it.",dep_parse=True)
 >>>ner=annotation['ner']
 >>>srl=annotation['srl']
 ```
