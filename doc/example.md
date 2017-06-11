@@ -106,7 +106,43 @@ skip gram
  [('He', 'created', 'the'), ('He', 'created', 'robot'), ('He', 'created', 'and'), ('He', 'the', 'robot'), ('He', 'the', 'and'), ('He', 'robot', 'and'), ('created', 'the', 'robot'), ('created', 'the', 'and'), ('created', 'the', 'broke'), ('created', 'robot', 'and'), ('created', 'robot', 'broke'), ('created', 'and', 'broke'), ('the', 'robot', 'and'), ('the', 'robot', 'broke'), ('the', 'robot', 'it'), ('the', 'and', 'broke'), ('the', 'and', 'it'), ('the', 'broke', 'it'), ('robot', 'and', 'broke'), ('robot', 'and', 'it'), ('robot', 'and', 'after'), ('robot', 'broke', 'it'), ('robot', 'broke', 'after'), ('robot', 'it', 'after'), ('and', 'broke', 'it'), ('and', 'broke', 'after'), ('and', 'broke', 'making'), ('and', 'it', 'after'), ('and', 'it', 'making'), ('and', 'after', 'making'), ('broke', 'it', 'after'), ('broke', 'it', 'making'), ('broke', 'it', 'it.'), ('broke', 'after', 'making'), ('broke', 'after', 'it.'), ('broke', 'making', 'it.'), ('it', 'after', 'making'), ('it', 'after', 'it.'), ('it', 'making', 'it.'), ('after', 'making', 'it.')]
 
 ```
+###Running with bath=True in test()
 
+ >Note:- It is highly recommented to use batch of sentence in CoNLL format only
+```python
+conll:
+ He	       PRP	              -	      S-A0	      S-A0	         O	      S-A0	         O
+         killed	       VBD	         killed	       S-V	         O	         O	         O	         O
+            the	        DT	              -	      B-A1	         O	         O	         O	         O
+            man	        NN	              -	      E-A1	         O	         O	         O	         O
+           with	        IN	              -	  B-AM-MNR	         O	         O	         O	         O
+              a	        DT	              -	  I-AM-MNR	         O	         O	         O	         O
+          knife	        NN	              -	  E-AM-MNR	         O	         O	         O	         O
+            and	        CC	              -	         O	         O	         O	         O	         O
+       murdered	       VBD	       murdered	         O	       S-V	         O	         O	         O
+            him	       PRP	              -	         O	      S-A1	         O	         O	         O
+           with	        IN	              -	         O	      B-A2	         O	         O	         O
+              a	        DT	              -	         O	      I-A2	         O	         O	         O
+         dagger	        NN	              -	         O	      E-A2	         O	         O	         O
+              .	         .	              -	         O	         O	         O	         O	         O
+             He	       PRP	              -	         O	         O	         O	         O	      S-A0
+             is	       VBZ	              -	         O	         O	         O	         O	         O
+              a	        DT	              -	         O	         O	         O	         O	         O
+           good	        JJ	              -	         O	         O	         O	         O	         O
+            boy	        NN	              -	         O	         O	         O	         O	         O
+              .	         .	              -	         O	         O	         O	         O	         O
+             He	       PRP	              -	         O	         O	      S-A0	      S-A0	      S-A0
+        created	       VBD	        created	         O	         O	       S-V	         O	         O
+            the	        DT	              -	         O	         O	      B-A1	         O	         O
+          robot	        NN	              -	         O	         O	      E-A1	         O	         O
+            and	        CC	              -	         O	         O	         O	         O	         O
+          broke	       VBD	          broke	         O	         O	         O	       S-V	         O
+             it	       PRP	              -	         O	         O	         O	      S-A1	         O
+          after	        IN	              -	         O	         O	         O	  B-AM-TMP	         O
+         making	       VBG	         making	         O	         O	         O	  I-AM-TMP	       S-V
+            it.	       PRP	              -	         O	         O	         O	  E-AM-TMP	      S-A1
+
+```
 >Run the `depParser.sh` for English PCFG parser on one or more files, printing trees only
 
 Error:
@@ -196,6 +232,9 @@ Better method is:
 n = is the value for n-grams
 k = skip value 
  `skipgrams()` returns the output in genetator form for better memory management.
+
+
+
 
 
 

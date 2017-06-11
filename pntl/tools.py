@@ -311,7 +311,7 @@ class Annotator:
         return annotations
 
 
-    def get_annotations(self, sentence="", senna_tags=None, batch=False, dep_parse=True):
+    def get_annotations(self, sentence="", senna_tags=None, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
@@ -414,7 +414,7 @@ class Annotator:
 
 
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False,
-               jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
+      jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
     please replace the path of yours environment(accouding to OS path)
 
@@ -448,7 +448,6 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
             print("\n\nrunning batch process", "\n", "="*20, "\n", sent, "\n",)
-            print(annotator.get_annotations(sent, batch=True, dep_parse=True))
             args = '-srl -pos'.strip().split()
             print("conll:\n", annotator.get_conll_format(sent, args))
 
