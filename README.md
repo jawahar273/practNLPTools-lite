@@ -84,3 +84,9 @@ ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I
 Dependency 
 =====================
 * Sphinx 1.5+ [only need it for building doc html]
+
+```
+cd api
+make html
+```
+The about command is used to generate html from docstring
