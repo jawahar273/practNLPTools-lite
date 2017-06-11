@@ -75,7 +75,7 @@ class Annotator:
 
     def check_stp_jar(self, path, raise_exp=False):
         """
-        Check the stanford parser is present in the given directions 
+        Check the stanford parser is present in the given directions
         and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
@@ -160,7 +160,7 @@ class Annotator:
             executable = 'senna-win32.exe'
         return self.senna_path+executable
 
-    def get_sennaTagBatch(self, sentences):
+    def get_senna_tag_batch(self, sentences):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing).
@@ -202,16 +202,18 @@ class Annotator:
         -brackettags
           	Output 'bracket' tags instead of IOBES.
         -path <path>
-          	Specify the path to the SENNA data/ and hash/ directories, if you do not run SENNA in its original directory.
-               The path must end by "/".
-	-usrtokens          
+          	Specify the path to the SENNA data/ and hash/ directories,
+               if you do not run SENNA in its original directory.
+                The path must end by "/".
+	-usrtokens
   	  	Use user's tokens (space separated) instead of SENNA tokenizer.
  	-posvbs
 	 	Use verbs outputed by the POS tagger instead of SRL style verbs for SRL task.
-          You might want to use this, as the SRL training task  		ignore some verbs (many "be" and "have") which might be not what you want.
+          You might want to use this, as the SRL training task ignore some verbs
+            (many "be" and "have") which might be not what you want.
  	-usrvbs <file>
- 		Use user's verbs (given in <file>) instead of SENNA verbs for SRL task. 
-          The file must contain one line per token, with an empty line between each sentence. 
+ 		Use user's verbs (given in <file>) instead of SENNA verbs for SRL task.
+          The file must contain one line per token, with an empty line between each sentence.
             A line which is not a "-" corresponds to a verb.
 	-pos
 	-chk
@@ -294,7 +296,7 @@ class Annotator:
         :rtype: dict
         """
         annotations = []
-        batch_senna_tags = self.get_sennaTagBatch(sentences)
+        batch_senna_tags = self.get_senna_tag_batch(sentences)
         for senna_tags in batch_senna_tags:
             annotations += [self.get_annotations(senna_tags=senna_tags)]
         if dep_parse:
@@ -329,7 +331,13 @@ class Annotator:
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
         no_verbs = len(senna_tags[0].split("\t"))-6
 
-        words = [];pos = [];chunk = [];ner = [];verb = [];srls = [];syn = []
+        words = []
+        pos = []
+        chunk = []
+        ner = []
+        verb = []
+        srls = []
+        syn = []
         for senna_tag in senna_tags:
             senna_tag = senna_tag.split("\t")
             words += [senna_tag[0].strip()]
@@ -405,11 +413,11 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False, 
+def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False,
                jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
     please replace the path of yours environment(accouding to OS path)
-    
+
     :param str senna_path: path for senna location
     :param str dep_model: stanford dependency parser model location
     :param str or list sent: the sentense to process with Senna
@@ -422,7 +430,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it."
-            
+
             print("\n", sent, "\n")
             sent = sent.split()
             args = '-srl -pos'.strip().split()
@@ -432,15 +440,17 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             print('pos:\n', (annotator.get_annotations(sent, dep_parse=True)['pos']))
             print('ner:\n', (annotator.get_annotations(sent, dep_parse=True)['ner']))
             print('srl:\n', (annotator.get_annotations(sent, dep_parse=True)['srl']))
-            print('syntax tree:\n', (annotator.get_annotations(sent, dep_parse=True)['syntax_tree']))
+            print('syntaxTree:\n', (annotator.get_annotations(sent, dep_parse=True)['syntax_tree']))
             print('words:\n', (annotator.get_annotations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-            
+
         else:
             sent = ["He killed the man with a knife and murdered him with a dagger.",\
                 "He is a good boy.", "He created the robot and broke it after making it."]
             print("\n\nrunning batch process", "\n", "="*20, "\n", sent, "\n",)
             print(annotator.get_annotations(sent, batch=True, dep_parse=True))
+            args = '-srl -pos'.strip().split()
+            print("conll:\n", annotator.get_conll_format(sent, args))
 
 
 
