@@ -66,16 +66,16 @@ Bench Mark comparsion
 =====================
 By using the `time` command in ubuntu on running the `testsrl.py` on this [link](https://github.com/jawahar273/SRLTagger) and along with `tools.py` on `pntl`  
 
-| pntl | NLTK-senna |
-| --   | ---  |
-| at fist run 
-|real	0m1.674s | real	0m2.484s
-|user	0m1.564s | user	0m1.868s
-|sys	0m0.228s | sys	0m0.524s
-| at second run 
-| real	0m1.245s | real	0m3.359s
-| user	0m1.560s | user	0m2.016s
-| sys	0m0.152s   | sys	0m1.168s
+|      | pntl | NLTK-senna |
+| --   | --   | ---  |
+| at fist run |   |   |
+|      |real	0m1.674s | real	0m2.484s
+|      |user	0m1.564s | user	0m1.868s
+|      |sys	0m0.228s | sys	0m0.524s
+| at second run |     |
+|      | real	0m1.245s | real	0m3.359s
+|      | user	0m1.560s | user	0m2.016s
+|      | sys	0m0.152s   | sys	0m1.168s
 
 > note: this bench mark may differt accouding to system's working and to restult present here is exact same result in my system 
 ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I will change to it. 
