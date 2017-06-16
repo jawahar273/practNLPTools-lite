@@ -228,8 +228,10 @@ Better method is:
 >>>list(skipgrams(sent.split(), n=3, k=2))
 [('He', 'created', 'the'), ('He', 'created', 'robot'), ('He', 'created', 'and'), ('He', 'the', 'robot'), ('He', 'the', 'and'), ('He', 'robot', 'and'), ('created', 'the', 'robot'), ('created', 'the', 'and'), ('created', 'the', 'broke'), ('created', 'robot', 'and'), ('created', 'robot', 'broke'), ('created', 'and', 'broke'), ('the', 'robot', 'and'), ('the', 'robot', 'broke'), ('the', 'robot', 'it'), ('the', 'and', 'broke'), ('the', 'and', 'it'), ('the', 'broke', 'it'), ('robot', 'and', 'broke'), ('robot', 'and', 'it'), ('robot', 'and', 'after'), ('robot', 'broke', 'it'), ('robot', 'broke', 'after'), ('robot', 'it', 'after'), ('and', 'broke', 'it'), ('and', 'broke', 'after'), ('and', 'broke', 'making'), ('and', 'it', 'after'), ('and', 'it', 'making'), ('and', 'after', 'making'), ('broke', 'it', 'after'), ('broke', 'it', 'making'), ('broke', 'it', 'it.'), ('broke', 'after', 'making'), ('broke', 'after', 'it.'), ('broke', 'making', 'it.'), ('it', 'after', 'making'), ('it', 'after', 'it.'), ('it', 'making', 'it.'), ('after', 'making', 'it.')]
 ```
-# Annotator().get_conll_format( sentence, options='-srl -pos -ner -chk -psg')
+# get_conll_format( sentence, options='-srl -pos -ner -chk -psg')
 This function used to return CoNLL format that is return by the SENNA tool in its process.
+The `option=` should be in string format which is converted as `list()` and passed into
+the lower communication for shell.
 ```python
 >>> annotator.get_conll_format("He created the robot and broke it after making it.", options='-srl -pos')
 He	       PRP	              -	      S-A0	      S-A0	      S-A0
