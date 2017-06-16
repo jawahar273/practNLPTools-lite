@@ -37,11 +37,11 @@ class Annotator:
     :param str stp_dir: path of stanford parser jar
     """
  
-    def __init__(self, senna_dir="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', stp_dir=""):
+    def __init__(self, senna_dir="", stp_dir="",dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure'):
         """
         init function of Annotator class
         """
-        self.senna_path = senna_path.strip().rstrip(os.path.sep)
+        self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
         self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
         self.dep_par_model = dep_model
 
@@ -273,7 +273,8 @@ class Annotator:
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
         os.chdir(package_directory)
-        with open("in.parse", "w", encoding='utf-8') as parsefile:
+        
+        with open(self.senna_path+os.path.sep+"in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_cli, stdout=subprocess.PIPE, \
              stderr=subprocess.PIPE)
@@ -290,7 +291,7 @@ class Annotator:
         annotations = []
         batch_senna_tags = self.get_senna_tag_batch(sentences)
         for senna_tags in batch_senna_tags:
-            annotations += [self.get_annotations(senna_tags=senna_tags)]
+            annotations += [self.get_annoations(senna_tags=senna_tags)]
         if dep_parse:
             syntax_tree = ""
             for annotation in annotations:
@@ -303,7 +304,7 @@ class Annotator:
         return annotations
 
 
-    def get_annotations(self, sentence="", senna_tags=None, dep_parse=True):
+    def get_annoations(self, sentence="", senna_tags=None, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
@@ -427,13 +428,13 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
             sent = sent.split()
             args = '-srl -pos'.strip().split()
             print("conll:\n", annotator.get_conll_format(sent, args))
-            print('dep_parse:\n', (annotator.get_annotations(sent, dep_parse=True)['dep_parse']))
-            print('chunk:\n', (annotator.get_annotations(sent, dep_parse=True)['chunk']))
-            print('pos:\n', (annotator.get_annotations(sent, dep_parse=True)['pos']))
-            print('ner:\n', (annotator.get_annotations(sent, dep_parse=True)['ner']))
-            print('srl:\n', (annotator.get_annotations(sent, dep_parse=True)['srl']))
-            print('syntaxTree:\n', (annotator.get_annotations(sent, dep_parse=True)['syntax_tree']))
-            print('words:\n', (annotator.get_annotations(sent, dep_parse=True)['words']))
+            print('dep_parse:\n', (annotator.get_annoations(sent, dep_parse=True)['dep_parse']))
+            print('chunk:\n', (annotator.get_annoations(sent, dep_parse=True)['chunk']))
+            print('pos:\n', (annotator.get_annoations(sent, dep_parse=True)['pos']))
+            print('ner:\n', (annotator.get_annoations(sent, dep_parse=True)['ner']))
+            print('srl:\n', (annotator.get_annoations(sent, dep_parse=True)['srl']))
+            print('syntaxTree:\n', (annotator.get_annoations(sent, dep_parse=True)['syntax_tree']))
+            print('words:\n', (annotator.get_annoations(sent, dep_parse=True)['words']))
             print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
 
         else:
