@@ -57,7 +57,7 @@ Self-testing
 ============
 
 To test for your self please use function `test()` 
-### test(senna_path="",  sent="", dep_model="", batch=False)
+### test(senna_path="",  sent="", dep_model="", batch=False,  stp_dir="")
 senna_path: location of senna 
 
 sent = tokenized string or list of string 
@@ -67,7 +67,7 @@ batch =  batch must be `True` if sent is a list of strings
 ```python
 >>> from pntl.tools import test
 >>> # the below CoNLL example consist of srl,  pos, ner, chk, psg
->>> test(senna_path="/home/user/senna")# input the location of senna file, if the senna is present the follwing output is printed
+>>> test(senna_path="/home/user/senna",  stp_dir="/home/user/stanford_parser_folder")# input the location of senna file, if the senna is present the follwing output is printed
 conll:
  He	       PRP	              -	      S-A0	      S-A0	      S-A0
         created	       VBD	        created	       S-V	         O	         O

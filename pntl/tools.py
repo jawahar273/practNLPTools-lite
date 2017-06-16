@@ -34,22 +34,20 @@ class Annotator:
 
     :param str senna_path: path where is located
     :param str dep_model: Stanford dependencie mode
-    :param str jar_path: path of stanford parser jar
+    :param str stp_dir: path of stanford parser jar
     """
  
-    def __init__(self, senna_path="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', stp_dir=""):
+    def __init__(self, senna_dir="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', stp_dir=""):
         """
         init function of Annotator class
         """
-        self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = stp_dir+os.path.sep
+        self.senna_path = senna_path.strip().rstrip(os.path.sep)
+        self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
         self.dep_par_model = dep_model
-
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
                       '-treeFile', 'in.parse', '-collapsed']
-
         self.print_values()
 
 
@@ -408,7 +406,7 @@ class Annotator:
 
 
 def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False,
-      jar_path="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
+      stp_dir="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
     """
     please replace the path of yours environment(accouding to OS path)
 
@@ -417,10 +415,10 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     :param str or list sent: the sentense to process with Senna
     :param bool batch: makeing as batch process with one or more sentense
                        passing
-    :param str jar_path: location of stanford-parser.jar file
+    :param str stp_dir: location of stanford-parser.jar file
     """
     from pntl.utils import skipgrams
-    annotator = Annotator(senna_path, dep_model, jar_path)
+    annotator = Annotator(senna_path, dep_model, stp_dir)
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it."
