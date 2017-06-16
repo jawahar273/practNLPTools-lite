@@ -33,6 +33,7 @@ pntl
 >`in.parser` file consite syntax tree(for now) which is use as input for dependencie parser. One more thing the last runned sentence output only 
 will be stored.
 
+#pntl.tools.Annotator(senna_dir="", stp_dir="",dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure')
 ```python
 >>>from pntl.tools import Annotator
 >>>annotator = Annotator(senna_dir = "/home/user/senna", stp_dir = "/home/user/stanford_parser_folder")
