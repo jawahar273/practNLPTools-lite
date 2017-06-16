@@ -36,24 +36,15 @@ class Annotator:
     :param str dep_model: Stanford dependencie mode
     :param str jar_path: path of stanford parser jar
     """
-
-    def __init__(self, senna_path="", dep_model="", jar_path=""):
+ 
+    def __init__(self, senna_path="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', stp_dir=""):
         """
         init function of Annotator class
         """
         self.senna_path = senna_path+os.path.sep
-        self.dep_par_path = None
-        self.dep_par_model = None
+        self.dep_par_path = stp_dir+os.path.sep
+        self.dep_par_model = dep_model
 
-        if jar_path:
-            self.dep_par_path = jar_path+os.path.sep
-        else:
-            self.dep_par_path = __file__+os.path.sep+"pntl"+os.path
-
-        if dep_model:
-            self.dep_par_model = dep_model
-        else:
-            self.dep_par_model = 'edu.stanford.nlp.trees.EnglishGrammaticalStructure'
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
                         self.dep_par_model, \
