@@ -90,3 +90,7 @@ cd api
 make html
 ```
 The about command is used to generate html from docstring
+
+Visulize
+=========
+* [conllu](https://github.com/EmilStenstrom/conllu) (To make visulize possible with only CoNLLU format) 

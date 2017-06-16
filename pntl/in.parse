@@ -1,1 +1,1 @@
-(S1(S(S(NP(PRP He))(VP(VP(VBD killed)(NP(DT the)(NN man))(PP(IN with)(NP(DT a)(NN knife))))(CC and)(VP(VBD murdered)(NP(PRP him))(PP(IN with)(NP(DT a)(NN dagger))))))(. .)(S(NP(PRP He))(VP(VBZ is)(NP(DT a)(JJ good)(NN boy))))(. .)(NP(PRP He))(VP(VP(VBD created)(NP(DT the)(NN robot)))(CC and)(VP(VBD broke)(NP(PRP it))(PP(IN after)(S(VP(VBG making)(NP(PRP it.)))))))))
+(S1(S(NP(PRP He))(VP(VP(VBD created)(NP(DT the)(NN robot)))(CC and)(VP(VBD broke)(NP(PRP it))(PP(IN after)(S(VP(VBG making)(NP(PRP it.)))))))))

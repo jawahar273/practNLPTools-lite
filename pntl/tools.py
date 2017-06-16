@@ -183,6 +183,9 @@ class Annotator:
         senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
+    @classmethod
+    def help_conll_format(cls):
+        return cls.get_conll_format.__doc__.split("\n\n")[1]
 
     def get_conll_format(self, sentence, options='-srl -pos -ner -chk -psg'):
         """

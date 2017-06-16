@@ -228,7 +228,25 @@ Better method is:
 >>>list(skipgrams(sent.split(), n=3, k=2))
 [('He', 'created', 'the'), ('He', 'created', 'robot'), ('He', 'created', 'and'), ('He', 'the', 'robot'), ('He', 'the', 'and'), ('He', 'robot', 'and'), ('created', 'the', 'robot'), ('created', 'the', 'and'), ('created', 'the', 'broke'), ('created', 'robot', 'and'), ('created', 'robot', 'broke'), ('created', 'and', 'broke'), ('the', 'robot', 'and'), ('the', 'robot', 'broke'), ('the', 'robot', 'it'), ('the', 'and', 'broke'), ('the', 'and', 'it'), ('the', 'broke', 'it'), ('robot', 'and', 'broke'), ('robot', 'and', 'it'), ('robot', 'and', 'after'), ('robot', 'broke', 'it'), ('robot', 'broke', 'after'), ('robot', 'it', 'after'), ('and', 'broke', 'it'), ('and', 'broke', 'after'), ('and', 'broke', 'making'), ('and', 'it', 'after'), ('and', 'it', 'making'), ('and', 'after', 'making'), ('broke', 'it', 'after'), ('broke', 'it', 'making'), ('broke', 'it', 'it.'), ('broke', 'after', 'making'), ('broke', 'after', 'it.'), ('broke', 'making', 'it.'), ('it', 'after', 'making'), ('it', 'after', 'it.'), ('it', 'making', 'it.'), ('after', 'making', 'it.')]
 ```
-###### pnlt.utils.skipgrams(sentence, n=2, k=1)
+# Annotator().get_conll_format( sentence, options='-srl -pos -ner -chk -psg')
+This function used to return CoNLL format that is return by the SENNA tool in its process.
+```python
+>>> annotator.get_conll_format("He created the robot and broke it after making it.", options='-srl -pos')
+He	       PRP	              -	      S-A0	      S-A0	      S-A0
+        created	       VBD	        created	       S-V	         O	         O
+            the	        DT	              -	      B-A1	         O	         O
+          robot	        NN	              -	      E-A1	         O	         O
+            and	        CC	              -	         O	         O	         O
+          broke	       VBD	          broke	         O	       S-V	         O
+             it	       PRP	              -	         O	      S-A1	         O
+          after	        IN	              -	         O	  B-AM-TMP	         O
+         making	       VBG	         making	         O	  I-AM-TMP	       S-V
+            it.	       PRP	              -	         O	  E-AM-TMP	      S-A1
+
+```
+to get help for this function use the class method `help_conll_format()`
+>Annotator.help_conll_format()
+# pnlt.utils.skipgrams(sentence, n=2, k=1)
 n = is the value for n-grams
 k = skip value 
  `skipgrams()` returns the output in genetator form for better memory management.

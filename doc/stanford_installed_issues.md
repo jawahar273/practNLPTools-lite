@@ -1,8 +1,11 @@
 
 ## If there is an issue in stanford parser. 
-If the stanford parser can not be copy into installing location. So for quick working on Dependence parser the one possible solution I am asking you to follow, until the issue is resolved.
-1. Assigning the location like this `annotator=Annotator();annotator.stp_dir="location_pls"` with respect to your os environment or follow the below steps
-1.  please use the this package without installing(as local package without installing) which have `stanford-parser.jar`  inside  
+If the stanford parser can not be copy into installing location. So for quick working on Dependence parser the some possible. 
+1. Assigning the location of `stanford-parser.jar`.
+```python
+annotator=Annotator()
+annotator.stp_dir="location_pls"#with respect to your os environment or follow the below steps
+``` 
 2. Placing the `stanford-parser.jar` explicitly inside the installing in linux on python 3.x usual location is 
 `/usr/local/lib/python3.5/dist-packages/pntl`  
 3.  if you are using Anaconda distribution python the possible location is `/home/<user_name>/anaconda3/lib/python3.5/site-packages/pntl/` (without `virtual environment`)
