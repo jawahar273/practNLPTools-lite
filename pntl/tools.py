@@ -54,7 +54,8 @@ class Annotator:
             self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
 
         if not stp_dir:
-           self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
+           import pntl.tools 
+           self.dep_par_path = pntl.tools.__file__.rsplit(os.path.sep, 1)[0]
         else:
            self.dep_par_path = stp_dir+ os.path.sep
 
@@ -77,7 +78,7 @@ class Annotator:
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("**"*50)
 
-    def check_stp_jar(self, path):
+    def check_stp_jar(self, path, raise_e=False ):
         """
         Check the stanford parser is present in the given directions
         and nested searching will be added in futurwork
@@ -96,8 +97,8 @@ class Annotator:
             if file.endwith(".jar"):
                 if file.startwith("stanford-parser"):
                     file_found = True
-        if not file_found :
-            raise FileNotFoundError("`stanford-parser.jar` is not found in the given path")
+        if not file_found and raise_e:
+            raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`"%(path))
         return file_found
 
     @property
