@@ -41,7 +41,14 @@ class Annotator:
         """
         init function of Annotator class
         """
-        self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
+        if not senna_dir:
+            if 'SENNA' in os.environ:
+                self.senna_path = os.path.normpath(environ['SENNA']) + sep
+                exe_file_2 = self.get_cos_name(self.senna_path)
+                if not os.path.isfile(exe_file_2):
+                    raise OSError("Senna executable expected at %s or %s but not found" % (exe_file_1,exe_file_2))
+        else:
+            self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
         self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
         self.dep_par_model = dep_model
 
@@ -62,7 +69,7 @@ class Annotator:
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("**"*50)
 
-    def check_stp_jar(self, path, raise_exp=False):
+    def check_stp_jar(self, path):
         """
         Check the stanford parser is present in the given directions
         and nested searching will be added in futurwork
@@ -81,7 +88,7 @@ class Annotator:
             if file.endwith(".jar"):
                 if file.startwith("stanford-parser"):
                     file_found = True
-        if not file_found and raise_exp:
+        if not file_found :
             raise FileNotFoundError("`stanford-parser.jar` is not found in the given path")
         return file_found
 
