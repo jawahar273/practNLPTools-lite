@@ -99,7 +99,10 @@ class Annotator:
                 if file.startwith("stanford-parser"):
                     file_found = True
         if not file_found and raise_e:
-            raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`\n to handle this issue follow this link [https://github.com/jawahar273/practNLPTools-lite/blob/master/doc/stanford_installing_issues.md]"%(path))
+            raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`\n \
+              to handle the issue follow this link \
+                   [https://github.com/jawahar273/practNLPTools-lite/blob/master/doc/ \
+                    stanford_installing_issues.md]"%(path))
         return file_found
 
     @property
