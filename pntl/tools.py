@@ -32,7 +32,7 @@ class Annotator:
     misalignment errors
     and for Dependency Parser the requirement is Java Runtime Environment :)
 
-    :param str senna_path: path where is located
+    :param str senna_dur: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str stp_dir: path of stanford parser jar
     """
@@ -41,15 +41,23 @@ class Annotator:
         """
         init function of Annotator class
         """
+        self.senna_path = ""
+        self.dep_par_path = ""
+
         if not senna_dir:
             if 'SENNA' in os.environ:
-                self.senna_path = os.path.normpath(environ['SENNA']) + sep
+                self.senna_path = os.path.normpath(environ['SENNA']) + os.path.sep
                 exe_file_2 = self.get_senna_bin(self.senna_path)
                 if not os.path.isfile(exe_file_2):
                     raise OSError("Senna executable expected at %s or %s but not found" % (exe_file_1,exe_file_2))
         else:
             self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
-        self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
+
+        if not stp_dir:
+           self.dep_par_path = os.getcwd().rsplit(os.path.sep, 2)[0]
+        else:
+           self.dep_par_path = stp_dir+ os.path.sep
+
         self.dep_par_model = dep_model
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
