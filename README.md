@@ -96,10 +96,3 @@ The about command is used to generate html from docstring
 * [conllu](https://github.com/EmilStenstrom/conllu) (To make visulize possible with only CoNLLU format) 
 
 
-<style>
-.blockquote-jon{
-border-left-color: #42b983;
-border-left-width: 5px;
-border:1px solid #eee;
-}
-</style>
