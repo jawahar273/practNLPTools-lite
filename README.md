@@ -97,6 +97,6 @@ Visulize
 
 <style>
 blockquote{
-border-left: 2rem #159957;
+border-left-color: #42b983;: 2rem #159957;
 }
 </style>
