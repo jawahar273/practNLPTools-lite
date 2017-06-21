@@ -85,7 +85,7 @@ class Annotator:
         and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
-        :param bool raise_exp: to raise exception with user wise and default `False`
+        :param bool raise_e: to raise exception with user wise and default `False`
               don't raises exception
         :return: given path if it is valid one or return boolean `False` or
              if raise FileNotFoundError on raise_exp=True
@@ -192,8 +192,13 @@ class Annotator:
         senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
+
     @classmethod
     def help_conll_format(cls):
+        """
+         With the help of this method, detail of senna 
+         arguments are displayed
+        """
         return cls.get_conll_format.__doc__.split("\n\n")[1]
 
     def get_conll_format(self, sentence, options='-srl -pos -ner -chk -psg'):
@@ -258,7 +263,7 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
 
-    def get_sennaTag(self, sentence):
+    def get_senna_tag(self, sentence):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
@@ -338,7 +343,7 @@ class Annotator:
         """
         annotations = {}
         if not senna_tags:
-            senna_tags = self.get_sennaTag(sentence).decode()
+            senna_tags = self.get_senna_tag(sentence).decode()
             senna_tags = [x.strip() for x in senna_tags.split("\n")];senna_tags = senna_tags[0:-2]
         else:
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
