@@ -35,9 +35,10 @@ class Annotator:
     :param str senna_dur: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str stp_dir: path of stanford parser jar
+    :param str raise_e: raise exception if stanford-parser.jar is not found
     """
  
-    def __init__(self, senna_dir="", stp_dir="",dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure'):
+    def __init__(self, senna_dir="", stp_dir="",dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', raise_e=False):
         """
         init function of Annotator class
         """
@@ -55,11 +56,12 @@ class Annotator:
 
         if not stp_dir:
            import pntl.tools 
-           self.dep_par_path = pntl.tools.__file__.rsplit(os.path.sep, 1)[0]
-           check_stp_jar(self.dep_par_path, raise_e=True)
+           self.dep_par_path = pntl.tools.__file__.rsplit(os.path.sep, 1)[0]+os.path.sep
+           self.check_stp_jar(self.dep_par_path, raise_e=True)
         else:
            self.dep_par_path = stp_dir+ os.path.sep
-
+           self.check_stp_jar(self.dep_par_path, raise_e)
+        
         self.dep_par_model = dep_model
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
@@ -92,17 +94,18 @@ class Annotator:
         :rtype: bool
 
         """
+        gpath = path
         path = os.listdir(path)
         file_found = False
         for file in path:
-            if file.endwith(".jar"):
-                if file.startwith("stanford-parser"):
+            if file.endswith(".jar"):
+                if file.startswith("stanford-parser"):
                     file_found = True
         if not file_found and raise_e:
             raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`\n \
               to handle the issue follow this link \
                    [https://github.com/jawahar273/practNLPTools-lite/blob/master/doc/ \
-                    stanford_installing_issues.md]"%(path))
+                    stanford_installing_issues.md]"%(gpath))
         return file_found
 
     @property
@@ -444,7 +447,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     :param str stp_dir: location of stanford-parser.jar file
     """
     from pntl.utils import skipgrams
-    annotator = Annotator(senna_path, dep_model, stp_dir)
+    annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent:
         if not batch:
             sent = "He created the robot and broke it after making it."
