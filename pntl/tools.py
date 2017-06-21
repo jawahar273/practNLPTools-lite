@@ -56,6 +56,7 @@ class Annotator:
         if not stp_dir:
            import pntl.tools 
            self.dep_par_path = pntl.tools.__file__.rsplit(os.path.sep, 1)[0]
+           check_stp_jar(self.dep_par_path, raise_e=True)
         else:
            self.dep_par_path = stp_dir+ os.path.sep
 
@@ -98,7 +99,7 @@ class Annotator:
                 if file.startwith("stanford-parser"):
                     file_found = True
         if not file_found and raise_e:
-            raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`"%(path))
+            raise FileNotFoundError("`stanford-parser.jar` is not found in the path `%s`\n to handle this issue follow this link [https://github.com/jawahar273/practNLPTools-lite/blob/master/doc/stanford_installing_issues.md]"%(path))
         return file_found
 
     @property
