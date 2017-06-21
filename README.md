@@ -76,10 +76,10 @@ By using the `time` command in ubuntu on running the `testsrl.py` on this [link]
 |      | real	0m1.245s | real	0m3.359s
 |      | user	0m1.560s | user	0m2.016s
 |      | sys	0m0.152s   | sys	0m1.168s
-
-> note: this bench mark may differt accouding to system's working and to restult present here is exact same result in my system 
+<div class="blockquote-jon">
+ note: this bench mark may differt accouding to system's working and to restult present here is exact same result in my system 
 ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I will change to it. 
-
+</div>
 
 Dependency 
 =====================
@@ -96,7 +96,9 @@ Visulize
 * [conllu](https://github.com/EmilStenstrom/conllu) (To make visulize possible with only CoNLLU format) 
 
 <style>
-blockquote{
+.blockquote-jon{
 border-left-color: #42b983;
+border-left-width: 5px;
+border:1px solid #eee;
 }
 </style>
