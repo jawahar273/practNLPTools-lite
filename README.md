@@ -13,8 +13,8 @@ practNLPTools is a pythonic library over [SENNA](http://ronan.collobert.com/senn
 
 
 
-Functionality
-=============
+# Functionality
+
 * Semantic Role Labeling
 * Syntactic Parsing
 * Part of Speech Tagging (POS Tagging)
@@ -23,15 +23,15 @@ Functionality
 * Shallow Chunking
 * Skip-gram(in-case)
 
-Future work
-==========
+# Future work
+
 * ~~automatic takes senna path if it install in system~~
 * copying stanford parser and depPaser file into installed direction
 * creating depParser for corresponding os environment
 * custome input format for stanford parser insted of tree format
 
-Features
-=============
+# Features
+
 1. Fast: [SENNA](http://ronan.collobert.com/senna/) is written is C. So it is Fast.
 2. We use only dependency Extractor Component of Stanford Parser, which takes in Syntactic Parse from SENNA and applies dependency Extraction. So there is no need to load parsing models for Stanford Parser, which takes time.
 3. Easy to use.
@@ -44,8 +44,8 @@ Features
     system specific binary should be rebuilt. Otherwise this could introduce
     misalignment errors.
     
-Installation
-=============
+# Installation
+
 
 Requires:
 A computer with 500mb memory, Java Runtime Environment (1.7 preferably, works with 1.6 too, but didnt test.) installed and python.
@@ -62,8 +62,8 @@ run this commands as administrator:
 python setup.py install
 ``` 
 
-Bench Mark comparsion
-=====================
+# Bench Mark comparsion
+
 By using the `time` command in ubuntu on running the `testsrl.py` on this [link](https://github.com/jawahar273/SRLTagger) and along with `tools.py` on `pntl`  
 
 |      | pntl | NLTK-senna |
@@ -81,8 +81,8 @@ By using the `time` command in ubuntu on running the `testsrl.py` on this [link]
 ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I will change to it. 
 </div>
 
-Dependency 
-=====================
+# Dependency 
+
 * Sphinx 1.5+ [only need it for building doc html]
 
 ```
@@ -91,9 +91,10 @@ make html
 ```
 The about command is used to generate html from docstring
 
-Visulize
-=========
+# Visulize
+
 * [conllu](https://github.com/EmilStenstrom/conllu) (To make visulize possible with only CoNLLU format) 
+
 
 <style>
 .blockquote-jon{
