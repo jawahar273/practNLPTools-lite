@@ -44,7 +44,7 @@ class Annotator:
         if not senna_dir:
             if 'SENNA' in os.environ:
                 self.senna_path = os.path.normpath(environ['SENNA']) + sep
-                exe_file_2 = self.get_cos_name(self.senna_path)
+                exe_file_2 = self.get_senna_bin(self.senna_path)
                 if not os.path.isfile(exe_file_2):
                     raise OSError("Senna executable expected at %s or %s but not found" % (exe_file_1,exe_file_2))
         else:
@@ -133,7 +133,7 @@ class Annotator:
     def jar_cli(self, val):
         self.default_jar_cli = val.split()
 
-    def get_cos_name(self, os_name):
+    def get_senna_bin(self, os_name):
         """
         get the current os executable binary file.
 
@@ -171,7 +171,7 @@ class Annotator:
         input_data = input_data[:-1]
         package_directory = os.path.dirname(self.senna_path)
         os_name = system()
-        executable = self.get_cos_name(os_name)
+        executable = self.get_senna_bin(os_name)
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
@@ -234,7 +234,7 @@ class Annotator:
         package_directory = os.path.dirname(self.senna_path)
         #print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
-        executable = self.get_cos_name(os_name)
+        executable = self.get_senna_bin(os_name)
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
@@ -258,7 +258,7 @@ class Annotator:
         package_directory = os.path.dirname(self.senna_path)
         #print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
-        executable = self.get_cos_name(os_name)
+        executable = self.get_senna_bin(os_name)
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
