@@ -8,6 +8,8 @@ Creating practNLPTools in lite mode.
 
 [![Build Status](https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master)](https://travis-ci.org/jawahar273/practNLPTools) - on click this built this might take you to build of [practNLPTools](https://github.com/jawahar273/practNLPTools) which is testing ground for this repository so don't worry.
 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fjawahar273%2FpractNLPTools-lite.svg?type=small)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fjawahar273%2FpractNLPTools-lite?ref=badge_small)
+
 Practical Natural Language Processing Tools for Humans.<br>
 practNLPTools is a pythonic library over [SENNA](http://ronan.collobert.com/senna/) and Stanford Dependency Extractor.
 
