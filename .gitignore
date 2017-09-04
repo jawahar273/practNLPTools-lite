@@ -23,6 +23,13 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+*.ipynb
+pntl/senna/
+.ipynb_checkpoints
+*.pyx
+
+*.c
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

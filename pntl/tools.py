@@ -53,6 +53,7 @@ class Annotator:
                     raise OSError("Senna executable expected at %s or %s but not found" % (exe_file_1,exe_file_2))
         else:
             self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
+            
 
         if not stp_dir:
            import pntl.tools 
