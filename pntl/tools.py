@@ -96,6 +96,7 @@ class Annotator:
 
         """
         gpath = path
+        print(path)
         path = os.listdir(path)
         file_found = False
         for file in path:
@@ -435,8 +436,8 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", batch=False,
-      stp_dir="/media/jawahar/jon/ubuntu/practNLPTools-lite/pntl"):
+def test(senna_path="/home/codingmart/Documents/jon/senna", sent="", dep_model="", batch=False,
+      stp_dir="/home/codingmart/Documents/jon/practNLPTools-lite/pntl"):
     """
     please replace the path of yours environment(accouding to OS path)
 
@@ -451,7 +452,7 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent:
         if not batch:
-            sent = "He created the robot and broke it after making it."
+            sent = 'get me a hotel on chennai in 21-4-2017 '#"He created the robot and broke it after making it."
 
             print("\n", sent, "\n")
             sent = sent.split()
@@ -476,7 +477,11 @@ def test(senna_path="/media/jawahar/jon/ubuntu/senna", sent="", dep_model="", ba
 
 
 if __name__ == "__main__":
-    test()
+    try:
+        test()
+    except Exception as e:
+        print(e)
+        print("To know about more issue to this link https://github.com/jawahar273/practNLPTools-lite/wiki")
 
 
 
