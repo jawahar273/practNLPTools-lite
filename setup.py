@@ -5,7 +5,6 @@ from distutils.command.install import INSTALL_SCHEMES
 files = ["pntl/*"]
 import os
 
-
 def walkdir(dirname):
     rec_files=[]
     for cur, _dirs, files in os.walk(dirname):
