@@ -64,21 +64,64 @@ run this commands as administrator:
 python setup.py install
 ``` 
 
-# Bench Mark comparsion
+<h1>Bench Mark comparsion</h1>
+<p>By using the <code>time</code> command in ubuntu on running the <code>testsrl.py</code> on this <a href="https://github.com/jawahar273/SRLTagger">link</a> and along with <code>tools.py</code> on <code>pntl</code></p>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>pntl</th>
+			<th>NLTK-senna</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>at fist run</td>
+			<td></td>
+			<td></td>
+		</tr>
 
-By using the `time` command in ubuntu on running the `testsrl.py` on this [link](https://github.com/jawahar273/SRLTagger) and along with `tools.py` on `pntl`  
+		<tr>
+			<td></td>
+			<td>real	0m1.674s</td>
+			<td>real	0m2.484s</td>
+		</tr>
 
-|      | pntl | NLTK-senna |
-| --   | --   | ---  |
-| at fist run |   |   |
-|      |real	0m1.674s | real	0m2.484s
-|      |user	0m1.564s | user	0m1.868s
-|      |sys	0m0.228s | sys	0m0.524s
-| at second run |     |
-|      | real	0m1.245s | real	0m3.359s
-|      | user	0m1.560s | user	0m2.016s
-|      | sys	0m0.152s   | sys	0m1.168s
-<div class="blockquote-jon">
+		<tr>
+			<td></td>
+			<td>user	0m1.564s</td>
+			<td>user	0m1.868s</td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td>sys	0m0.228s</td>
+			<td>sys	0m0.524s</td>
+		</tr>
+
+		<tr>
+			<td>at second run</td>
+			<td></td>
+			<td></td>
+		</tr>
+
+<tr>
+<td></td>
+<td>real	0m1.245s</td>
+<td>real	0m3.359s</td>
+</tr>
+<tr>
+<td></td>
+<td>user	0m1.560s</td>
+<td>user	0m2.016s</td>
+</tr>
+<tr>
+<td></td>
+<td>sys	0m0.152s</td>
+<td>sys	0m1.168s</td>
+</tr></tbody></table>
+
+<div>
  note: this bench mark may differt accouding to system's working and to restult present here is exact same result in my system 
 ububtu 4Gb RAM and i3 process. If I find another good benchmark techinque then I will change to it. 
 </div>

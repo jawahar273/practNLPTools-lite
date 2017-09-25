@@ -1,4 +1,4 @@
-* JBot version:
+
 * Python version:
 * Operating System:
 
