@@ -1,0 +1,163 @@
+==================
+practNLPTools-lite
+==================
+Creating practNLPTools in lite mode.
+
+|Author|  |Python-version-3|
+
+|Build Status| - on click this built this might take you to build of
+`practNLPTools`_ which is testing ground for this repository so don’t
+worry.
+
+|FOSSA Status|
+
+| Practical Natural Language Processing Tools for Humans.
+| practNLPTools is a pythonic library over `SENNA`_ and Stanford
+  Dependency Extractor.
+
+.. image:: https://img.shields.io/pypi/v/practNLPTools-lite.svg
+        :target: https://pypi.python.org/pypi/practNLPTools-lite
+
+.. image:: https://img.shields.io/travis/jawahar273/practNLPTools-lite.svg
+        :target: https://travis-ci.org/jawahar273/practNLPTools-lite
+
+.. image:: https://readthedocs.org/projects/practNLPTools-lite/badge/?version=latest
+        :target: https://practNLPTools-lite.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+.. image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/shield.svg
+     :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
+     :alt: Updates
+
+
+* Documentation: https://practNLPTools-lite.readthedocs.io.
+
+Functionality
+=============
+
+-  Semantic Role Labeling
+-  Syntactic Parsing
+-  Part of Speech Tagging (POS Tagging)
+-  Named Entity Recognisation (NER)
+-  Dependency Parsing
+-  Shallow Chunking
+-  Skip-gram(in-case)
+
+Future work
+===========
+
+-  [STRIKEOUT:automatic takes senna path if it install in system]
+-  copying stanford parser and depPaser file into installed direction
+-  creating depParser for corresponding os environment
+-  custome input format for stanford parser insted of tree format
+
+Features
+========
+
+#. Fast: `SENNA`_ is written is C. So it is Fast.
+#. We use only dependency Extractor Component of Stanford Parser, which
+   takes in Syntactic Parse from SENNA and applies dependency
+   Extraction. So there is no need to load parsing models for Stanford
+   Parser, which takes time.
+#. Easy to use.
+#. Platform Supported - Windows, Linux and Mac
+
+    | Notes:
+    | SENNA pipeline has a fixed maximum size of the sentences that it
+      can read.
+    | By default it is 1024 token/sentence. If you have larger
+      sentences, changing
+    | the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should be
+      considered and your
+    | system specific binary should be rebuilt. Otherwise this could
+      introduce
+    | misalignment errors.
+
+Installation
+============
+
+| Requires:
+| A computer with 500mb memory, Java Runtime Environment (1.7
+  preferably, works with 1.6 too, but didnt test.) installed and python.
+
+| If you are in linux:
+| run:
+
+::
+
+    sudo python setup.py install 
+
+| If you are in windows:
+| run this commands as administrator:
+
+::
+
+    python setup.py install
+
+
+Bench Mark comparsion
+=====================
+
+By using the ``time`` command in ubuntu on running the ``testsrl.py`` on
+this `link`_ and along with ``tools.py`` on ``pntl``
+
+.. _link: https://github.com/jawahar273/SRLTagger
+
+
++-----------------+-----------------+-----------------+
+|                 | pntl            | NLTK-senna      |
++=================+=================+=================+
+| at fist run     |                 |                 |
++-----------------+-----------------+-----------------+
+|                 | real 0m1.674s   | real 0m2.484s   |
++-----------------+-----------------+-----------------+
+|                 | user 0m1.564s   | user 0m1.868s   |
++-----------------+-----------------+-----------------+
+|                 | sys 0m0.228s    | sys 0m0.524s    |
++-----------------+-----------------+-----------------+
+| at second run   |                 |                 |
++-----------------+-----------------+-----------------+
+|                 | real 0m1.245s   | real 0m3.359s   |
++-----------------+-----------------+-----------------+
+|                 | user 0m1.560s   | user 0m2.016s   |
++-----------------+-----------------+-----------------+
+|                 | sys 0m0.152s    | sys 0m1.168s    |
++-----------------+-----------------+-----------------+
+
+
+.. raw:: html
+
+   <div>
+
+note: this bench mark may differt accouding to system’s working and to
+restult present here is exact same result in my system ububtu 4Gb RAM
+and i3 process. If I find another good benchmark techinque then I will
+change to it.
+
+.. raw:: html
+
+   </div>
+
+.. _practNLPTools: https://github.com/jawahar273/practNLPTools-lite
+.. _SENNA: http://ronan.collobert.com/senna/
+
+.. |Author| image:: https://img.shields.io/badge/Author-jawahar-blue.svg
+.. |Python-version-3| image:: https://img.shields.io/badge/Python%20Version-Python--3.5-green.svg
+.. |Build Status| image:: https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master
+   :target: https://travis-ci.org/jawahar273/practNLPTools
+.. |FOSSA Status| image:: https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fjawahar273%2FpractNLPTools-lite.svg?type=small
+   :target: https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fjawahar273%2FpractNLPTools-lite?ref=badge_small
+
+
+.. Features
+.. --------
+
+.. * TODO
+
+Credits
+---------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
