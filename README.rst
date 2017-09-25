@@ -30,7 +30,7 @@ worry.
      :alt: Updates
 
 
-* Documentation: https://practNLPTools-lite.readthedocs.io.
+* Documentation: http://pntl.readthedocs.io
 
 Functionality
 =============
