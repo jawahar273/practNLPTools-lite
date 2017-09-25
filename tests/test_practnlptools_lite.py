@@ -7,7 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from pntl import pntl
+from pntl.tools import Annotator
 from pntl import cli
 
 

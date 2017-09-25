@@ -464,10 +464,8 @@ class Annotator:
         return annotations
 
 
-def test(senna_path="/home/codingmart/Documents/jon/senna", sent="", dep_model="", batch=False,
-      stp_dir="/home/codingmart/Documents/jon/practNLPTools-lite/pntl"):
-    """
-    please replace the path of yours environment(accouding to OS path)
+def test(senna_path="", sent="", dep_model="", batch=False, tp_dir=""):
+    """please replace the path of yours environment(accouding to OS path)
 
     :param str senna_path: path for senna location
     :param str dep_model: stanford dependency parser model location
@@ -480,8 +478,8 @@ def test(senna_path="/home/codingmart/Documents/jon/senna", sent="", dep_model="
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent:
         if not batch:
-            sent = 'get me a hotel on chennai in 21-4-2017 '#"He created the robot and broke it after making it."
-
+            sent = 'get me a hotel on chennai in 21-4-2017 ' 
+            # "He created the robot and broke it after making it."
             print("\n", sent, "\n")
             sent = sent.split()
             args = '-srl -pos'.strip().split()
