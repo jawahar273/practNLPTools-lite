@@ -14,6 +14,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
+    'colorama>=0.3.9'
     # TODO: put package requirements here
 ]
 

@@ -13,7 +13,8 @@ import subprocess
 import os
 from platform import architecture, system
 
-
+from colorama import Fore, init
+init(autoreset=True)
 
 
 class Annotator:
@@ -38,9 +39,13 @@ class Annotator:
     :param str senna_dir: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str stp_dir: path of stanford parser jar
-    :param str raise_e: raise exception if stanford-parser.jar is not found    
+    :param str raise_e: raise exception if stanford-parser.jar
+                          is not found
     """
-    def __init__(self, senna_dir="", stp_dir="", dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure', raise_e=False):
+
+    def __init__(self, senna_dir="", stp_dir="",
+                 dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure',
+                 raise_e=False):
         """
         init function of Annotator class
         """
@@ -49,18 +54,21 @@ class Annotator:
 
         if not senna_dir:
             if 'SENNA' in os.environ:
-                self.senna_path = os.path.normpath(os.environ['SENNA']) \
-                + os.path.sep
+                self.senna_path = os.path.normpath(os.environ['SENNA']) + os.path.sep
                 exe_file_2 = self.get_senna_bin(self.senna_path)
                 if not os.path.isfile(exe_file_2):
-                    raise OSError("Senna executable expected at %s or %s but not found" % (exe_file_1, exe_file_2))
+                    raise OSError(Fore.RED +
+                                  "Senna executable expected at %s or"
+                                  " %s but not found"
+                                  % (self.senna_path, exe_file_2))
         else:
-            self.senna_path = senna_dir.strip().rstrip(os.path.sep)+os.path.sep
+            self.senna_path = senna_dir.strip().rstrip(
+                                                       os.path.sep) + os.path.sep
 
         if not stp_dir:
-            import pntl.tools
-            self.dep_par_path = pntl. \
-                 tools.__file__.rsplit(os.path.sep, 1)[0] + os.path.sep
+            import pntl.tools as Tfile
+            self.dep_par_path = Tfile.__file__.rsplit(
+                                                      os.path.sep, 1)[0] + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e=True)
         else:
             self.dep_par_path = stp_dir + os.path.sep
@@ -68,30 +76,30 @@ class Annotator:
 
         self.dep_par_model = dep_model
 
-        self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',\
-                        self.dep_par_model, \
-                      '-treeFile', 'in.parse', '-collapsed']
+        self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',
+                                self.dep_par_model,
+                                '-treeFile', 'in.parse', '-collapsed']
         self.print_values()
 
-
     def print_values(self):
-        """
-        displays the current set of values such as SENNA location, stanford parser jar,
+        """ displays the current set of values
+        such as SENNA location, stanford parser jar,
         jar command interface
         """
-        print("**"*50)
-        print("default values:\nsenna path:\n", self.senna_path, \
-             "\nDependencie parser:\n", self.dep_par_path)
+        print("**" * 50)
+        print("default values:\nsenna path:\n", self.senna_path,
+              "\nDependencie parser:\n", self.dep_par_path)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
-        print("**"*50)
+        print("**" * 50)
 
-    def check_stp_jar(self, path, raise_e=False ):
+    def check_stp_jar(self, path, raise_e=False):
         """
         Check the stanford parser is present in the given directions
         and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
-        :param bool raise_e: to raise exception with user wise and default `False`
+        :param bool raise_e: to raise
+                             exception with user wise and default `False`
               don't raises exception
         :return: given path if it is valid one or return boolean `False` or
              if raise FileNotFoundError on raise_exp=True
@@ -99,7 +107,6 @@ class Annotator:
 
         """
         gpath = path
-        print(path)
         path = os.listdir(path)
         file_found = False
         for file in path:
@@ -107,12 +114,14 @@ class Annotator:
                 if file.startswith("stanford-parser"):
                     file_found = True
         if not file_found and raise_e:
-            raise FileNotFoundError("`stanford-parser.jar` is not "
-                " found in the path `%s`"
-              "to handle the issue follow this link"
-                   "[https://github.com/jawahar273/practNLPTools-lite"
-                   "/blob/master/doc/"
-                    "stanford_installing_issues.md]"%(gpath))
+            raise FileNotFoundError(Fore.RED + "`stanford-parser.jar` is not"
+                                    " found in the path \n"
+                                    "`{}` \n"
+                                    "To know about more about the issues,"
+                                    "got to this given link ["
+                                    "http://pntl.readthedocs.io/en/"
+                                    "latest/stanford_installing_issues.html]"
+                                    .format(gpath))
         return file_found
 
     @property
@@ -197,8 +206,9 @@ class Annotator:
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
-        pipe = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, \
-               stdin=subprocess.PIPE)
+        pipe = subprocess.Popen(senna_executable,
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
@@ -282,7 +292,7 @@ class Annotator:
 
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
-        #print("testing dir",self.dep_par_path, package_directory)
+        # print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable = self.get_senna_bin(os_name)
         senna_executable = os.path.join(package_directory, executable)
@@ -290,8 +300,11 @@ class Annotator:
         os.chdir(package_directory)
         args = [senna_executable]
         args.extend(options)
-        pipe = subprocess.Popen(args, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
+        pipe = subprocess.Popen(args,
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        senna_stdout = pipe.communicate(
+                                        input=" ".join(input_data)\
+                                                       .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
 
@@ -306,14 +319,17 @@ class Annotator:
         """
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
-        #print("testing dir",self.dep_par_path, package_directory)
+        # print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable = self.get_senna_bin(os_name)
         senna_executable = os.path.join(package_directory, executable)
         cwd = os.getcwd()
         os.chdir(package_directory)
-        pipe = subprocess.Popen(senna_executable, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = pipe.communicate(input=" ".join(input_data).encode('utf-8'))[0]
+        pipe = subprocess.Popen(senna_executable,
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        senna_stdout = pipe.communicate(
+                                        input=" ".join(input_data)
+                                                      .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
 
@@ -327,15 +343,16 @@ class Annotator:
         :return: stanford dependency universal format
         :rtype: str
         """
-        #print("\nrunning.........")
+        # print("\nrunning.........")
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
         os.chdir(package_directory)
 
         with open(self.senna_path + os.path.sep + "in.parse", "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
-        pipe = subprocess.Popen(self.default_jar_cli, stdout=subprocess.PIPE, \
-             stderr=subprocess.PIPE)
+        pipe = subprocess.Popen(self.default_jar_cli,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
         pipe.wait()
         stanford_out = pipe.stdout.read()
         os.chdir(cwd)
@@ -355,32 +372,37 @@ class Annotator:
             for annotation in annotations:
                 syntax_tree += annotation['syntax_tree']
             dependencies = self.get_dependency(syntax_tree).split("\n\n")
-            #print dependencies
+            # print (dependencies)
             if len(annotations) == len(dependencies):
                 for dependencie, annotation in zip(dependencies, annotations):
                     annotation["dep_parse"] = dependencie
         return annotations
-
 
     def get_annoations(self, sentence="", senna_tags=None, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
 
-        :param str or list sentence: a sentence or list of sentence for nlp process.
-        :param str or list senna_tags:  this values are by SENNA processed string
-        :param bool  batch: the change the mode into batch processing process
-        :param bool dep_parse: to tell the code and user need to communicate with stanford parser
-        :return: the dict() of every out in the process such as ner, dep_parse, srl, verbs etc.
+        :param str or list sentence: a sentence or list of
+                     sentence for nlp process.
+        :param str or list senna_tags:  this values are by
+                     SENNA processed string
+        :param bool  batch: the change the mode into batch
+                     processing process
+        :param bool dep_parse: to tell the code and user need
+                    to communicate with stanford parser
+        :return: the dict() of every out in the process
+                    such as ner, dep_parse, srl, verbs etc.
         :rtype: dict
         """
         annotations = {}
         if not senna_tags:
             senna_tags = self.get_senna_tag(sentence).decode()
-            senna_tags = [x.strip() for x in senna_tags.split("\n")];senna_tags = senna_tags[0:-2]
+            senna_tags = [x.strip() for x in senna_tags.split("\n")]
+            senna_tags = senna_tags[0:-2]
         else:
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
-        no_verbs = len(senna_tags[0].split("\t"))-6
+        no_verbs = len(senna_tags[0].split("\t")) - 6
 
         words = []
         pos = []
@@ -397,7 +419,7 @@ class Annotator:
             ner += [senna_tag[3].strip()]
             verb += [senna_tag[4].strip()]
             srl = []
-            for i in range(5, 5+no_verbs):
+            for i in range(5, 5 + no_verbs):
                 srl += [senna_tag[i].strip()]
             srls += [tuple(srl)]
             syn += [senna_tag[-1]]
@@ -415,35 +437,35 @@ class Annotator:
                             role[splits[1]] = words[i]
                         else:
                             if splits[1] in role:
-                                role[splits[1]] += " "+words[i]
+                                role[splits[1]] += " " + words[i]
                             else:
                                 role[splits[1]] = words[i]
                     elif len(splits) == 3:
-                        if splits[1]+"-"+splits[2] in role:
-                            role[splits[1]+"-"+splits[2]] += " "+words[i]
+                        if splits[1] + "-" + splits[2] in role:
+                            role[splits[1] + "-" + splits[2]] += " " + words[i]
                         else:
-                            role[splits[1]+"-"+splits[2]] = words[i]
+                            role[splits[1] + "-" + splits[2]] = words[i]
                 elif splits[0] == "B":
-                    temp = temp+" "+words[i]
+                    temp = temp + " " + words[i]
                 elif splits[0] == "I":
-                    temp = temp+" "+words[i]
+                    temp = temp + " " + words[i]
                 elif splits[0] == "E":
-                    temp = temp+" "+words[i]
+                    temp = temp + " " + words[i]
                     if len(splits) == 2:
                         if splits[1] == "V":
                             role[splits[1]] = temp.strip()
                         else:
                             if splits[1] in role:
-                                role[splits[1]] += " "+temp
+                                role[splits[1]] += " " + temp
                                 role[splits[1]] = role[splits[1]].strip()
                             else:
                                 role[splits[1]] = temp.strip()
                     elif len(splits) == 3:
-                        if splits[1]+"-"+splits[2] in role:
-                            role[splits[1]+"-"+splits[2]] += " "+temp
-                            role[splits[1]+"-"+splits[2]] = role[splits[1]+"-"+splits[2]].strip()
+                        if splits[1] + "-" + splits[2] in role:
+                            role[splits[1] + "-" + splits[2]] += " " + temp
+                            role[splits[1] + "-" + splits[2]] = role[splits[1] + "-" + splits[2]].strip()
                         else:
-                            role[splits[1]+"-"+splits[2]] = temp.strip()
+                            role[splits[1] + "-" + splits[2]] = temp.strip()
                     temp = ""
                 i += 1
             if "V" in role:
@@ -457,54 +479,10 @@ class Annotator:
         annotations['dep_parse'] = ""
         annotations['syntax_tree'] = ""
         for (word_, syn_, pos_) in zip(words, syn, pos):
-            annotations['syntax_tree'] += syn_.replace("*", "("+pos_+" "+word_+")")
+            annotations['syntax_tree'] += syn_.replace("*", "(" + pos_ + " " + word_ + ")")
         #annotations['syntax_tree']=annotations['syntax_tree'].replace("S1","S")
         if dep_parse:
-            annotations['dep_parse'] = self.get_dependency(annotations['syntax_tree'])
+            annotations['dep_parse'] = self.get_dependency(annotations
+                                                            ['syntax_tree'])
         return annotations
-
-
-def test(senna_path="", sent="", dep_model="", batch=False, tp_dir=""):
-    """please replace the path of yours environment(accouding to OS path)
-
-    :param str senna_path: path for senna location
-    :param str dep_model: stanford dependency parser model location
-    :param str or list sent: the sentense to process with Senna
-    :param bool batch: makeing as batch process with one or more sentense
-                       passing
-    :param str stp_dir: location of stanford-parser.jar file
-    """
-    from pntl.utils import skipgrams
-    annotator = Annotator(senna_path, stp_dir, dep_model)
-    if not sent:
-        if not batch:
-            sent = 'get me a hotel on chennai in 21-4-2017 ' 
-            # "He created the robot and broke it after making it."
-            print("\n", sent, "\n")
-            sent = sent.split()
-            args = '-srl -pos'.strip().split()
-            print("conll:\n", annotator.get_conll_format(sent, args))
-            print('dep_parse:\n', (annotator.get_annoations(sent, dep_parse=True)['dep_parse']))
-            print('chunk:\n', (annotator.get_annoations(sent, dep_parse=True)['chunk']))
-            print('pos:\n', (annotator.get_annoations(sent, dep_parse=True)['pos']))
-            print('ner:\n', (annotator.get_annoations(sent, dep_parse=True)['ner']))
-            print('srl:\n', (annotator.get_annoations(sent, dep_parse=True)['srl']))
-            print('syntaxTree:\n', (annotator.get_annoations(sent, dep_parse=True)['syntax_tree']))
-            print('words:\n', (annotator.get_annoations(sent, dep_parse=True)['words']))
-            print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-
-        else:
-            sent = ["He killed the man with a knife and murdered him with a dagger.",\
-                "He is a good boy.", "He created the robot and broke it after making it."]
-            print("\n\nrunning batch process", "\n", "="*20, "\n", sent, "\n",)
-            args = '-srl -pos'.strip().split()
-            print("conll:\n", annotator.get_conll_format(sent, args))
-
-
-if __name__ == "__main__":
-    try:
-        test()
-    except Exception as e:
-        print(e)
-        print("To know about more issue to this link https://github.com/jawahar273/practNLPTools-lite/wiki")
-
+ 
