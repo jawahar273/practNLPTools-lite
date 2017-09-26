@@ -30,7 +30,7 @@ worry.
      :alt: Updates
 
 
-* Documentation: https://practNLPTools-lite.readthedocs.io.
+* Documentation: http://pntl.readthedocs.io
 
 Functionality
 =============
@@ -62,16 +62,14 @@ Features
 #. Easy to use.
 #. Platform Supported - Windows, Linux and Mac
 
-    | Notes:
-    | SENNA pipeline has a fixed maximum size of the sentences that it
+.. note::
+    
+    SENNA pipeline has a fixed maximum size of the sentences that it
       can read.
-    | By default it is 1024 token/sentence. If you have larger
-      sentences, changing
-    | the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should be
-      considered and your
-    | system specific binary should be rebuilt. Otherwise this could
-      introduce
-    | misalignment errors.
+     By default it is 1024 token/sentence.
+      If you have larger
+      sentences, changing the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should be
+      considered and your system specific binary should be rebuilt. Otherwise this could introduce misalignment errors.
 
 Installation
 ============

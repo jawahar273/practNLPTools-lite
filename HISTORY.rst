@@ -2,7 +2,11 @@
 History
 =======
 
+0.2.0 pre-alpha
+----------------
+* Marking standard tools for `pntl` 
+
 0.1.1 (2017-09-17)
 ------------------
 
-* First release on PyPI.
+* Planing to release on PyPI.
