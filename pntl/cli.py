@@ -14,7 +14,7 @@ init(autoreset=True)
 @click.command()
 @click.option('-SA', '--senna_path', help='Set the direction of senna.',
               type=click.Path(exists=True))
-@click.option('-S', '--sent', help='Testing sentense to passed in senna.',
+@click.option('-S', '--sent', help='Testing sentence to passed in senna.',
               type=str, default='')
 @click.option('-DM', '--dep_model',
               help='Stanford dependency parser model location.', type=str)
@@ -29,8 +29,8 @@ def test(senna_path="", sent="", dep_model="", batch=False, stp_dir=""):
 
     :param str senna_path: path for senna location
     :param str dep_model: stanford dependency parser model location
-    :param str or list sent: the sentense to process with Senna
-    :param bool batch: makeing as batch process with one or more sentense
+    :param str or list sent: the sentence to process with Senna
+    :param bool batch: makeing as batch process with one or more sentence
        passing
     :param str stp_dir: location of stanford-parser.jar file
     """

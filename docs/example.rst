@@ -1,8 +1,6 @@
-Welcome to the practNLPTools-lite wiki!
-=======================================
-
 Examples:
----------
+=========
+
 
 #. S = Tag covers Single Word.
 #. B = Tag Begins with the Word.

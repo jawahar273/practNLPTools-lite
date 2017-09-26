@@ -38,11 +38,11 @@ setup(
     author_email='jawahar273@gmail.com',
     url='https://github.com/jawahar273/practNLPTools-lite',
     packages=find_packages(include=['pntl']),
-    # entry_points={
-    #     'console_scripts': [
-    #         'pntl=pntl.cli:main'
-    #     ]
-    # },
+    entry_points={
+        'console_scripts': [
+            'pntl=pntl.cli:test'
+        ]
+    },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
