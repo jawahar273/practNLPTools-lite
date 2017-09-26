@@ -10,11 +10,11 @@ Contents:
    installation
    usage
    api
-   contributing
-   authors
-   history
    stanford_installing_issues
    issues
+   authors
+   contributing
+   history
 
 Indices and tables
 ==================
