@@ -21,7 +21,7 @@ worry.
 .. image:: https://img.shields.io/travis/jawahar273/practNLPTools-lite.svg
         :target: https://travis-ci.org/jawahar273/practNLPTools-lite
 
-.. image:: https://readthedocs.org/projects/practNLPTools-lite/badge/?version=latest
+.. image:: https://readthedocs.org/projects/pntl/badge/?version=latest
         :target: https://practNLPTools-lite.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
@@ -29,6 +29,9 @@ worry.
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
      :alt: Updates
 
+.. image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/python-3-shield.svg
+     :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
+     :alt: Python 3
 
 * Documentation: http://pntl.readthedocs.io
 
