@@ -49,7 +49,7 @@ Functionality
 Future work
 ===========
 
--  [STRIKEOUT:automatic takes senna path if it install in system]
+-  [STRIKEOUT: automatic takes senna path if it install in system]
 -  copying stanford parser and depPaser file into installed direction
 -  creating depParser for corresponding os environment
 -  custome input format for stanford parser insted of tree format
@@ -68,10 +68,8 @@ Features
 .. note::
     
     SENNA pipeline has a fixed maximum size of the sentences that it
-      can read.
-    By default it is 1024 token/sentence.
-    If you have larger
-      sentences, changing the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should beconsidered and your system specific binary should be rebuilt. Otherwise this could introduce misalignment errors.
+    can read. By default it is 1024 token/sentence. If you have larger
+    sentences, changing the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should beconsidered and your system specific binary should be rebuilt. Otherwise this could introduce misalignment errors.
 
 Installation
 ============
@@ -142,7 +140,7 @@ change to it.
 .. _SENNA: http://ronan.collobert.com/senna/
 
 .. |Author| image:: https://img.shields.io/badge/Author-jawahar-blue.svg
-.. |Python-version-3| image:: https://img.shields.io/badge/Python%20Version-Python--3.5-green.svg
+.. |Python-version-3| image:: https://img.shields.io/badge/Py-version-Python--3.5-green.svg
 .. |Build Status| image:: https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master
    :target: https://travis-ci.org/jawahar273/practNLPTools
 .. |FOSSA Status| image:: https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fjawahar273%2FpractNLPTools-lite.svg?type=small
