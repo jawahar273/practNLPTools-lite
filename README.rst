@@ -1,7 +1,7 @@
 ==================
 practNLPTools-lite
 ==================
-Creating practNLPTools in lite mode.
+Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
 |Author|  |Python-version-3|
 

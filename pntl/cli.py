@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """Console script for practnlptools_lite."""
-
+import os
 import click
+
 
 from pntl.tools import Annotator
 from pntl.utils import skipgrams
@@ -21,10 +22,14 @@ init(autoreset=True)
 @click.option('-B', '--batch',
               type=click.BOOL, help='Batch process.')
 @click.option('-SD', '--stp_dir',
-              type=str, help='Location of stanford-parser.jar file.')
-# @click.option('-h', '--help',
-#               help='Show this message and exit.')
-def test(senna_path="", sent="", dep_model="", batch=False, stp_dir=""):
+              help='Location of stanford-parser.jar file.',
+              type=str
+              )
+@click.option('-I', '--init',
+              help='downlard stanford-parser jar from github.',
+              type=bool, default=False)
+def test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
+         init=False):
     """please replace the path of yours environment(accouding to OS path)
 
     :param str senna_path: path for senna location

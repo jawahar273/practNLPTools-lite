@@ -114,6 +114,7 @@ class Annotator:
                 if file.startswith("stanford-parser"):
                     file_found = True
         if not file_found and raise_e:
+            # need to check the install dir for stanfor parser
             raise FileNotFoundError(Fore.RED + "`stanford-parser.jar` is not"
                                     " found in the path \n"
                                     "`{}` \n"
