@@ -12,7 +12,7 @@ from colorama import Fore, init
 init(autoreset=True)
 
 
-def download():
+def download_files():
     stanford_parser_url = ("https://github.com/jawahar273"
                            "/practNLPTools-lite/blob/master/pntl/"
                            "stanford-parser.jar")
@@ -57,8 +57,8 @@ def download():
 @click.option('-I', '--init',
               help='downlard stanford-parser jar from github.',
               type=bool, default=False)
-def test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
-         init=False):
+def user_test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
+              init=False):
     """please replace the path of yours environment(accouding to OS path)
 
     :param str senna_path: path for senna location
@@ -68,6 +68,9 @@ def test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
        passing
     :param str stp_dir: location of stanford-parser.jar file
     """
+    if init:
+        download_files()
+
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
         sent = ["He killed the man with a knife and murdered"
