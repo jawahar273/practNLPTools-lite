@@ -3,13 +3,42 @@
 """Console script for practnlptools_lite."""
 import os
 import click
-
+import urllib.request
 
 from pntl.tools import Annotator
 from pntl.utils import skipgrams
 
 from colorama import Fore, init
 init(autoreset=True)
+
+
+def download():
+    stanford_parser_url = ("https://github.com/jawahar273"
+                           "/practNLPTools-lite/blob/master/pntl/"
+                           "stanford-parser.jar")
+    dep_parse_url = ("https://github.com/jawahar273/practNLPTools-lite"
+                     "/blob/master/pntl/depParse.sh"
+                     )
+    lexparser_url = ("https://github.com/jawahar273/practNLPTools-lite"
+                     "/blob/master/pntl/lexparser.sh")
+    import pntl
+    file_loc = pntl.__file__
+
+    print(Fore.GREEN + "downloading take accouding to the Network speed")
+    with urllib.request(stanford_parser_url) as spl:
+        with open(file_loc, "wb") as file:
+            file.write(spl.read())
+    print(Fore.GREEN + "downloading stanford-parser done..")
+
+    with urllib.request(lexparser_url) as lpl:
+        with open(file_loc, "wb") as file:
+            file.write(lpl.read())
+    print(Fore.GREEN + "downloading lexparser parse sh done..")
+
+    with urllib.request(dep_parse_url) as dpl:
+        with open(file_loc, "wb") as file:
+            file.write(dpl.read())
+    print(Fore.GREEN + "downloading dependency parse sh done..")
 
 
 @click.command()
