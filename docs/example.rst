@@ -1,4 +1,4 @@
-Examples:
+Examples
 =========
 
 
@@ -34,8 +34,8 @@ Annotator is the only class you need. Create an annotator object.
 
   ``in.parser`` file consite syntax tree(for now) which is use as input for dependencie parser. One more thing the last runned sentence output only will be stored.
 
-Annotator()
-=============
+Annotator[class]
+================
 
 .. code-block:: python
 
@@ -57,6 +57,9 @@ Annotator()
 
 Self-testing
 ============
+
+.. warning:: 
+   This function is depercated
 
 To test for your self please use function ``test()``
 

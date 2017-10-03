@@ -3,3 +3,8 @@ API
 
 .. autoclass:: pntl.tools.Annotator
    :members:
+
+.. autofunction:: pntl.tools.test
+
+
+.. autofunction:: pntl.cli.user_test
