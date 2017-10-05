@@ -9,6 +9,7 @@ Contents:
    readme
    installation
    usage
+   cli
    api
    stanford_installing_issues
    issues
