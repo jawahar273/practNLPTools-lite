@@ -10,6 +10,6 @@ Sphinx==1.6.4
 pyup-update-pytest-3.2.2
 PyYAML==3.12
 pytest-runner==2.12.1
-pytest==3.2.2
+pytest==3.2.3
 
 
