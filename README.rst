@@ -4,7 +4,7 @@ practNLPTools-lite
 
 .. warning:: 
    `master` branch is under drastic changing so it is unstable models.
-   use `dev` for a while 
+   use `devbranch`_ for a while or this one `properbranch`_
 
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
@@ -144,6 +144,8 @@ change to it.
 
 .. _practNLPTools: https://github.com/jawahar273/practNLPTools-lite
 .. _SENNA: http://ronan.collobert.com/senna/
+.. _properbranch: https://github.com/jawahar273/practNLPTools-lite/tree/pyup-update-pytest-3.2.2-to-3.2.3
+.. _devbranch: https://github.com/jawahar273/practNLPTools-lite/tree/dev
 
 .. |Author| image:: https://img.shields.io/badge/Author-jawahar-blue.svg
 .. |Python-version-3| image:: https://img.shields.io/badge/Py-version-Python--3.5-green.svg

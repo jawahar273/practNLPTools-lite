@@ -1,0 +1,14 @@
+box:
+  id: 3.5-slim 
+  ports:
+    - "5000"
+
+dev:
+  steps:
+    # first we want to run pip-install to install all the dependencies
+    - pip-install
+    # then we want to run a wercker step that watches your files and reloads
+    # when changes are detected.
+    - internal/watch:
+        code: python pntl/tools.py
+        reload: true
