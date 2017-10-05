@@ -1,0 +1,3 @@
+[submodule "pntl/practNLPTools"]
+	path = pntl/practNLPTools
+	url = git@github.com:jawahar273/practNLPTools.git

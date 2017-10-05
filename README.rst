@@ -64,6 +64,7 @@ Features
    Parser, which takes time.
 #. Easy to use.
 #. Platform Supported - Windows, Linux and Mac
+#. Automatic findes stanford parsing jar if it is present in install path.
 
 .. note::
     
