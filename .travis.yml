@@ -1,6 +1,8 @@
 # Config file for automatic testing at travis-ci.org
 # This file will be regenerated if you run travis_pypi_setup.py
 
+sudo: true
+
 language: python
 python:
   - 3.5
@@ -10,10 +12,15 @@ python:
   - 2.6
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis
+install:
+  - pip install -U tox-travis
+  - pip install codecov
+
 
 # command to run tests, e.g. python setup.py test
-script: tox
+script:
+  - tox
+  - coverage run pntl/tools.py 
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
@@ -22,8 +29,8 @@ deploy:
   distributions: sdist bdist_wheel
   user: jawahar273
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: jawahar2731
   on:
     tags: true
-    repo: jawahar273/practnlptools_lite
-    python: 2.7
+    repo: jawahar273/practNLPTools-lite
+    python: 3.5

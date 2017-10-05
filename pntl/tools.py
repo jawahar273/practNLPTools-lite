@@ -36,11 +36,12 @@ class Annotator:
     system specific binary should be rebuilt. Otherwise this could introduce
     misalignment errors
     and for Dependency Parser the requirement is Java Runtime Environment :)
+
     :param str senna_dir: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str stp_dir: path of stanford parser jar
     :param str raise_e: raise exception if stanford-parser.jar
-                          is not found
+                        is not found
     """
 
     def __init__(self, senna_dir="", stp_dir="",
@@ -75,6 +76,7 @@ class Annotator:
             self.check_stp_jar(self.dep_par_path, raise_e)
 
         self.dep_par_model = dep_model
+        print(dep_model)
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',
                                 self.dep_par_model,
@@ -89,18 +91,17 @@ class Annotator:
         print("**" * 50)
         print("default values:\nsenna path:\n", self.senna_path,
               "\nDependencie parser:\n", self.dep_par_path)
+        # print(self.default_jar_cli)
         print("Stanford parser clr", " ".join(self.default_jar_cli))
         print("**" * 50)
 
-    def check_stp_jar(self, path, raise_e=False):
-        """
-        Check the stanford parser is present in the given directions
+    def check_stp_jar(self, path, raise_e=False, _rec=True):
+        """Check the stanford parser is present in the given directions
         and nested searching will be added in futurwork
 
         :param str path: path of where the stanford parser is present
-        :param bool raise_e: to raise
-                             exception with user wise and default `False`
-              don't raises exception
+        :param bool raise_e: to raise exception with user
+              wise and default `False` don't raises exception
         :return: given path if it is valid one or return boolean `False` or
              if raise FileNotFoundError on raise_exp=True
         :rtype: bool
@@ -113,16 +114,25 @@ class Annotator:
             if file.endswith(".jar"):
                 if file.startswith("stanford-parser"):
                     file_found = True
-        if not file_found and raise_e:
+        if not file_found:
             # need to check the install dir for stanfor parser
-            raise FileNotFoundError(Fore.RED + "`stanford-parser.jar` is not"
-                                    " found in the path \n"
-                                    "`{}` \n"
-                                    "To know about more about the issues,"
-                                    "got to this given link ["
-                                    "http://pntl.readthedocs.io/en/"
-                                    "latest/stanford_installing_issues.html]"
-                                    .format(gpath))
+            if _rec:
+                import pntl
+                path_ = os.path.split(pntl.__file__)[0]
+                self.check_stp_jar(path_, raise_e, _rec=False)
+            if raise_e:
+                raise FileNotFoundError(Fore.RED + "`stanford-parser.jar` is "
+                                        "not"
+                                        " found in the path \n"
+                                        "`{}` \n"
+                                        "To know about more about the issues,"
+                                        "got to this given link ["
+                                        "http://pntl.readthedocs.io/en/"
+                                        "latest/stanford_installing_"
+                                        "issues.html] \n User "
+                                        "`pntl -I true` to downlard "
+                                        "needed file automatically."
+                                        .format(gpath))
         return file_found
 
     @property
@@ -304,7 +314,7 @@ class Annotator:
         pipe = subprocess.Popen(args,
                                 stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(
-                                        input=" ".join(input_data)\
+                                        input=" ".join(input_data)
                                                        .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
@@ -329,8 +339,8 @@ class Annotator:
         pipe = subprocess.Popen(senna_executable,
                                 stdout=subprocess.PIPE, stdin=subprocess.PIPE)
         senna_stdout = pipe.communicate(
-                                        input=" ".join(input_data)
-                                                      .encode('utf-8'))[0]
+                                        input=" ".join(input_data).
+                                                       encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
 
@@ -484,6 +494,61 @@ class Annotator:
         #annotations['syntax_tree']=annotations['syntax_tree'].replace("S1","S")
         if dep_parse:
             annotations['dep_parse'] = self.get_dependency(annotations
-                                                            ['syntax_tree'])
+                                                           ['syntax_tree'])
         return annotations
- 
+
+
+def test(senna_path='', sent='',
+         dep_model='',
+         batch=False,
+         stp_dir=''):
+    """please replace the path of yours environment(according to OS path)
+
+    :param str senna_path: path for senna location \n
+    :param str dep_model: stanford dependency parser model location \n
+    :param str or list sent: the sentence to process with Senna \n
+    :param bool batch:  processing more than one sentence
+       in one row \n
+    :param str stp_dir: location of stanford-parser.jar file
+
+    .. warning::
+       deprecated:: 0.2.0.
+       See CLI doc instead. This `test()` function will be removed from next release.
+    """
+    annotator = Annotator(senna_path, stp_dir, dep_model)
+    if not sent and batch:
+        sent = ["He killed the man with a knife and murdered"
+                "him with a dagger.",
+                "He is a good boy.",
+                "He created the robot and broke it after making it."]
+    elif not sent:
+        sent = 'get me a hotel on chennai in 21-4-2017 '
+        # "He created the robot and broke it after making it.
+    if not batch:
+        print("\n", sent, "\n")
+        sent = sent.split()
+        args = '-srl -pos'.strip().split()
+        print("conll:\n", annotator.get_conll_format(sent, args))
+        temp = annotator.get_annoations(sent, dep_parse=True)['dep_parse']
+        print('dep_parse:\n', temp)
+        temp = annotator.get_annoations(sent, dep_parse=True)['chunk']
+        print('chunk:\n', temp)
+        temp = annotator.get_annoations(sent, dep_parse=True)['pos']
+        print('pos:\n', temp)
+        temp = annotator.get_annoations(sent, dep_parse=True)['ner']
+        print('ner:\n', temp)
+        temp = annotator.get_annoations(sent, dep_parse=True)['srl']
+        print('srl:\n', temp)
+        temp = annotator.get_annoations(sent,
+                                        dep_parse=True)['syntax_tree']
+        print('syntaxTree:\n', temp)
+        temp = annotator.get_annoations(sent, dep_parse=True)['words']
+        print('words:\n', temp)
+        print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+
+    else:
+        print("\n\nrunning batch process", "\n", "=" * 20,
+              "\n", sent, "\n")
+        args = '-srl -pos'.strip().split()
+        print("conll:\n", annotator.get_conll_format(sent, args))
+        print(Fore.BLUE + "CoNLL format is recommented for batch process")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Console script for practnlptools_lite."""
-import os
+import os.path
 import click
 import urllib.request
 
@@ -22,54 +22,67 @@ def download_files():
     lexparser_url = ("https://github.com/jawahar273/practNLPTools-lite"
                      "/blob/master/pntl/lexparser.sh")
     import pntl
-    file_loc = pntl.__file__
-
-    print(Fore.GREEN + "downloading take accouding to the Network speed")
-    with urllib.request(stanford_parser_url) as spl:
-        with open(file_loc, "wb") as file:
+    file_loc = os.path.split(pntl.__file__)[0]
+    print(("location {} and \n list of files \n \t{}"
+           "\n \t{}"
+           "\n \t{}").format(file_loc,
+                             "stanford-parser",
+                             "dependency sh",
+                             "lexparser sh")
+          )
+    print(Fore.GREEN + "downloading depend on the Network speed \n\n")
+    with urllib.request.urlopen(stanford_parser_url) as spl:
+        with open(file_loc + os.path.sep + "stanford-parser.jar", "wb") as file:
             file.write(spl.read())
     print(Fore.GREEN + "downloading stanford-parser done..")
 
-    with urllib.request(lexparser_url) as lpl:
-        with open(file_loc, "wb") as file:
+    with urllib.request.urlopen(lexparser_url) as lpl:
+        with open(file_loc + os.path.sep + "depParse.sh", "wb") as file:
             file.write(lpl.read())
     print(Fore.GREEN + "downloading lexparser parse sh done..")
 
-    with urllib.request(dep_parse_url) as dpl:
-        with open(file_loc, "wb") as file:
+    with urllib.request.urlopen(dep_parse_url) as dpl:
+        with open(file_loc + os.path.sep + "lexparser.sh", "wb") as file:
             file.write(dpl.read())
     print(Fore.GREEN + "downloading dependency parse sh done..")
 
 
 @click.command()
-@click.option('-SA', '--senna_path', help='Set the direction of senna.',
+@click.option('-SE', '--senna_path', help='Set the direction of senna.',
               type=click.Path(exists=True))
 @click.option('-S', '--sent', help='Testing sentence to passed in senna.',
               type=str, default='')
 @click.option('-DM', '--dep_model',
-              help='Stanford dependency parser model location.', type=str)
+              help='Stanford dependency parser model location.', type=str,
+              default='edu.stanford.nlp.trees.EnglishGrammaticalStructure')
 @click.option('-B', '--batch',
               type=click.BOOL, help='Batch process.')
 @click.option('-SD', '--stp_dir',
               help='Location of stanford-parser.jar file.',
-              type=str
-              )
+              type=str)
 @click.option('-I', '--init',
-              help='downlard stanford-parser jar from github.',
+              help='downlard files from github.',
               type=bool, default=False)
-def user_test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
+def user_test(senna_path='', sent='',
+              dep_model='',
+              batch=False,
+              stp_dir='',
               init=False):
-    """please replace the path of yours environment(accouding to OS path)
+    """please replace the path of yours environment(according to OS path)
 
-    :param str senna_path: path for senna location
-    :param str dep_model: stanford dependency parser model location
-    :param str or list sent: the sentence to process with Senna
-    :param bool batch: makeing as batch process with one or more sentence
-       passing
+    :param str senna_path: path for senna location \n
+    :param str dep_model: stanford dependency parser model \t
+     default='edu.stanford.nlp.trees.EnglishGrammaticalStructure'
+    \n
+    :param str or list sent: the sentence to process with Senna \n
+    :param bool batch:  processing more than one sentence
+       in one row \n
     :param str stp_dir: location of stanford-parser.jar file
+    :param bool init: downlard files from github.
     """
     if init:
         download_files()
+        return None
 
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
@@ -110,11 +123,11 @@ def user_test(senna_path="", sent="", dep_model="", batch=False, stp_dir="",
         print(Fore.BLUE + "CoNLL format is recommented for batch process")
 
 
-if __name__ == "__main__":
-    try:
-        test()
-    except Exception as e:
-        print(Fore.RED + e,
-              "\n\nTo know about more issue to this link"
-              " https://github.com/jawahar273/practNLPTools-lite/wiki")
+# if __name__ == "__main__":
+#     try:
+#         test()
+#     except Exception as e:
+#         print(Fore.RED + e,
+#               "\n\nTo know about more issue to this link"
+#               " https://github.com/jawahar273/practNLPTools-lite/wiki")
 

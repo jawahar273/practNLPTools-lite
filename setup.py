@@ -31,7 +31,7 @@ test_requirements = [
 
 setup(
     name='pntl',
-    version='0.2.0',
+    version='0.2.1',
     description="used to interface with Senna and stanford-parser.jar",
     long_description=readme + '\n\n' + history,
     author="Jawahar S",
@@ -40,26 +40,23 @@ setup(
     packages=find_packages(include=['pntl']),
     entry_points={
         'console_scripts': [
-            'pntl=pntl.cli:test'
+            'pntl=pntl.cli:user_test'
         ]
     },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='practNLPTools-lite senna python pntl pysenna',
+    keywords='practnlptools-lite senna python pntl pysenna'.split(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering :: Information Analysis',
     ],
     test_suite='tests',

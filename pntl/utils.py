@@ -5,18 +5,20 @@ from itertools import chain, combinations
 from colorama import Fore, init
 init(autoreset=True)
 
+
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
     if pad_left:
-        sequence = chain((pad_sym,) * (n - 1), seq)
+        seq = chain((pad_sym,) * (n - 1), seq)
     if pad_right:
-        sequence = chain(seq, (pad_sym,) * (n - 1))
-    return sequence
+        seq = chain(seq, (pad_sym,) * (n - 1))
+    return seq
 
 
-def skipgrams(seq, n=2, k=1, pad_left=False, pad_right=False, pad_sym=None):
-    sequence_length = len(seq)
-    sequence = iter(seq)
-    sequence = pad_sequence(seq, n, pad_left, pad_right, pad_sym)
+def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
+              pad_sym=None):
+    sequence_length = len(sequence)
+    sequence = iter(sequence)
+    sequence = pad_sequence(sequence, n, pad_left, pad_right, pad_sym)
     if sequence_length + pad_left + pad_right < k:
         raise Exception("The length of sentence + padding(s) < skip")
 
