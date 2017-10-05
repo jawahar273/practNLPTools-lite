@@ -1,6 +1,11 @@
 ==================
 practNLPTools-lite
 ==================
+
+.. warning:: 
+   `master` branch is under drastic changing so it is unstable models.
+   use `dev` for a while 
+
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
 |Author|  |Python-version-3|
