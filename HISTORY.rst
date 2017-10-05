@@ -2,7 +2,7 @@
 History
 =======
 
-0.2.0 pre-alpha
+0.2.0 4-alpha
 ----------------
 * Marking standard tools for `pntl` 
 

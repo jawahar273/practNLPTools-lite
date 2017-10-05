@@ -49,7 +49,7 @@ def download_files():
 
 @click.command()
 @click.option('-SE', '--senna_path', help='Set the direction of senna.',
-              type=click.Path(exists=True))
+              type=click.Path(exists=True)  )
 @click.option('-S', '--sent', help='Testing sentence to passed in senna.',
               type=str, default='')
 @click.option('-DM', '--dep_model',
@@ -82,7 +82,8 @@ def user_test(senna_path='', sent='',
     """
     if init:
         download_files()
-        return None
+        if not senna_path:
+            return None
 
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
@@ -125,7 +126,7 @@ def user_test(senna_path='', sent='',
 
 # if __name__ == "__main__":
 #     try:
-#         test()
+#         user_test()
 #     except Exception as e:
 #         print(Fore.RED + e,
 #               "\n\nTo know about more issue to this link"

@@ -40,8 +40,8 @@ command
       --help                  Show this message and exit.
 
 
-run
-====
+Quick Start
+===========
 
 .. code:: bash
 
