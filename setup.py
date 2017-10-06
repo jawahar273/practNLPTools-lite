@@ -31,10 +31,11 @@ test_requirements = [
 
 setup(
     name='pntl',
-    version='0.2.1',
-    description="used to interface with Senna and stanford-parser.jar",
-    long_description=readme + '\n\n' + history,
-    author="Jawahar S",
+    version='0.2.2',
+    description=("used to interface with Senna and"
+                 " stanford-parser.jar for dependency parsing"),
+    long_description='\n\n' + readme + '\n\n' + history,
+    author='Jawahar S',
     author_email='jawahar273@gmail.com',
     url='https://github.com/jawahar273/practNLPTools-lite',
     packages=find_packages(include=['pntl']),
@@ -49,7 +50,7 @@ setup(
     zip_safe=False,
     keywords='practnlptools-lite senna python pntl pysenna'.split(),
     classifiers=[
-        'Development Status :: 4 - Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',

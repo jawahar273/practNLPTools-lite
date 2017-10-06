@@ -13,30 +13,17 @@ import subprocess
 import os
 from platform import architecture, system
 
-from colorama import Fore, init
-init(autoreset=True)
+try:
+    from colorama import init
+    from colorama.Fore import RED, BLUE
+    init(autoreset=True)
+except ImportError:
+    RED = " "
+    BLUE = " "
 
 
 class Annotator:
-    """A general interface of the SENNA and Stanford Dependency
-    Extractor pipeline that supports any of
-    the operations specified in SUPPORTED_OPERATIONS.
-    SUPPORTED_OPERATIONS: It provides
-    Part of Speech Tags, Semantic Role Labels, Shallow Parsing (Chunking),
-    Named Entity Recognisation (NER), Dependency Parse and
-    Syntactic Constituency Parse.
-    Applying multiple operations at once has the speed advantage. For example,
-    senna v3.0 will calculate the POS tags in case you are extracting the named
-    entities. Applying both of the operations will cost only the time of
-    extracting the named entities. Same is true for dependency Parsing.
-    SENNA pipeline has a fixed maximum size of the sentences that it can read.
-    By default it is 1024 token/sentence. If you have larger sentences,
-    changing
-    the MAX_SENTENCE_SIZE value in SENNA_main.c should be considered and your
-    system specific binary should be rebuilt. Otherwise this could introduce
-    misalignment errors
-    and for Dependency Parser the requirement is Java Runtime Environment :)
-
+    """
     :param str senna_dir: path where is located
     :param str dep_model: Stanford dependencie mode
     :param str stp_dir: path of stanford parser jar
@@ -58,7 +45,7 @@ class Annotator:
                 self.senna_path = os.path.normpath(os.environ['SENNA']) + os.path.sep
                 exe_file_2 = self.get_senna_bin(self.senna_path)
                 if not os.path.isfile(exe_file_2):
-                    raise OSError(Fore.RED +
+                    raise OSError(RED +
                                   "Senna executable expected at %s or"
                                   " %s but not found"
                                   % (self.senna_path, exe_file_2))
@@ -121,7 +108,7 @@ class Annotator:
                 path_ = os.path.split(pntl.__file__)[0]
                 self.check_stp_jar(path_, raise_e, _rec=False)
             if raise_e:
-                raise FileNotFoundError(Fore.RED + "`stanford-parser.jar` is "
+                raise FileNotFoundError(RED + "`stanford-parser.jar` is "
                                         "not"
                                         " found in the path \n"
                                         "`{}` \n"
@@ -515,6 +502,7 @@ def test(senna_path='', sent='',
        deprecated:: 0.2.0.
        See CLI doc instead. This `test()` function will be removed from next release.
     """
+    # from pntl.utils import skipgrams
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
         sent = ["He killed the man with a knife and murdered"
@@ -544,11 +532,14 @@ def test(senna_path='', sent='',
         print('syntaxTree:\n', temp)
         temp = annotator.get_annoations(sent, dep_parse=True)['words']
         print('words:\n', temp)
-        print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+        # print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
 
     else:
         print("\n\nrunning batch process", "\n", "=" * 20,
               "\n", sent, "\n")
         args = '-srl -pos'.strip().split()
         print("conll:\n", annotator.get_conll_format(sent, args))
-        print(Fore.BLUE + "CoNLL format is recommented for batch process")
+        print(BLUE + "CoNLL format is recommented for batch process")
+
+if __name__ == "__main__":
+    test("/home/codingmart/Documents/jon/senna")

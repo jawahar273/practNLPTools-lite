@@ -179,30 +179,17 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">platform</span> <span class="k">import</span> <span class="n">architecture</span><span class="p">,</span> <span class="n">system</span>
 
-<span class="kn">from</span> <span class="nn">colorama</span> <span class="k">import</span> <span class="n">Fore</span><span class="p">,</span> <span class="n">init</span>
-<span class="n">init</span><span class="p">(</span><span class="n">autoreset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">colorama</span> <span class="k">import</span> <span class="n">init</span>
+    <span class="kn">from</span> <span class="nn">colorama.Fore</span> <span class="k">import</span> <span class="n">RED</span><span class="p">,</span> <span class="n">BLUE</span>
+    <span class="n">init</span><span class="p">(</span><span class="n">autoreset</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">RED</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+    <span class="n">BLUE</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
 
 
 <div class="viewcode-block" id="Annotator"><a class="viewcode-back" href="../../api.html#pntl.tools.Annotator">[docs]</a><span class="k">class</span> <span class="nc">Annotator</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;A general interface of the SENNA and Stanford Dependency</span>
-<span class="sd">    Extractor pipeline that supports any of</span>
-<span class="sd">    the operations specified in SUPPORTED_OPERATIONS.</span>
-<span class="sd">    SUPPORTED_OPERATIONS: It provides</span>
-<span class="sd">    Part of Speech Tags, Semantic Role Labels, Shallow Parsing (Chunking),</span>
-<span class="sd">    Named Entity Recognisation (NER), Dependency Parse and</span>
-<span class="sd">    Syntactic Constituency Parse.</span>
-<span class="sd">    Applying multiple operations at once has the speed advantage. For example,</span>
-<span class="sd">    senna v3.0 will calculate the POS tags in case you are extracting the named</span>
-<span class="sd">    entities. Applying both of the operations will cost only the time of</span>
-<span class="sd">    extracting the named entities. Same is true for dependency Parsing.</span>
-<span class="sd">    SENNA pipeline has a fixed maximum size of the sentences that it can read.</span>
-<span class="sd">    By default it is 1024 token/sentence. If you have larger sentences,</span>
-<span class="sd">    changing</span>
-<span class="sd">    the MAX_SENTENCE_SIZE value in SENNA_main.c should be considered and your</span>
-<span class="sd">    system specific binary should be rebuilt. Otherwise this could introduce</span>
-<span class="sd">    misalignment errors</span>
-<span class="sd">    and for Dependency Parser the requirement is Java Runtime Environment :)</span>
-
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :param str senna_dir: path where is located</span>
 <span class="sd">    :param str dep_model: Stanford dependencie mode</span>
 <span class="sd">    :param str stp_dir: path of stanford parser jar</span>
@@ -224,7 +211,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">senna_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SENNA&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
                 <span class="n">exe_file_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_senna_bin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">senna_path</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">exe_file_2</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span>
+                    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">RED</span> <span class="o">+</span>
                                   <span class="s2">&quot;Senna executable expected at </span><span class="si">%s</span><span class="s2"> or&quot;</span>
                                   <span class="s2">&quot; </span><span class="si">%s</span><span class="s2"> but not found&quot;</span>
                                   <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">senna_path</span><span class="p">,</span> <span class="n">exe_file_2</span><span class="p">))</span>
@@ -287,7 +274,7 @@
                 <span class="n">path_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">pntl</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">check_stp_jar</span><span class="p">(</span><span class="n">path_</span><span class="p">,</span> <span class="n">raise_e</span><span class="p">,</span> <span class="n">_rec</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">raise_e</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span> <span class="s2">&quot;`stanford-parser.jar` is &quot;</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">RED</span> <span class="o">+</span> <span class="s2">&quot;`stanford-parser.jar` is &quot;</span>
                                         <span class="s2">&quot;not&quot;</span>
                                         <span class="s2">&quot; found in the path </span><span class="se">\n</span><span class="s2">&quot;</span>
                                         <span class="s2">&quot;`</span><span class="si">{}</span><span class="s2">` </span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -681,6 +668,7 @@
 <span class="sd">       deprecated:: 0.2.0.</span>
 <span class="sd">       See CLI doc instead. This `test()` function will be removed from next release.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># from pntl.utils import skipgrams</span>
     <span class="n">annotator</span> <span class="o">=</span> <span class="n">Annotator</span><span class="p">(</span><span class="n">senna_path</span><span class="p">,</span> <span class="n">stp_dir</span><span class="p">,</span> <span class="n">dep_model</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">sent</span> <span class="ow">and</span> <span class="n">batch</span><span class="p">:</span>
         <span class="n">sent</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He killed the man with a knife and murdered&quot;</span>
@@ -710,14 +698,17 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;syntaxTree:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">annotator</span><span class="o">.</span><span class="n">get_annoations</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="n">dep_parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">&#39;words&#39;</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;words:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;skip gram</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">skipgrams</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="c1"># print(&#39;skip gram\n&#39;, list(skipgrams(sent, n=3, k=2)))</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">running batch process&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span>
               <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sent</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">args</span> <span class="o">=</span> <span class="s1">&#39;-srl -pos&#39;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;conll:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">annotator</span><span class="o">.</span><span class="n">get_conll_format</span><span class="p">(</span><span class="n">sent</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">Fore</span><span class="o">.</span><span class="n">BLUE</span> <span class="o">+</span> <span class="s2">&quot;CoNLL format is recommented for batch process&quot;</span><span class="p">)</span></div>
+        <span class="nb">print</span><span class="p">(</span><span class="n">BLUE</span> <span class="o">+</span> <span class="s2">&quot;CoNLL format is recommented for batch process&quot;</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test</span><span class="p">(</span><span class="s2">&quot;/home/codingmart/Documents/jon/senna&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>

@@ -2,7 +2,7 @@
 practNLPTools-lite
 ==================
 
-.. warning:: 
+.. warning::
    `master` branch is under drastic changing so it is unstable models.
    use `devbranch`_ for a while or this one `properbranch`_
 
