@@ -213,15 +213,14 @@ class Annotator:
 
     @classmethod
     def help_conll_format(cls):
-        """
-         With the help of this method, detail of senna
+        """With the help of this method, detail of senna
          arguments are displayed
         """
         return cls.get_conll_format.__doc__.split("\n\n")[1]
 
     def get_conll_format(self, sentence, options='-srl -pos -ner -chk -psg'):
-        """ Communicates with senna through lower level communiction(sub process)
-        and converted the console output(default is file writing)
+        """Communicates with senna through lower level communiction
+        (sub process) and converted the console output(default is file writing)
         with CoNLL format and argument to be in `options` pass
 
         :param str or list: list of sentences for batch processes
@@ -311,7 +310,7 @@ class Annotator:
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
 
-        :param str or listsentences: list of sentences for batch processes
+        :param str/list listsentences : list of sentences for batch processes
         :return: senna tagged output
         :rtype: str
         """
@@ -491,6 +490,10 @@ def test(senna_path='', sent='',
          stp_dir=''):
     """please replace the path of yours environment(according to OS path)
 
+    .. warning::
+       deprecated:: 0.2.0.
+       See CLI doc instead. This `test()` function will be removed from next release.
+
     :param str senna_path: path for senna location \n
     :param str dep_model: stanford dependency parser model location \n
     :param str or list sent: the sentence to process with Senna \n
@@ -498,11 +501,8 @@ def test(senna_path='', sent='',
        in one row \n
     :param str stp_dir: location of stanford-parser.jar file
 
-    .. warning::
-       deprecated:: 0.2.0.
-       See CLI doc instead. This `test()` function will be removed from next release.
     """
-    # from pntl.utils import skipgrams
+    from pntl.utils import skipgrams
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
         sent = ["He killed the man with a knife and murdered"
@@ -532,7 +532,7 @@ def test(senna_path='', sent='',
         print('syntaxTree:\n', temp)
         temp = annotator.get_annoations(sent, dep_parse=True)['words']
         print('words:\n', temp)
-        # print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
+        print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
 
     else:
         print("\n\nrunning batch process", "\n", "=" * 20,
@@ -540,6 +540,3 @@ def test(senna_path='', sent='',
         args = '-srl -pos'.strip().split()
         print("conll:\n", annotator.get_conll_format(sent, args))
         print(BLUE + "CoNLL format is recommented for batch process")
-
-if __name__ == "__main__":
-    test("/home/codingmart/Documents/jon/senna")

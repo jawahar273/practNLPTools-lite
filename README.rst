@@ -8,7 +8,7 @@ practNLPTools-lite
 
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
-|Author|  |Python-version-3|
+|Author|
 
 |Build Status| - on click this built this might take you to build of
 `practNLPTools`_ which is testing ground for this repository so don’t
@@ -69,7 +69,7 @@ Features
    Parser, which takes time.
 #. Easy to use.
 #. Platform Supported - Windows, Linux and Mac
-#. Automatic findes stanford parsing jar if it is present in install path.
+#. Automatic finds stanford parsing jar if it is present in install path[pntl].
 
 .. note::
     
@@ -80,19 +80,22 @@ Features
 Installation
 ============
 
-| Requires:
-| A computer with 500mb memory, Java Runtime Environment (1.7
+Requires:
+~~~~~~~~~
+  A computer with 500mb memory, Java Runtime Environment (1.7
   preferably, works with 1.6 too, but didnt test.) installed and python.
 
-| If you are in linux:
-| run:
+Linux:
+```````
+run:
 
 ::
 
     sudo python setup.py install 
 
-| If you are in windows:
-| run this commands as administrator:
+windows:
+````````
+run this commands as administrator:
 
 ::
 
@@ -129,18 +132,12 @@ this `link`_ and along with ``tools.py`` on ``pntl``
 +-----------------+-----------------+-----------------+
 
 
-.. raw:: html
+.. note:: 
 
-   <div>
+   this bench mark may differt accouding to system’s working and to restult present here is exact same result in my system ububtu 4Gb RAM
+   and i3 process. If I find another good benchmark techinque then I will
+   change to it.
 
-note: this bench mark may differt accouding to system’s working and to
-restult present here is exact same result in my system ububtu 4Gb RAM
-and i3 process. If I find another good benchmark techinque then I will
-change to it.
-
-.. raw:: html
-
-   </div>
 
 .. _practNLPTools: https://github.com/jawahar273/practNLPTools-lite
 .. _SENNA: http://ronan.collobert.com/senna/
@@ -161,7 +158,7 @@ change to it.
 .. * TODO
 
 Credits
----------
+=======
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
