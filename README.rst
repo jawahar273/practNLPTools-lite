@@ -27,8 +27,8 @@ worry.
         :target: https://travis-ci.org/jawahar273/practNLPTools-lite
 
 .. image:: https://readthedocs.org/projects/pntl/badge/?version=latest
-        :target: https://practNLPTools-lite.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+:target: https://pntl.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/shield.svg
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
@@ -38,7 +38,7 @@ worry.
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
      :alt: Python 3
 
-* Documentation: http://pntl.readthedocs.io
+* Documentation: https://pntl.readthedocs.io
 
 Functionality
 =============

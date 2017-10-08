@@ -19,13 +19,8 @@ Go to folder senna location
         *windows: I never compiled C files in Windows.*
         python setup.py install
 
-#. Any other, you can la la laa la laaaa to biplab12 (A T) cse d0t iitb
-   d0t ac d0t in or Jawahar273@gmail.com
-#. Issues with “pip install practnlptools” <- **this only for original
-   tool**
-
-    | This is not possible until a proper package release in PyPi.
-    |  
+#. Any other, you can mail to Jawahar273@gmail.com
+#. Issues with “pip install pntl” 
 
 You might receive following Error while running:
 
