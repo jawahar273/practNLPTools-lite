@@ -1,10 +1,3 @@
-This is a fork of Ronan Collobert's senna code.
-
-http://ronan.collobert.com/senna/
-
-The senna license is distributed as part of this package, and is also viewable from 
-http://ronan.collobert.com/senna/license.html
-
-To compile the code
-
-gcc -o senna -O3 -ffast-math *.c
+version https://git-lfs.github.com/spec/v1
+oid sha256:91dc33475a55ab3f580fb0f21d0137a2cff584a32533c217e7783891cdce8eff
+size 270
