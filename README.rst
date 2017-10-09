@@ -21,7 +21,7 @@ worry.
   Dependency Extractor.
 
 .. image:: https://img.shields.io/pypi/v/practNLPTools-lite.svg
-        :target: https://pypi.python.org/pypi/practNLPTools-lite
+        :target: https://pypi.python.org/pypi/pntl
 
 .. image:: https://img.shields.io/travis/jawahar273/practNLPTools-lite.svg
         :target: https://travis-ci.org/jawahar273/practNLPTools-lite
