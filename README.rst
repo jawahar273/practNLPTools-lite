@@ -43,21 +43,22 @@ worry.
 Functionality
 =============
 
--  Semantic Role Labeling
--  Syntactic Parsing
--  Part of Speech Tagging (POS Tagging)
--  Named Entity Recognisation (NER)
--  Dependency Parsing
--  Shallow Chunking
--  Skip-gram(in-case)
+-  Semantic Role Labeling.
+-  Syntactic Parsing.
+-  Part of Speech Tagging (POS Tagging).
+-  Named Entity Recognisation (NER).
+-  Dependency Parsing.
+-  Shallow Chunking.
+-  Skip-gram(in-case).
+-  find the senna path if is install in the system.
+-  stanford parser and depPaser file into installed direction.
 
 Future work
 ===========
 
--  [STRIKEOUT: automatic takes senna path if it install in system]
--  copying stanford parser and depPaser file into installed direction
 -  creating depParser for corresponding os environment
 -  custome input format for stanford parser insted of tree format
+
 
 Features
 ========

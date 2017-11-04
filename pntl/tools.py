@@ -351,8 +351,11 @@ class Annotator:
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
         pipe.wait()
+
         stanford_out = pipe.stdout.read()
+        # print(stanford_out, "\n", self.default_jar_cli)
         os.chdir(cwd)
+
         return stanford_out.decode("utf-8").strip()
 
     def get_batch_annotations(self, sentences, dep_parse=True):
