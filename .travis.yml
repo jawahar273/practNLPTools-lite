@@ -17,10 +17,15 @@ install:
   - pip install codecov
 
 
+before_script:
+  - git clone https://github.com/baojie/senna.git
+
 # command to run tests, e.g. python setup.py test
 script:
+  - pntl -SE senna
   - tox
   - coverage run pntl/tools.py 
+
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
