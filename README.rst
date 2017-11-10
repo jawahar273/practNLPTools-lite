@@ -4,7 +4,7 @@ practNLPTools-lite
 
 .. warning::
    `master` branch is under drastic changing so it is unstable models.
-   use `devbranch`_ for a while or this one `properbranch`_
+   use `devbranch`_ for a while or this one `properbranch`_ (after 0.2.0)
 
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
@@ -43,21 +43,22 @@ worry.
 Functionality
 =============
 
--  Semantic Role Labeling
--  Syntactic Parsing
--  Part of Speech Tagging (POS Tagging)
--  Named Entity Recognisation (NER)
--  Dependency Parsing
--  Shallow Chunking
--  Skip-gram(in-case)
+-  Semantic Role Labeling.
+-  Syntactic Parsing.
+-  Part of Speech Tagging (POS Tagging).
+-  Named Entity Recognisation (NER).
+-  Dependency Parsing.
+-  Shallow Chunking.
+-  Skip-gram(in-case).
+-  find the senna path if is install in the system.
+-  stanford parser and depPaser file into installed direction.
 
 Future work
 ===========
 
--  [STRIKEOUT: automatic takes senna path if it install in system]
--  copying stanford parser and depPaser file into installed direction
 -  creating depParser for corresponding os environment
 -  custome input format for stanford parser insted of tree format
+
 
 Features
 ========

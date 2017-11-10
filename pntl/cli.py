@@ -49,7 +49,7 @@ def download_files():
 
 @click.command()
 @click.option('-SE', '--senna_path', help='Set the direction of senna.',
-              type=click.Path(exists=True)  )
+              type=click.Path(exists=True), default="senna")
 @click.option('-S', '--sent', help='Testing sentence to passed in senna.',
               type=str, default='')
 @click.option('-DM', '--dep_model',
@@ -92,8 +92,7 @@ def user_test(senna_path='', sent='',
                 "He is a good boy.",
                 "He created the robot and broke it after making it."]
     elif not sent:
-        sent = 'get me a hotel on chennai in 21-4-2017 '
-        # "He created the robot and broke it after making it.
+        sent = "He created the robot and broke it after making it."
     if not batch:
         print("\n", sent, "\n")
         sent = sent.split()
