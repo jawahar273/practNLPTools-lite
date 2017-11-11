@@ -6,7 +6,7 @@ box:
 dev:
   steps:
     # first we want to run pip-install to install all the dependencies
-    - pip-install
+    - pip-install-r-requirements_dev.txt
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
     - internal/watch:
