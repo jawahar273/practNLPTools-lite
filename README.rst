@@ -2,9 +2,9 @@
 practNLPTools-lite
 ==================
 
-.. warning::
-   `master` branch is under drastic changing so it is unstable models.
-   use `devbranch`_ for a while or this one `properbranch`_ (after 0.2.0)
+.. note::
+   
+   use `devbranch`_ to get the old stable code or this one `properbranch`_ (after 0.2.0 which is also stable version)
 
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
