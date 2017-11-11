@@ -52,15 +52,14 @@ class Annotator:
                                   " %s but not found"
                                   % (self.senna_path, exe_file_2))
         elif senna_dir.startswith('.'):
-            self.senna_path = os.path.realpath(senna_dir)
+            self.senna_path = os.path.realpath(senna_dir) + os.path.sep
         else:
             self.senna_path = senna_dir.strip()
             self.senna_path = self.senna_path.rstrip(os.path.sep) + os.path.sep
 
         if not stp_dir:
             import pntl.tools as Tfile
-            self.dep_par_path = Tfile.__file__.rsplit(
-                                                      os.path.sep, 1)[0] + os.path.sep
+            self.dep_par_path = Tfile.__file__.rsplit(os.path.sep, 1)[0] + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e=True)
         else:
             self.dep_par_path = stp_dir + os.path.sep
