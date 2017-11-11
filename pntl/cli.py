@@ -49,7 +49,7 @@ def download_files():
 
 @click.command()
 @click.option('-SE', '--senna_path', help='Set the direction of senna.',
-              type=click.Path(exists=True), default="senna")
+               default=os.path.sep)
 @click.option('-S', '--sent', help='Testing sentence to passed in senna.',
               type=str, default='')
 @click.option('-DM', '--dep_model',
