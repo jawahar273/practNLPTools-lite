@@ -346,7 +346,7 @@ class Annotator:
         cwd = os.getcwd()
         os.chdir(package_directory)
 
-        with open(self.senna_path + os.path.sep + "in.parse", 
+        with open(self.senna_path + os.path.sep + "in.parse",
                   "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_cli,
