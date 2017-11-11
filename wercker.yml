@@ -10,10 +10,12 @@ dev:
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
     - internal/watch:
-        code: python pntl/tools.py
+        code: 
+          - python setupt.py install
         reload: true
 
     - internal/shell:
         cmd: /bin/sh
         code:
+          - pip install -r requirements_dev.txt
           - pntl -SE ./pntl/senna
