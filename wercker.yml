@@ -6,9 +6,14 @@ box:
 dev:
   steps:
     # first we want to run pip-install to install all the dependencies
-    - pip-install-r-requirements_dev.txt
+    - pip-install
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
     - internal/watch:
         code: python pntl/tools.py
         reload: true
+
+    - internal/shell:
+        cmd: /bin/sh
+        code:
+          - pntl -SE ./pntl/senna
