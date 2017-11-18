@@ -31,7 +31,7 @@ test_requirements = [
 
 setup(
     name='pntl',
-    version='0.2.2',
+    version='0.2.3',
     description=("used to interface with Senna and"
                  " stanford-parser.jar for dependency parsing"),
     long_description='\n\n' + readme + '\n\n' + history,
@@ -50,7 +50,7 @@ setup(
     zip_safe=False,
     keywords='practnlptools-lite senna python pntl pysenna'.split(),
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
