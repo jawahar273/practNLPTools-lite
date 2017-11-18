@@ -10,13 +10,18 @@ build:
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
     - script:
+        name: initialize git submodules
+        code: |
+            apt-get install git -y
+            git submodule update --init --recursive
+
+    - script:
         name: echo python information
         code: |
           echo "python version $(python --version) running"
           echo "pip version $(pip --version) running"
           pip install -r requirements.txt
           python setup.py install
-          git submodule update --init --recursive
           pntl -SE ./pntl/senna
 
 
