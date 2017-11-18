@@ -21,8 +21,7 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - python3 setup.py install
-  - git clone https://github.com/baojie/senna.git
-  - pntl -SE ./senna
+  - pntl -SE ./pntl/senna
   - tox
   - coverage run pntl/tools.py 
 
