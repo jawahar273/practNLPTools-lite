@@ -22,6 +22,7 @@ before_script:
 
 # command to run tests, e.g. python setup.py test
 script:
+  - python setup.py install
   - pntl -SE ./senna
   - tox
   - coverage run pntl/tools.py 
