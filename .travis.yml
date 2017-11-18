@@ -21,8 +21,8 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - python3 setup.py install
+  - git submodule update --init --recursive
   - pntl -SE ./pntl/senna
-  - tox
   - coverage run pntl/tools.py 
 
 
