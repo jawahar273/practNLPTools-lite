@@ -3,7 +3,7 @@ box:
   ports:
     - "5000"
 
-dev:
+build:
   steps:
     # first we want to run pip-install to install all the dependencies
     - pip-install
@@ -15,6 +15,11 @@ dev:
           - pip install -r requirements_dev.txt
           - python setupt.py install
           - pntl -SE ./pntl/senna
+    - script:
+        name: echo python information
+        code: |
+          echo "python version $(python --version) running"
+          echo "pip version $(pip --version) running"
 
     - internal/watch:
         reload: true
