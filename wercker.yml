@@ -12,7 +12,8 @@ build:
     - script:
         name: initialize git submodules
         code: |
-            apt-get install git -y
+            apt-get update
+            apt-get install git 
             git submodule update --init --recursive
 
     - script:
