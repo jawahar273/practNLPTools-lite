@@ -17,12 +17,10 @@ install:
   - pip install codecov
 
 
-before_script:
-  - git clone https://github.com/baojie/senna.git
-
 # command to run tests, e.g. python setup.py test
 script:
   - python setup.py install
+  - git clone https://github.com/baojie/senna.git
   - pntl -SE ./senna
   - tox
   - coverage run pntl/tools.py 

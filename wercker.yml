@@ -9,17 +9,19 @@ build:
     - pip-install
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
-    - internal/shell:
-        cmd: /bin/sh
-        code:
-          - pip install -r requirements_dev.txt
-          - python setupt.py install
-          - pntl -SE ./pntl/senna
     - script:
         name: echo python information
         code: |
           echo "python version $(python --version) running"
           echo "pip version $(pip --version) running"
+    - internal/shell:
+        cmd: /bin/sh
+        code:
+          - pip install -r requirements_dev.txt
+          - python setupt.py install
+          - cd pntl
+          - git clone https://github.com/baojie/senna.git
+          - pntl -SE ./senna
 
     - internal/watch:
         reload: true
