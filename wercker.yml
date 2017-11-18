@@ -1,5 +1,5 @@
 box:
-  id: 3.5-slim 
+  id: python:3.5-slim 
   ports:
     - "5000"
 
@@ -18,11 +18,15 @@ build:
         cmd: /bin/sh
         code:
           - pip install -r requirements_dev.txt
-          - python setupt.py install
+          - python setup.py install
           - cd pntl
           - git clone https://github.com/baojie/senna.git
           - pntl -SE ./senna
 
     - internal/watch:
+        code: |
+           python setup.py install
+           pntl -SE ./senna
+
         reload: true
 
