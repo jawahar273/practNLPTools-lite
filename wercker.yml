@@ -15,15 +15,14 @@ build:
             apt-get update 
             apt-get install git -y
             git submodule update --init --recursive
-            ls -l pntl
-            gcc -o ./pntl/senna -O3 -ffast-math *.c
+            ls -l pntl/senna
 
     - script:
-        name: echo python information
+        name: Python information
         code: |
+          echo 
           echo "python version $(python --version) running"
           echo "pip version $(pip --version) running"
-          pip3 install -r requirements.txt
           python3 setup.py install
           pntl -SE ./pntl/senna -B true
 
