@@ -66,7 +66,7 @@ class Annotator:
             self.check_stp_jar(self.dep_par_path, raise_e)
 
         self.dep_par_model = dep_model
-        print(dep_model)
+        # print(dep_model)
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',
                                 self.dep_par_model,
