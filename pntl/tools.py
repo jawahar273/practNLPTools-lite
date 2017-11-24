@@ -66,7 +66,7 @@ class Annotator:
             self.check_stp_jar(self.dep_par_path, raise_e)
 
         self.dep_par_model = dep_model
-        print(dep_model)
+        # print(dep_model)
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',
                                 self.dep_par_model,
@@ -209,7 +209,8 @@ class Annotator:
         os.chdir(package_directory)
         pipe = subprocess.Popen(senna_executable,
                                 stdout=subprocess.PIPE,
-                                stdin=subprocess.PIPE)
+                                stdin=subprocess.PIPE,
+                                shell=True)
         senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
@@ -301,7 +302,9 @@ class Annotator:
         args = [senna_executable]
         args.extend(options)
         pipe = subprocess.Popen(args,
-                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE,
+                                shell=True)
         senna_stdout = pipe.communicate(input=" ".join(input_data)
                                         .encode('utf-8'))[0]
         os.chdir(cwd)
@@ -325,7 +328,9 @@ class Annotator:
         cwd = os.getcwd()
         os.chdir(package_directory)
         pipe = subprocess.Popen(senna_executable,
-                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE,
+                                shell=True)
         senna_stdout = pipe.communicate(input=" ".join(input_data)
                                         .encode('utf-8'))[0]
         os.chdir(cwd)
@@ -351,7 +356,8 @@ class Annotator:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_cli,
                                 stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+                                stderr=subprocess.PIPE,
+                                shell=True)
         pipe.wait()
 
         stanford_out = pipe.stdout.read()

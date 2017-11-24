@@ -1,21 +1,28 @@
 box:
-  id: 3.5-slim 
+  id: python:3.5-slim 
   ports:
     - "5000"
 
-dev:
+build:
   steps:
     # first we want to run pip-install to install all the dependencies
     - pip-install
     # then we want to run a wercker step that watches your files and reloads
     # when changes are detected.
-    - internal/shell:
-        cmd: /bin/sh
-        code:
-          - pip install -r requirements_dev.txt
-          - python setupt.py install
-          - pntl -SE ./pntl/senna
+    - script:
+        name: initialize git submodules
+        code: |
+            apt-get update 
+            apt-get install git -y
+            git submodule update --init --recursive
 
-    - internal/watch:
-        reload: true
+    - script:
+        name: Python information
+        code: |
+          echo 
+          echo "python version $(python --version) running"
+          echo "pip version $(pip --version) running"
+          python3 setup.py install
+          pntl -SE ./pntl/senna -B true
+
 

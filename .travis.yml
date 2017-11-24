@@ -13,17 +13,16 @@ python:
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-  - pip install -U tox-travis
-  - pip install codecov
+  - pip3 install -r requirements.txt
+  - pip3 install -U tox-travis
+  - pip3 install codecov
 
-
-before_script:
-  - git clone https://github.com/baojie/senna.git
 
 # command to run tests, e.g. python setup.py test
 script:
-  - pntl -SE ./senna
-  - tox
+  - python3 setup.py install
+  - git submodule update --init --recursive
+  - pntl -SE ./pntl/senna
   - coverage run pntl/tools.py 
 
 
