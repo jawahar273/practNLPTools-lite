@@ -2,9 +2,9 @@
 practNLPTools-lite
 ==================
 
-.. warning::
-   `master` branch is under drastic changing so it is unstable models.
-   use `devbranch`_ for a while or this one `properbranch`_ (after 0.2.0)
+.. note::
+   
+   use `devbranch`_ to get the old stable code or this one `properbranch`_ (after 0.2.0 which is also stable version)
 
 Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 
@@ -14,29 +14,49 @@ Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
 `practNLPTools`_ which is testing ground for this repository so don’t
 worry.
 
-|FOSSA Status|
 
-| Practical Natural Language Processing Tools for Humans.
-| practNLPTools is a pythonic library over `SENNA`_ and Stanford
-  Dependency Extractor.
+Practical Natural Language Processing Tools for Humans.
+practNLPTools is a pythonic library over `SENNA`_ and Stanford
+Dependency Extractor.
 
-.. image:: https://img.shields.io/pypi/v/practNLPTools-lite.svg
+.. |pypi status| image:: https://img.shields.io/pypi/v/practNLPTools-lite.svg
         :target: https://pypi.python.org/pypi/pntl
 
-.. image:: https://img.shields.io/travis/jawahar273/practNLPTools-lite.svg
+.. |travis status| image:: https://img.shields.io/travis/jawahar273/practNLPTools-lite.svg
         :target: https://travis-ci.org/jawahar273/practNLPTools-lite
 
-.. image:: https://readthedocs.org/projects/pntl/badge/?version=latest
+.. |doc status| image:: https://readthedocs.org/projects/pntl/badge/?version=latest
         :target: https://pntl.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/shield.svg
+.. |dep status| image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/shield.svg
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
      :alt: Updates
 
-.. image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/python-3-shield.svg
+.. |blocker status| image:: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/python-3-shield.svg
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
      :alt: Python 3
+
+.. |Wercker status| image:: https://app.wercker.com/status/758bf4fa0e3bb9066d118385ee4aac1f/s/master
+   :target: https://app.wercker.com/project/byKey/758bf4fa0e3bb9066d118385ee4aac1f
+
++-----------------+-----------------+
+|    name         | status          |
++=================+=================+
+| Wercker status  | |Wercker status||
++-----------------+-----------------+
+| PyPi            |    |pypi status||
++-----------------+-----------------+
+| travis          |  |travis status||
++-----------------+-----------------+
+| Documentation   |     |doc status||
++-----------------+-----------------+
+| dependency      |     |dep status||
++-----------------+-----------------+
+| blocker Pyupbot | |blocker status||
++-----------------+-----------------+
+| FOSSA           |   |FOSSA Status||
++-----------------+-----------------+
 
 * Documentation: https://pntl.readthedocs.io
 

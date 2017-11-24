@@ -31,39 +31,42 @@ class Annotator:
                         is not found
     """
 
-    def __init__(self, senna_dir="", stp_dir="",
-                 dep_model='edu.stanford.nlp.trees.EnglishGrammaticalStructure',
+    def __init__(self, senna_dir='', stp_dir='',
+                 dep_model='edu.stanford.nlp.trees.'
+                           'EnglishGrammaticalStructure',
                  raise_e=False):
         """
         init function of Annotator class
         """
-        self.senna_path = ""
-        self.dep_par_path = ""
+        self.senna_path = ''
+        self.dep_par_path = ''
 
         if not senna_dir:
             if 'SENNA' in os.environ:
-                self.senna_path = os.path.normpath(os.environ['SENNA']) + os.path.sep
+                self.senna_path = os.path.normpath(os.environ['SENNA'])
+                self.senna_path + os.path.sep
                 exe_file_2 = self.get_senna_bin(self.senna_path)
                 if not os.path.isfile(exe_file_2):
                     raise OSError(RED +
                                   "Senna executable expected at %s or"
                                   " %s but not found"
                                   % (self.senna_path, exe_file_2))
+        elif senna_dir.startswith('.'):
+            self.senna_path = os.path.realpath(senna_dir) + os.path.sep
         else:
-            self.senna_path = senna_dir.strip().rstrip(
-                                                       os.path.sep) + os.path.sep
+            self.senna_path = senna_dir.strip()
+            self.senna_path = self.senna_path.rstrip(os.path.sep) + os.path.sep
 
         if not stp_dir:
             import pntl.tools as Tfile
-            self.dep_par_path = Tfile.__file__.rsplit(
-                                                      os.path.sep, 1)[0] + os.path.sep
+            self.dep_par_path = Tfile.__file__.rsplit(os.path.sep, 1)[0] + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e=True)
         else:
             self.dep_par_path = stp_dir + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e)
 
         self.dep_par_model = dep_model
-        print(dep_model)
+        # print(dep_model)
 
         self.default_jar_cli = ['java', '-cp', 'stanford-parser.jar',
                                 self.dep_par_model,
@@ -206,7 +209,8 @@ class Annotator:
         os.chdir(package_directory)
         pipe = subprocess.Popen(senna_executable,
                                 stdout=subprocess.PIPE,
-                                stdin=subprocess.PIPE)
+                                stdin=subprocess.PIPE,
+                                shell=True)
         senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode().split("\n\n")[0:-1]
@@ -289,19 +293,20 @@ class Annotator:
 
         input_data = sentence
         package_directory = os.path.dirname(self.senna_path)
-        # print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
         executable = self.get_senna_bin(os_name)
-        senna_executable = os.path.join(package_directory, executable)
+        senna_executable = os.path.join(executable)
+        # print("testing dir", executable, package_directory)
         cwd = os.getcwd()
         os.chdir(package_directory)
         args = [senna_executable]
         args.extend(options)
         pipe = subprocess.Popen(args,
-                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = pipe.communicate(
-                                        input=" ".join(input_data)
-                                                       .encode('utf-8'))[0]
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE,
+                                shell=True)
+        senna_stdout = pipe.communicate(input=" ".join(input_data)
+                                        .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
 
@@ -323,10 +328,11 @@ class Annotator:
         cwd = os.getcwd()
         os.chdir(package_directory)
         pipe = subprocess.Popen(senna_executable,
-                                stdout=subprocess.PIPE, stdin=subprocess.PIPE)
-        senna_stdout = pipe.communicate(
-                                        input=" ".join(input_data).
-                                                       encode('utf-8'))[0]
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE,
+                                shell=True)
+        senna_stdout = pipe.communicate(input=" ".join(input_data)
+                                        .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
 
@@ -345,11 +351,13 @@ class Annotator:
         cwd = os.getcwd()
         os.chdir(package_directory)
 
-        with open(self.senna_path + os.path.sep + "in.parse", "w", encoding='utf-8') as parsefile:
+        with open(self.senna_path + os.path.sep + "in.parse",
+                  "w", encoding='utf-8') as parsefile:
             parsefile.write(parse)
         pipe = subprocess.Popen(self.default_jar_cli,
                                 stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+                                stderr=subprocess.PIPE,
+                                shell=True)
         pipe.wait()
 
         stanford_out = pipe.stdout.read()
@@ -378,7 +386,7 @@ class Annotator:
                     annotation["dep_parse"] = dependencie
         return annotations
 
-    def get_annoations(self, sentence="", senna_tags=None, dep_parse=True):
+    def get_annoations(self, sentence='', senna_tags=None, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
         and the returning them in a form of `dict()`
