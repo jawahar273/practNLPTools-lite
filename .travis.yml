@@ -11,6 +11,8 @@ python:
   - "3.5"
   - "3.4"
 
+notifications:
+  email: false
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
@@ -23,8 +25,10 @@ install:
 script:
   - python setup.py install
   - git submodule update --init --recursive
-  - pntl -SE ./pntl/senna
   - coverage run pntl/tools.py 
+  - pntl -SE ./pntl/senna
+  - pntl -SE ./pntl/senna -B true
+  - pntl -SE ./pntl/senna -S 'I am gonna make him an offer he can not refuse.''
 
 
 # After you create the Github repo and add it to Travis, run the
