@@ -40,14 +40,21 @@ Dependency Extractor.
 .. |Wercker status| image:: https://app.wercker.com/status/758bf4fa0e3bb9066d118385ee4aac1f/s/master
    :target: https://app.wercker.com/project/byKey/758bf4fa0e3bb9066d118385ee4aac1f
 
-+-----------------+-----------------+-----------------+-----------------+
-| Wercker status  | |Wercker status|| PyPi            |    |pypi status||
-+=================+=================+=================+=================+
-+-----------------+-----------------+-----------------+-----------------+
-| travis          |  |travis status|| Documentation   |     |doc status||
-+-----------------+-----------------+-----------------+-----------------+
-| dependency      |     |dep status|| blocker Pyupbot | |blocker status||
-+-----------------+-----------------+-----------------+-----------------+
++-----------------+-----------------+
+|    name         | status          |
++=================+=================+
+| Wercker status  | |Wercker status||
++-----------------+-----------------+
+| PyPi            |    |pypi status||
++-----------------+-----------------+
+| travis          |  |travis status||
++-----------------+-----------------+
+| Documentation   |     |doc status||
++-----------------+-----------------+
+| dependency      |     |dep status||
++-----------------+-----------------+
+| blocker Pyupbot | |blocker status||
++-----------------+-----------------+
 | FOSSA           |   |FOSSA Status||
 +-----------------+-----------------+
 
