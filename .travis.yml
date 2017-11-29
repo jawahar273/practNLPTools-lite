@@ -28,7 +28,7 @@ script:
   - coverage run pntl/tools.py 
   - pntl -SE ./pntl/senna
   - pntl -SE ./pntl/senna -B true
-  - pntl -SE ./pntl/senna -S 'I am gonna make him an offer he can not refuse.''
+  - pntl -SE ./pntl/senna -S 'I am gonna make him an offer he can not refuse.'
 
 
 # After you create the Github repo and add it to Travis, run the
