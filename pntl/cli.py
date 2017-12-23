@@ -47,43 +47,11 @@ def download_files():
     print(Fore.GREEN + "downloading dependency parse sh done..")
 
 
-@click.command()
-@click.option('-SE', '--senna_path', help='Set the direction of senna.',
-               default=os.path.sep)
-@click.option('-S', '--sent', help='Testing sentence to passed in senna.',
-              type=str, default='')
-@click.option('-DM', '--dep_model',
-              help='Stanford dependency parser model location.', type=str,
-              default='edu.stanford.nlp.trees.EnglishGrammaticalStructure')
-@click.option('-B', '--batch',
-              type=click.BOOL, help='Batch process.')
-@click.option('-SD', '--stp_dir',
-              help='Location of stanford-parser.jar file.',
-              type=str)
-@click.option('-I', '--init',
-              help='downlard files from github.',
-              type=bool, default=False)
-def user_test(senna_path='', sent='',
+def main(senna_path='', sent='',
               dep_model='',
               batch=False,
               stp_dir='',
               init=False):
-    """please replace the path of yours environment(according to OS path)
-
-    :param str senna_path: path for senna location \n
-    :param str dep_model: stanford dependency parser model \t
-     default='edu.stanford.nlp.trees.EnglishGrammaticalStructure'
-    \n
-    :param str or list sent: the sentence to process with Senna \n
-    :param bool batch:  processing more than one sentence
-       in one row \n
-    :param str stp_dir: location of stanford-parser.jar file
-    :param bool init: downlard files from github.
-    """
-    if init:
-        download_files()
-        if not senna_path:
-            return None
 
     annotator = Annotator(senna_path, stp_dir, dep_model)
     if not sent and batch:
@@ -121,6 +89,47 @@ def user_test(senna_path='', sent='',
         args = '-srl -pos'.strip().split()
         print("conll:\n", annotator.get_conll_format(sent, args))
         print(Fore.BLUE + "CoNLL format is recommented for batch process")
+
+
+
+@click.command()
+@click.option('-SE', '--senna_path', help='Set the direction of senna.',
+               default=os.path.sep)
+@click.option('-S', '--sent', help='Testing sentence to passed in senna.',
+              type=str, default='')
+@click.option('-DM', '--dep_model',
+              help='Stanford dependency parser model location.', type=str,
+              default='edu.stanford.nlp.trees.EnglishGrammaticalStructure')
+@click.option('-B', '--batch',
+              type=click.BOOL, help='Batch process.')
+@click.option('-SD', '--stp_dir',
+              help='Location of stanford-parser.jar file.',
+              type=str)
+@click.option('-I', '--init',
+              help='downlard files from github.',
+              type=bool, default=False)
+def user_test(senna_path='', sent='',
+              dep_model='',
+              batch=False,
+              stp_dir='',
+              init=False):
+    """please replace the path of yours environment(according to OS path)
+
+    :param str senna_path: path for senna location \n
+    :param str dep_model: stanford dependency parser model \t
+     default='edu.stanford.nlp.trees.EnglishGrammaticalStructure'
+    \n
+    :param str or list sent: the sentence to process with Senna \n
+    :param bool batch:  processing more than one sentence
+       in one row \n
+    :param str stp_dir: location of stanford-parser.jar file
+    :param bool init: downlard files from github.
+    """
+    if init:
+        download_files()
+    else:
+       main(senna_path, sent, dep_model, batch, stp_dir)
+
 
 
 # if __name__ == "__main__":

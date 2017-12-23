@@ -2,11 +2,7 @@
 practNLPTools-lite
 ==================
 
-.. note::
-   
-   use `devbranch`_ to get the old stable code or this one `properbranch`_ (after 0.2.0 which is also stable version)
-
-Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
+Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or previous stable  `properbranch`_ ]
 
 |Author|
 
@@ -60,6 +56,43 @@ Dependency Extractor.
 
 * Documentation: https://pntl.readthedocs.io
 
+QuickStart 
+==========
+
+Downlarding Stanford Parser JAR
+###############################
+
+To downlard the stanford-parser from github automatically and placing them inside the install direction.
+
+.. code:: bash
+
+   pntl -I true
+   # downlards required file from github.
+
+Running Predefine Examples Sentences
+#####################################
+
+To run exiting example for batch(which has more than one list of examples).
+
+.. code:: bash
+
+   pntl -SE home/user/senna -B true
+
+To run predefine example for one sentence.
+
+.. code:: bash
+
+   pntl -SE home/user/senna
+
+Running user given sentence
+###########################
+
+To run user given example using `-S` is
+
+.. code:: bash
+
+   pntl -SE home/user/senna -S 'I am gonna make him an offer he can not refuse.'
+
 Functionality
 =============
 
@@ -97,6 +130,7 @@ Features
     SENNA pipeline has a fixed maximum size of the sentences that it
     can read. By default it is 1024 token/sentence. If you have larger
     sentences, changing the MAX\_SENTENCE\_SIZE value in SENNA\_main.c should beconsidered and your system specific binary should be rebuilt. Otherwise this could introduce misalignment errors.
+
 
 Installation
 ============

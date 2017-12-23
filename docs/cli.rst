@@ -32,10 +32,4 @@ command
       --help                  Show this message and exit.
 
 
-Quick Start
-===========
 
-.. code:: bash
-
-   pntl -SE /home/user_name/senna -I true
-   # will find the senna'd exceutable file at the given location according to os environment and also downlard needed file from github.
