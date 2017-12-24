@@ -2,11 +2,8 @@
 practNLPTools-lite
 ==================
 
-.. note::
-   
-   use `devbranch`_ to get the old stable code or this one `properbranch`_ (after 0.2.0 which is also stable version)
 
-Creating practNLPTools in lite mode.[ get the old coding in dev branch ]
+Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or old stable code `properbranch`_]
 
 |Author|
 
