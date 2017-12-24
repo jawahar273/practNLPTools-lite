@@ -64,7 +64,7 @@ QuickStart
 ==========
 
 Downlarding Stanford Parser JAR
-###############################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To downlard the stanford-parser from github automatically and placing them inside the install direction.
 
@@ -74,7 +74,7 @@ To downlard the stanford-parser from github automatically and placing them insid
    # downlards required file from github.
 
 Running Predefine Examples Sentences
-#####################################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To run exiting example for batch(which has more than one list of examples).
 
@@ -89,7 +89,7 @@ To run predefine example for one sentence.
    pntl -SE home/user/senna
 
 Running user given sentence
-###########################
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To run user given example using `-S` is
 
