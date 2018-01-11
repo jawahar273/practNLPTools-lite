@@ -110,7 +110,7 @@ Functionality
 
 Future work
 ===========
-
+-  tag2file(new)
 -  creating depParser for corresponding os environment
 -  custome input format for stanford parser insted of tree format
 
