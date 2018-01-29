@@ -5,7 +5,7 @@ practNLPTools-lite
 
 Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or old stable code `properbranch`_]
 
-|Author|
+|Author| |python_version|
 
 |Build Status| - on click this built this might take you to build of
 `practNLPTools`_ which is testing ground for this repository so don’t
@@ -201,7 +201,7 @@ this `link`_ and along with ``tools.py`` on ``pntl``
 .. _devbranch: https://github.com/jawahar273/practNLPTools-lite/tree/dev
 
 .. |Author| image:: https://img.shields.io/badge/Author-jawahar-blue.svg
-.. |Author| image:: https://img.shields.io/badge/python3+-only-red.svg
+.. |python_version| image:: https://img.shields.io/badge/python3+-only-red.svg
 .. |Python-version-3| image:: https://img.shields.io/badge/Py-version-Python--3.5-green.svg
 .. |Build Status| image:: https://travis-ci.org/jawahar273/practNLPTools.svg?branch=master
    :target: https://travis-ci.org/jawahar273/practNLPTools
