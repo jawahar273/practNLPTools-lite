@@ -4,7 +4,7 @@
 #               Combination of Senna and Stanford dependency Extractor
 # Copyright (C) 2017 PractNLP-lite Project
 # Current Author: Jawahar S <jawahar273@gmail.com>
-# URL: https://jawahar273.gitbooks.io (or) https://github.com/jawahar273
+# URL: https://github.com/jawahar273
 
 
 from __future__ import generators, print_function, unicode_literals

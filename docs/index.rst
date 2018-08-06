@@ -12,6 +12,7 @@ Contents:
    cli
    api
    stanford_installing_issues
+   changelog
    issues
    authors
    contributing

@@ -73,13 +73,25 @@ To downlard the stanford-parser from github automatically and placing them insid
 Running Predefine Examples Sentences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To run exiting example for batch(which has more than one list of examples).
+To run predefine example in batch mode(which has more than one list of examples).
 
 .. code:: bash
 
    pntl -SE home/user/senna -B true
 
-To run predefine example for one sentence.
+.. notes::
+
+    Batch mode means listed sentences.
+
+    ..code:: python
+
+        sentences = [
+            "This is line 1",
+            "This is line 2",
+            ...
+        ]
+
+To run predefine example in non batch mode.
 
 .. code:: bash
 
