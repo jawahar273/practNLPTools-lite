@@ -61,7 +61,7 @@ QuickStart
 ==========
 
 Downlarding Stanford Parser JAR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===============================
 
 To downlard the stanford-parser from github automatically and placing them inside the install direction.
 
@@ -71,7 +71,7 @@ To downlard the stanford-parser from github automatically and placing them insid
    # downlards required file from github.
 
 Running Predefine Examples Sentences
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=======================================
 
 To run predefine example in batch mode(which has more than one list of examples).
 
@@ -79,17 +79,21 @@ To run predefine example in batch mode(which has more than one list of examples)
 
    pntl -SE home/user/senna -B true
 
-.. notes::
+Example
+-------
 
-    Batch mode means listed sentences.
+Batch mode means listed sentences.
 
-    ..code:: python
+..code:: 
 
-        sentences = [
-            "This is line 1",
-            "This is line 2",
-            ...
-        ]
+    # Example structure for predefine
+    # Sentences in the code.
+
+    sentences = [
+        "This is line 1",
+        "This is line 2",
+
+    ]
 
 To run predefine example in non batch mode.
 
@@ -98,7 +102,7 @@ To run predefine example in non batch mode.
    pntl -SE home/user/senna
 
 Running user given sentence
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===========================
 
 To run user given example using `-S` is
 
@@ -148,26 +152,26 @@ Features
 Installation
 ============
 
-Requires:
-~~~~~~~~~
-  A computer with 500mb memory, Java Runtime Environment (1.7
-  preferably, works with 1.6 too, but didnt test.) installed and python.
+**Requires:**
 
-Linux:
-```````
-run:
+    A computer with 500mb memory, Java Runtime Environment (1.7
+    preferably, works with 1.6 too, but didnt test.) installed and python.
 
-::
+    **Linux:**
 
-    sudo python setup.py install 
+    run:
 
-windows:
-````````
-run this commands as administrator:
+    ::
 
-::
+        sudo python setup.py install 
 
-    python setup.py install
+    windows:
+
+    run this commands as administrator:
+
+    ::
+
+        python setup.py install
 
 
 Bench Mark comparsion
