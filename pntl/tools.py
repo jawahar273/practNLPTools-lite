@@ -293,7 +293,7 @@ class Annotator:
         :rtype: str
         """
 
-        if isinstance(sentence, str):
+        if isinstance(input_data, str):
 
             input_data = input_data.split()
 
@@ -502,61 +502,3 @@ class Annotator:
 
     def to_sql(self):
         pass
-
-def test(senna_path='', sent='',
-         dep_model='',
-         batch=False,
-         stp_dir=''):
-    """please replace the path of yours environment(according to OS path)
-
-    .. warning::
-       deprecated:: 0.2.0.
-       See CLI doc instead. This `test()` function will be removed from next release.
-
-    :param str senna_path: path for senna location \n
-    :param str dep_model: stanford dependency parser model location \n
-    :param str or list sent: the sentence to process with Senna \n
-    :param bool batch:  processing more than one sentence
-       in one row \n
-    :param str stp_dir: location of stanford-parser.jar file
-
-    """
-    from pntl.utils import skipgrams
-    annotator = Annotator(senna_path, stp_dir, dep_model)
-    if not sent and batch:
-        sent = ["He killed the man with a knife and murdered"
-                "him with a dagger.",
-                "He is a good boy.",
-                "He created the robot and broke it after making it."]
-    elif not sent:
-        sent = 'get me a hotel on chennai in 21-4-2017 '
-        # "He created the robot and broke it after making it.
-    if not batch:
-        print("\n", sent, "\n")
-        sent = sent.split()
-        args = '-srl -pos'.strip().split()
-        print("conll:\n", annotator.get_conll_format(sent, args))
-        temp = annotator.get_annoations(sent, dep_parse=True)['dep_parse']
-        print('dep_parse:\n', temp)
-        temp = annotator.get_annoations(sent, dep_parse=True)['chunk']
-        print('chunk:\n', temp)
-        temp = annotator.get_annoations(sent, dep_parse=True)['pos']
-        print('pos:\n', temp)
-        temp = annotator.get_annoations(sent, dep_parse=True)['ner']
-        print('ner:\n', temp)
-        temp = annotator.get_annoations(sent, dep_parse=True)['srl']
-        print('srl:\n', temp)
-        temp = annotator.get_annoations(sent,
-                                        dep_parse=True)['syntax_tree']
-        print('syntaxTree:\n', temp)
-        temp = annotator.get_annoations(sent, dep_parse=True)['words']
-        print('words:\n', temp)
-        print('skip gram\n', list(skipgrams(sent, n=3, k=2)))
-
-    else:
-        print("\n\nrunning batch process", "\n", "=" * 20,
-              "\n", sent, "\n")
-        args = '-srl -pos'.strip().split()
-        # print("conll:\n", annotator.get_conll_format(sent, args))
-        print('pos:\n', annotator.get_annoations(sent)['pos'])
-        # print(BLUE + "CoNLL format is higly recommented for batch process")

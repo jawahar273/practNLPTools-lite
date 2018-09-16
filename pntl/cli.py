@@ -89,6 +89,7 @@ def main(senna_path='', sent='',
         args = '-srl -pos'.strip().split()
         print("conll:\n", annotator.get_conll_format(sent, args))
         print(Fore.BLUE + "CoNLL format is recommented for batch process")
+        print('pos:\n', annotator.get_annoations(sent)['pos'])
 
 
 
