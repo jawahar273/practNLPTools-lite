@@ -369,7 +369,7 @@ class Annotator:
     def get_batch_annotations(self, sentences, dep_parse=True):
         """
         :param list sentences: list of sentences
-        :rtype: dict
+        :rtype: list
         """
         annotations = []
         batch_senna_tags = self.get_senna_tag_batch(sentences)
