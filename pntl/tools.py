@@ -370,6 +370,7 @@ class Annotator:
 
         return stanford_out.decode("utf-8").strip()
 
+
     def get_batch_annotations(self, sentences, dep_parse=True):
         """
         :param list sentences: list of sentences
@@ -389,9 +390,6 @@ class Annotator:
                 for dependencie, annotation in zip(dependencies, annotations):
                     annotation["dep_parse"] = dependencie
         return annotations
-
-    def to_sql(self):
-        pass
 
     def get_annoations(self, sentence='', senna_tags=None, dep_parse=True):
         """
@@ -502,6 +500,8 @@ class Annotator:
                                                            ['syntax_tree'])
         return annotations
 
+    def to_sql(self):
+        pass
 
 def test(senna_path='', sent='',
          dep_model='',
@@ -557,5 +557,6 @@ def test(senna_path='', sent='',
         print("\n\nrunning batch process", "\n", "=" * 20,
               "\n", sent, "\n")
         args = '-srl -pos'.strip().split()
-        print("conll:\n", annotator.get_conll_format(sent, args))
-        print(BLUE + "CoNLL format is higly recommented for batch process")
+        # print("conll:\n", annotator.get_conll_format(sent, args))
+        print('pos:\n', annotator.get_annoations(sent)['pos'])
+        # print(BLUE + "CoNLL format is higly recommented for batch process")
