@@ -113,7 +113,7 @@ def user_test(senna_path='', sent='',
               batch=False,
               stp_dir='',
               init=False):
-    """please replace the path of yours environment(according to OS path)
+    """please replace the path/dirs of yours (according to Operating system's fromat)
 
     :param str senna_path: path for senna location \n
     :param str dep_model: stanford dependency parser model \t
