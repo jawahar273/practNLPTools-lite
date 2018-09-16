@@ -188,33 +188,6 @@ class Annotator:
             executable = 'senna-win32.exe'
         return self.senna_path + executable
 
-    def get_senna_tag_batch(self, sentences):
-        """
-        Communicates with senna through lower level communiction(sub process)
-        and converted the console output(default is file writing).
-        On batch processing each end is add with new line.
-
-        :param list sentences: list of sentences for batch processes
-        :rtype: str
-        """
-        input_data = ""
-        for sentence in sentences:
-            input_data += sentence + "\n"
-        input_data = input_data[:-1]
-        package_directory = os.path.dirname(self.senna_path)
-        os_name = system()
-        executable = self.get_senna_bin(os_name)
-        senna_executable = os.path.join(package_directory, executable)
-        cwd = os.getcwd()
-        os.chdir(package_directory)
-        pipe = subprocess.Popen(senna_executable,
-                                stdout=subprocess.PIPE,
-                                stdin=subprocess.PIPE,
-                                shell=True)
-        senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
-        os.chdir(cwd)
-        return senna_stdout.decode().split("\n\n")[0:-1]
-
     @classmethod
     def help_conll_format(cls):
         """With the help of this method, detail of senna
@@ -310,16 +283,20 @@ class Annotator:
         os.chdir(cwd)
         return senna_stdout.decode("utf-8").strip()
 
-    def get_senna_tag(self, sentence):
+    def get_senna_tag(self, input_data):
         """
         Communicates with senna through lower level communiction(sub process)
         and converted the console output(default is file writing)
 
-        :param str/list listsentences : list of sentences for batch processes
+        :param str/list input_data : list of sentences for batch processes
         :return: senna tagged output
         :rtype: str
         """
-        input_data = sentence
+
+        if isinstance(sentence, str):
+
+            input_data = input_data.split()
+
         package_directory = os.path.dirname(self.senna_path)
         # print("testing dir",self.dep_par_path, package_directory)
         os_name = system()
@@ -335,6 +312,33 @@ class Annotator:
                                         .encode('utf-8'))[0]
         os.chdir(cwd)
         return senna_stdout
+
+    def get_senna_tag_batch(self, sentences):
+        """
+        Communicates with senna through lower level communiction(sub process)
+        and converted the console output(default is file writing).
+        On batch processing each end is add with new line.
+
+        :param list sentences: list of sentences for batch processes
+        :rtype: str
+        """
+        input_data = ""
+        for sentence in sentences:
+            input_data += sentence + "\n"
+        input_data = input_data[:-1]
+        package_directory = os.path.dirname(self.senna_path)
+        os_name = system()
+        executable = self.get_senna_bin(os_name)
+        senna_executable = os.path.join(package_directory, executable)
+        cwd = os.getcwd()
+        os.chdir(package_directory)
+        pipe = subprocess.Popen(senna_executable,
+                                stdout=subprocess.PIPE,
+                                stdin=subprocess.PIPE,
+                                shell=True)
+        senna_stdout = pipe.communicate(input=input_data.encode('utf-8'))[0]
+        os.chdir(cwd)
+        return senna_stdout.decode().split("\n\n")[0:-1]
 
     def get_dependency(self, parse):
         """
@@ -386,6 +390,9 @@ class Annotator:
                     annotation["dep_parse"] = dependencie
         return annotations
 
+    def to_sql(self):
+        pass
+
     def get_annoations(self, sentence='', senna_tags=None, dep_parse=True):
         """
         passing the string to senna and performing aboue given nlp process
@@ -410,6 +417,7 @@ class Annotator:
             senna_tags = senna_tags[0:-2]
         else:
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
+
         no_verbs = len(senna_tags[0].split("\t")) - 6
 
         words = []
@@ -482,8 +490,8 @@ class Annotator:
         annotations['pos'] = list(zip(words, pos))
         annotations['ner'] = list(zip(words, ner))
         annotations['srl'] = roles
-        annotations['verbs'] = [x for x in verb if x != "-"]
-        annotations['chunk'] = list(zip(words, chunk))
+        annotations['chunk'] = [x for x in verb if x != "-"]
+        annotations['verbs'] = list(zip(words, chunk))
         annotations['dep_parse'] = ""
         annotations['syntax_tree'] = ""
         for (word_, syn_, pos_) in zip(words, syn, pos):
@@ -550,4 +558,4 @@ def test(senna_path='', sent='',
               "\n", sent, "\n")
         args = '-srl -pos'.strip().split()
         print("conll:\n", annotator.get_conll_format(sent, args))
-        print(BLUE + "CoNLL format is recommented for batch process")
+        print(BLUE + "CoNLL format is higly recommented for batch process")

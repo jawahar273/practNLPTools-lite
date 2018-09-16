@@ -65,3 +65,4 @@ target/
 
 # virtual env
 pntl_vir
+.env

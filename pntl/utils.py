@@ -5,6 +5,13 @@ from itertools import chain, combinations
 from colorama import Fore, init
 init(autoreset=True)
 
+def to_int(value):
+
+    if not type(value, str):
+
+        raise TypeError('Wrong data type given..')
+
+    return int(value)
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
     if pad_left:
