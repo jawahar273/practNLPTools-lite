@@ -26,14 +26,11 @@ def test_content(response):
     # from bs4 import BeautifulSoup
     # assert 'GitHub' in BeautifulSoup(response.content).title.string
     annotator = Annotator(senna_dir="senna")
-    
 
 
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
-    result = runner.invoke(cli.user_test, [''])
+    result = runner.invoke(cli.user_test, [""])
     assert result.exit_code == 0
-    assert 'pntl.cli.user_test' in result.output
-
-
+    assert "pntl.cli.user_test" in result.output

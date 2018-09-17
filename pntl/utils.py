@@ -3,15 +3,18 @@ from itertools import chain, combinations
 
 # from nltk.util import ngrams
 from colorama import Fore, init
+
 init(autoreset=True)
+
 
 def to_int(value):
 
     if not type(value, str):
 
-        raise TypeError('Wrong data type given..')
+        raise TypeError("Wrong data type given..")
 
     return int(value)
+
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
     if pad_left:
@@ -21,8 +24,7 @@ def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
     return seq
 
 
-def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
-              pad_sym=None):
+def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False, pad_sym=None):
     sequence_length = len(sequence)
     sequence = iter(sequence)
     sequence = pad_sequence(sequence, n, pad_left, pad_right, pad_sym)
@@ -30,8 +32,9 @@ def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
         raise Exception("The length of sentence + padding(s) < skip")
 
     if n < k:
-        raise Exception(Fore.RED + "Degree of Ngrams (n)"
-                        "needs to be bigger than skip (k)")
+        raise Exception(
+            Fore.RED + "Degree of Ngrams (n)" "needs to be bigger than skip (k)"
+        )
 
     history = []
     nk = n + k
@@ -64,4 +67,3 @@ def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
     # len(sequence) < n+k
     for ng in list(skipgrams(history, n, k - 1)):
         yield ng
-

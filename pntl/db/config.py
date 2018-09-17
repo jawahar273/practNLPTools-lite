@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 # use of the engine
-engine = create_engine(os.getenv('DATABASE_URL', 'postgres:///'))
+engine = create_engine(os.getenv("DATABASE_URL", "postgres:///"))
 
 # global session
 SessionMaker = sessionmaker(bind=engine)
