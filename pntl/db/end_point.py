@@ -3,6 +3,7 @@
 from pntl.db.model import Package
 
 
+
 class EndPoint:
 
     '''EndPoint class define as access point
