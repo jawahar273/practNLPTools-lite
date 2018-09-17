@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 engine = create_engine(os.getenv('DATABASE_URL', 'postgres:///'))
 
 # global session
-global_session = sessionmaker(bind=engine)
+SessionMaker = sessionmaker(bind=engine)
 
 # base of the class DB
 Base = declarative_base()

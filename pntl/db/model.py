@@ -9,6 +9,9 @@ from pntl.db.json_field import JSONEncodedDict
 
 from pntl.utils import to_int
 
+def _json_field(value):
+
+    return JSONEncodedDict(value)
 
 class Package(Base):
 
@@ -18,8 +21,9 @@ class Package(Base):
 
     text = Column(UnicodeText())
     syntax_tree = Column(UnicodeText())
-    pos = Column(JSONEncodedDict(to_int(os.getenv('POS_LEN'))))
-    ner = Column(JSONEncodedDict(to_int(os.getenv('NER_LEN'))))
-    dep = Column(JSONEncodedDict(to_int(os.getenv('DEP_LEN'))))
-    srl = Column(JSONEncodedDict(to_int(os.getenv('SRL_LEN'))))
-    chunk = Column(JSONEncodedDict(to_int(os.getenv('CHUNK_LEN'))))
+    pos = Column(_json_field(to_int(os.getenv('POS_LEN'))))
+    ner = Column(_json_field(to_int(os.getenv('NER_LEN'))))
+    dep_parse = Column(_json_field(to_int(os.getenv('DEP_LEN'))), nullable=True)
+    srl = Column(_json_field(to_int(os.getenv('SRL_LEN'))))
+    chunk = Column(_json_field(to_int(os.getenv('CHUNK_LEN'))))
+    verb = Column(_json_field(to_int(os.getenv('SRL_LEN'))))
