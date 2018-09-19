@@ -1,7 +1,6 @@
 
 - r ./requirements.txt 
 
-PyYAML==3.13
 python-dotenv>=0.9.1
 
 pip==18.0

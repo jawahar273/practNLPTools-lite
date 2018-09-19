@@ -21,7 +21,7 @@ class EntryPoint:
 
             ValueError("given value must `dict` with non empty..")
 
-        self.session.add(self.db(tagged))
+        self.session.add(self.db(**tagged))
 
     def filter(self):
         # arg will be selected soon..

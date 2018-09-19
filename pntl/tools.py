@@ -38,12 +38,14 @@ class Annotator:
         stp_dir="",
         dep_model="edu.stanford.nlp.trees." "EnglishGrammaticalStructure",
         raise_e=False,
+        save_all=False
     ):
         """
         init function of Annotator class
         """
         self.senna_path = ""
         self.dep_par_path = ""
+        self.end_point = None
 
         if not senna_dir:
             if "SENNA" in os.environ:
@@ -69,6 +71,13 @@ class Annotator:
         else:
             self.dep_par_path = stp_dir + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e)
+
+        if save_all:
+
+            # saving the value of the processed data
+            # into the database.
+            from pntl.db.end_point import EntryPoint
+            self.end_point = EndPoint()
 
         self.dep_par_model = dep_model
         # print(dep_model)
@@ -517,5 +526,6 @@ class Annotator:
             annotations["dep_parse"] = self.get_dependency(annotations["syntax_tree"])
         return annotations
 
-    def to_sql(self):
-        pass
+    def to_sql(self, annotations):
+
+        self.end_point.insert(annotations)
