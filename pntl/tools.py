@@ -48,27 +48,38 @@ class Annotator:
         self.end_point = None
 
         if not senna_dir:
+
             if "SENNA" in os.environ:
+
                 self.senna_path = os.path.normpath(os.environ["SENNA"])
                 self.senna_path + os.path.sep
                 exe_file_2 = self.get_senna_bin(self.senna_path)
+
                 if not os.path.isfile(exe_file_2):
+
                     raise OSError(
                         RED + "Senna executable expected at %s or"
                         " %s but not found" % (self.senna_path, exe_file_2)
                     )
+
         elif senna_dir.startswith("."):
+
             self.senna_path = os.path.realpath(senna_dir) + os.path.sep
+
         else:
+
             self.senna_path = senna_dir.strip()
             self.senna_path = self.senna_path.rstrip(os.path.sep) + os.path.sep
 
         if not stp_dir:
+
             import pntl.tools as Tfile
 
             self.dep_par_path = Tfile.__file__.rsplit(os.path.sep, 1)[0] + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e=True)
+ 
         else:
+ 
             self.dep_par_path = stp_dir + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e)
 
@@ -124,18 +135,27 @@ class Annotator:
         gpath = path
         path = os.listdir(path)
         file_found = False
+
         for file in path:
+
             if file.endswith(".jar"):
+
                 if file.startswith("stanford-parser"):
+
                     file_found = True
+
         if not file_found:
+
             # need to check the install dir for stanfor parser
             if _rec:
+
                 import pntl
 
                 path_ = os.path.split(pntl.__file__)[0]
                 self.check_stp_jar(path_, raise_e, _rec=False)
+
             if raise_e:
+
                 raise FileNotFoundError(
                     RED + "`stanford-parser.jar` is "
                     "not"
@@ -149,6 +169,7 @@ class Annotator:
                     "`pntl -I true` to downlard "
                     "needed file automatically.".format(gpath)
                 )
+
         return file_found
 
     @property
@@ -157,11 +178,14 @@ class Annotator:
         and set the path for Dependency Parse at run time(
         this is python @property)
         """
+
         return self.dep_par_path
 
     @stp_dir.setter
     def stp_dir(self, val):
+
         if os.path.isdir(val):
+
             self.dep_par_path = val + os.path.sep
 
     @property
@@ -171,11 +195,14 @@ class Annotator:
 
         :rtype: string
         """
+
         return self.senna_path
 
     @senna_dir.setter
     def senna_dir(self, val):
+
         if os.path.isdir(val):
+
             self.senna_path = val + os.path.sep
 
     @property
@@ -185,10 +212,12 @@ class Annotator:
 
         :rtype: string
         """
+
         return " ".join(self.default_jar_cli)
 
     @jar_cli.setter
     def jar_cli(self, val):
+
         self.default_jar_cli = val.split()
 
     def get_senna_bin(self, os_name):
@@ -201,17 +230,29 @@ class Annotator:
         """
 
         if os_name == "Linux":
+
             bits = architecture()[0]
+
             if bits == "64bit":
+
                 executable = "senna-linux64"
+
             elif bits == "32bit":
+
                 executable = "senna-linux32"
+
             else:
+
                 executable = "senna"
+
         elif os_name == "Darwin":
+
             executable = "senna-osx"
+
         elif os_name == "Windows":
+
             executable = "senna-win32.exe"
+
         return self.senna_path + executable
 
     @classmethod
@@ -219,6 +260,7 @@ class Annotator:
         """With the help of this method, detail of senna
          arguments are displayed
         """
+
         return cls.get_conll_format.__doc__.split("\n\n")[1]
 
     def get_conll_format(self, sentence, options="-srl -pos -ner -chk -psg"):
@@ -305,6 +347,7 @@ class Annotator:
         )
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode("utf-8"))[0]
         os.chdir(cwd)
+
         return senna_stdout.decode("utf-8").strip()
 
     def get_senna_tag(self, input_data):
@@ -333,6 +376,7 @@ class Annotator:
         )
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode("utf-8"))[0]
         os.chdir(cwd)
+  
         return senna_stdout
 
     def get_senna_tag_batch(self, sentences):
@@ -345,8 +389,11 @@ class Annotator:
         :rtype: str
         """
         input_data = ""
+  
         for sentence in sentences:
+    
             input_data += sentence + "\n"
+
         input_data = input_data[:-1]
         package_directory = os.path.dirname(self.senna_path)
         os_name = system()
@@ -359,6 +406,7 @@ class Annotator:
         )
         senna_stdout = pipe.communicate(input=input_data.encode("utf-8"))[0]
         os.chdir(cwd)
+
         return senna_stdout.decode().split("\n\n")[0:-1]
 
     def get_dependency(self, parse):
@@ -372,6 +420,7 @@ class Annotator:
         :rtype: str
         """
         # print("\nrunning.........")
+
         package_directory = os.path.dirname(self.dep_par_path)
         cwd = os.getcwd()
         os.chdir(package_directory)
@@ -379,7 +428,9 @@ class Annotator:
         with open(
             self.senna_path + os.path.sep + "in.parse", "w", encoding="utf-8"
         ) as parsefile:
+
             parsefile.write(parse)
+
         pipe = subprocess.Popen(
             self.default_jar_cli,
             stdout=subprocess.PIPE,
@@ -401,18 +452,30 @@ class Annotator:
         """
         annotations = []
         batch_senna_tags = self.get_senna_tag_batch(sentences)
+
         for senna_tags in batch_senna_tags:
+
             annotations += [self.get_annoations(senna_tags=senna_tags)]
+
         if dep_parse:
+
             syntax_tree = ""
+
             for annotation in annotations:
+
                 syntax_tree += annotation["syntax_tree"]
+
             dependencies = self.get_dependency(syntax_tree).split("\n\n")
             # print (dependencies)
+
             if len(annotations) == len(dependencies):
+
                 for dependencie, annotation in zip(dependencies, annotations):
+
                     annotation["dep_parse"] = dependencie
+
         return annotations
+
 
     def get_annoations(self, sentence="", senna_tags=None, dep_parse=True):
         """
@@ -432,11 +495,15 @@ class Annotator:
         :rtype: dict
         """
         annotations = {}
+
         if not senna_tags:
+
             senna_tags = self.get_senna_tag(sentence).decode()
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
             senna_tags = senna_tags[0:-2]
+
         else:
+
             senna_tags = [x.strip() for x in senna_tags.split("\n")]
 
         no_verbs = len(senna_tags[0].split("\t")) - 6
@@ -448,7 +515,9 @@ class Annotator:
         verb = []
         srls = []
         syn = []
+
         for senna_tag in senna_tags:
+
             senna_tag = senna_tag.split("\t")
             words += [senna_tag[0].strip()]
             pos += [senna_tag[1].strip()]
@@ -460,55 +529,98 @@ class Annotator:
                 srl += [senna_tag[i].strip()]
             srls += [tuple(srl)]
             syn += [senna_tag[-1]]
+
         roles = []
+
         for j in range(no_verbs):
+
             role = {}
             i = 0
             temp = ""
             curr_labels = [x[j] for x in srls]
+
             for curr_label in curr_labels:
+
                 splits = curr_label.split("-")
+
                 if splits[0] == "S":
+
                     if len(splits) == 2:
+
                         if splits[1] == "V":
+
                             role[splits[1]] = words[i]
+
                         else:
+
                             if splits[1] in role:
+
                                 role[splits[1]] += " " + words[i]
+
                             else:
+
                                 role[splits[1]] = words[i]
+
                     elif len(splits) == 3:
+
                         if splits[1] + "-" + splits[2] in role:
+
                             role[splits[1] + "-" + splits[2]] += " " + words[i]
+
                         else:
+
                             role[splits[1] + "-" + splits[2]] = words[i]
+
                 elif splits[0] == "B":
+
                     temp = temp + " " + words[i]
+
                 elif splits[0] == "I":
+
                     temp = temp + " " + words[i]
+
                 elif splits[0] == "E":
+
                     temp = temp + " " + words[i]
+
                     if len(splits) == 2:
+
                         if splits[1] == "V":
+
                             role[splits[1]] = temp.strip()
+
                         else:
+
                             if splits[1] in role:
+
                                 role[splits[1]] += " " + temp
                                 role[splits[1]] = role[splits[1]].strip()
+
                             else:
+
                                 role[splits[1]] = temp.strip()
+
                     elif len(splits) == 3:
+
                         if splits[1] + "-" + splits[2] in role:
+
                             role[splits[1] + "-" + splits[2]] += " " + temp
                             role[splits[1] + "-" + splits[2]] = role[
                                 splits[1] + "-" + splits[2]
                             ].strip()
+
                         else:
+
                             role[splits[1] + "-" + splits[2]] = temp.strip()
+
                     temp = ""
+
                 i += 1
+
             if "V" in role:
+
                 roles += [role]
+
         annotations["words"] = words
         annotations["pos"] = list(zip(words, pos))
         annotations["ner"] = list(zip(words, ner))
@@ -517,13 +629,22 @@ class Annotator:
         annotations["verbs"] = list(zip(words, chunk))
         annotations["dep_parse"] = ""
         annotations["syntax_tree"] = ""
+
         for (word_, syn_, pos_) in zip(words, syn, pos):
+
             annotations["syntax_tree"] += syn_.replace(
                 "*", "(" + pos_ + " " + word_ + ")"
             )
         # annotations['syntax_tree']=annotations['syntax_tree'].replace("S1","S")
+
         if dep_parse:
+
             annotations["dep_parse"] = self.get_dependency(annotations["syntax_tree"])
+
+        if self.save_all:
+
+            self.end_point.save()
+
         return annotations
 
     def to_sql(self, annotations):

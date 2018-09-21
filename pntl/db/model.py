@@ -13,7 +13,6 @@ from pntl.utils import to_int
 def _json_field(value):
     """Just a proxy name for the :py:class:JSONEncodedDict
 
-    
     [description]
     :param value: len the field(for now)
     :type value: str

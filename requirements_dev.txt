@@ -3,6 +3,9 @@
 
 python-dotenv>=0.9.1
 
+# Database
+psycopg2-binary==2.7.4
+
 pip==18.0
 bumpversion==0.5.3
 wheel==0.31.1

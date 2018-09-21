@@ -9,7 +9,7 @@ init(autoreset=True)
 
 def to_int(value):
 
-    if not type(value, str):
+    if not isinstance(value, str):
 
         raise TypeError("Wrong data type given..")
 
