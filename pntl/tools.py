@@ -38,7 +38,7 @@ class Annotator:
         stp_dir="",
         dep_model="edu.stanford.nlp.trees." "EnglishGrammaticalStructure",
         raise_e=False,
-        save_all=False
+        save_all=False,
     ):
         """
         init function of Annotator class
@@ -77,9 +77,9 @@ class Annotator:
 
             self.dep_par_path = Tfile.__file__.rsplit(os.path.sep, 1)[0] + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e=True)
- 
+
         else:
- 
+
             self.dep_par_path = stp_dir + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e)
 
@@ -88,6 +88,7 @@ class Annotator:
             # saving the value of the processed data
             # into the database.
             from pntl.db.end_point import EntryPoint
+
             self.end_point = EndPoint()
 
         self.dep_par_model = dep_model
@@ -376,7 +377,7 @@ class Annotator:
         )
         senna_stdout = pipe.communicate(input=" ".join(input_data).encode("utf-8"))[0]
         os.chdir(cwd)
-  
+
         return senna_stdout
 
     def get_senna_tag_batch(self, sentences):
@@ -389,9 +390,9 @@ class Annotator:
         :rtype: str
         """
         input_data = ""
-  
+
         for sentence in sentences:
-    
+
             input_data += sentence + "\n"
 
         input_data = input_data[:-1]
@@ -475,7 +476,6 @@ class Annotator:
                     annotation["dep_parse"] = dependencie
 
         return annotations
-
 
     def get_annoations(self, sentence="", senna_tags=None, dep_parse=True):
         """
@@ -643,7 +643,7 @@ class Annotator:
 
         if self.save_all:
 
-            self.end_point.save()
+            self.to_sql(annotations)
 
         return annotations
 
