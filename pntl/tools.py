@@ -650,3 +650,4 @@ class Annotator:
     def to_sql(self, annotations):
 
         self.end_point.insert(annotations)
+        self.end_point.save()

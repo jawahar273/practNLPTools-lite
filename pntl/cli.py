@@ -14,6 +14,7 @@ init(autoreset=True)
 
 
 def download_files():
+
     stanford_parser_url = (
         "https://github.com/jawahar273"
         "/practNLPTools-lite/blob/master/pntl/"
@@ -27,6 +28,7 @@ def download_files():
         "https://github.com/jawahar273/practNLPTools-lite"
         "/blob/master/pntl/lexparser.sh"
     )
+
     import pntl
 
     file_loc = os.path.split(pntl.__file__)[0]
@@ -139,8 +141,17 @@ def main(senna_path="", sent="", dep_model="", batch=False, stp_dir="", init=Fal
 @click.option(
     "-I", "--init", help="downlard files from github.", type=bool, default=False
 )
+@click.option("-E", "--evn", help="enable the environment", default=False)
+@click.option("-P", "--evn_path", help="environment file location")
 def user_test(
-    senna_path="", sent="", dep_model="", batch=False, stp_dir="", init=False
+    senna_path="",
+    sent="",
+    dep_model="",
+    batch=False,
+    stp_dir="",
+    init=False,
+    env="",
+    evn_path="",
 ):
     """please replace the path/dirs of yours (according to Operating system's fromat)
 
@@ -155,6 +166,21 @@ def user_test(
     :param bool init: downlard files from github.
     """
     if init:
+
         download_files()
+
     else:
+
         main(senna_path, sent, dep_model, batch, stp_dir)
+
+        if env:
+
+            from dotenv import load_dotenv
+
+            if not evn_path:
+
+                import os
+
+                env = os.getcwd()
+
+            load_dotenv(dotenv_path=env)

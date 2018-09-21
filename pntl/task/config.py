@@ -7,6 +7,7 @@ task_runner = None
 try:
 
     import redis
+
     from huey import RedisHuey
 
     task_runner = RedisHuey(
