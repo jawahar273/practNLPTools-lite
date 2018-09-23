@@ -1,5 +1,9 @@
 SQLAlchemy>=1.2.11
-ujson==1.35
+# ujson==1.35
 PyYAML==3.13
 
+# Task Executor
 huey==1.10.2
+
+# ElasticSearch 
+elasticsearch-dsl>=5.0.0,<6.0.0
