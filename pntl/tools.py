@@ -2,7 +2,7 @@
 # encoding: utf-8
 # Practical Natural Language Processing Tools (practNLPTools-lite):
 #               Combination of Senna and Stanford dependency Extractor
-# Copyright (C) 2017 PractNLP-lite Project
+# Copyright (C) 2018 PractNLP-lite Project
 # Current Author: Jawahar S <jawahar273@gmail.com>
 # URL: https://github.com/jawahar273
 
@@ -13,6 +13,7 @@ import subprocess
 import os
 from platform import architecture, system
 
+
 try:
     from colorama import init
     from colorama.Fore import RED, BLUE
@@ -21,6 +22,8 @@ try:
 except ImportError:
     RED = " "
     BLUE = " "
+
+from pntl.db.end_point import EntryPoint
 
 
 class Annotator:
@@ -122,14 +125,6 @@ class Annotator:
 
             self.dep_par_path = stp_dir + os.path.sep
             self.check_stp_jar(self.dep_par_path, raise_e)
-
-        if save_all:
-
-            # saving the value of the processed data
-            # into the database.
-            from pntl.db.end_point import EntryPoint
-
-            self.end_point = EndPoint()
 
         self.dep_par_model = dep_model
         # print(dep_model)
@@ -683,21 +678,18 @@ class Annotator:
 
         if self.save_all:
 
-            self.__to_sql(annotations)
+            end_point = EntryPoint()
+            self.__to_sql(annotations, end_point)
 
         return annotations
 
-    def __to_sql(self, annotations):
+    def __to_sql(self, annotations, end_point):
 
-        self.end_point.insert(annotations)
+        end_point.insert(annotations)
+        self.save(end_point)
 
-    def save(self):
+    def save(self, end_point):
         """Save is wrapper function build on
         the top of :Class:~pntl.db.EntryPoint.
-
-        ..note::
-            This method must be called explicity meanning
-            developer is responseable to this class method
-            when it is need.
         """
-        self.end_point.save()
+        end_point.save()

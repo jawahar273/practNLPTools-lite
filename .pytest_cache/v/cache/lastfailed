@@ -1,0 +1,3 @@
+{
+  "tests/test_pntl.py::test_command_line_interface": true
+}

@@ -1,0 +1,4 @@
+[
+  "tests/test_pntl.py::test_content",
+  "tests/test_pntl.py::test_command_line_interface"
+]
