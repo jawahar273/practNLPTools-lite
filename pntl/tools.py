@@ -33,7 +33,7 @@ class Annotator:
         self,
         senna_dir="",
         stp_dir="",
-        dep_model="edu.stanford.nlp.trees." "EnglishGrammaticalStructure",
+        dep_model="edu.stanford.nlp.trees.EnglishGrammaticalStructure",
         raise_e=False,
         save_all=False,
         env=False,
