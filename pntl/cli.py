@@ -202,8 +202,5 @@ def user_test(
                 env_path = Path(getcwd()) / ".env"
 
             load_dotenv(dotenv_path=env_path)
-            from os import getenv
-
-            print("%%" * 24, getenv("TABLENAME"), env_path)
 
         main(senna_path, sent, dep_model, batch, stp_dir)
