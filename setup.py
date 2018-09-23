@@ -31,7 +31,7 @@ test_requirements = [
 
 setup(
     name="pntl",
-    version="0.2.4.0",
+    version="0.2.4",
     description=(
         "used to interface with Senna and" " stanford-parser.jar for dependency parsing"
     ),

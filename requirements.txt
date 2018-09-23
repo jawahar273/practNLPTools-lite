@@ -6,4 +6,4 @@ PyYAML==3.13
 huey==1.10.2
 
 # ElasticSearch 
-elasticsearch-dsl>=5.0.0,<6.0.0
+elasticsearch-dsl>=6.0.0,<7.0.0

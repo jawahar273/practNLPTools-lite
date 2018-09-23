@@ -46,6 +46,7 @@ class Annotator:
         self.senna_path = ""
         self.dep_par_path = ""
         self.end_point = None
+        self.save_all = save_all
 
         if not senna_dir:
 
@@ -643,11 +644,21 @@ class Annotator:
 
         if self.save_all:
 
-            self.to_sql(annotations)
+            self.__to_sql(annotations)
 
         return annotations
 
-    def to_sql(self, annotations):
+    def __to_sql(self, annotations):
 
         self.end_point.insert(annotations)
+
+    def save(self):
+        """Save is wrapper function build on
+        the top of :Class:~pntl.db.EntryPoint.
+
+        ..note::
+            This method must be called explicity meanning
+            developer is responseable to this class method
+            when it is need.
+        """
         self.end_point.save()

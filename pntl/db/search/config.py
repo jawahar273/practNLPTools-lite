@@ -4,4 +4,4 @@ from os import getenv
 
 from elasticsearch_dsl import connections
 
-connections.configure(**dict(getenv("")))
+connections.configure(**dict(getenv("ELASTICSEARCH_HOST")))
