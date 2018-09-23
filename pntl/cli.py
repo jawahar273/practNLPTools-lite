@@ -117,8 +117,6 @@ def main(senna_path="", sent="", dep_model="", batch=False, stp_dir="", init=Fal
 
         print(Fore.BLUE + "CoNLL format is recommented for batch process")
 
-        print("pos:\n", annotator.get_annoations(sent)["pos"])
-
 
 @click.command()
 @click.option(
@@ -155,52 +153,9 @@ def user_test(
     env=False,
     env_path="",
 ):
-    """please replace the path/dirs of yours (according to Operating system's fromat)
 
-    :param str senna_path: path for senna location \n
-    :param str dep_model: stanford dependency parser model \t
-     default='edu.stanford.nlp.trees.EnglishGrammaticalStructure'
-    \n
-    :param str or list sent: the sentence to process with Senna \n
-    :param bool batch:  processing more than one sentence
-       in one row \n
-    :param str stp_dir: location of stanford-parser.jar file
-    :param bool init: downlard files from github.
-    :param bool env: status for reading environment file.
-    :param str env_path: location of the environment file.
-
-    .. note::
-    The default file for environment variable is consider
-    as `.env`. If you have `.env` in diffrent path then is
-    it is good way to pass the location alone with file name.
-
-    .. bash::
-        # for linux
-        # /home/user_name/.env
-
-        # for windows
-        # C://user_name//.env
-
-        # this is a example for idea purpose.
-
-    """
     if init:
 
         download_files()
 
-    else:
-
-        if env:
-
-            from dotenv import load_dotenv
-
-            if not env_path:
-
-                from os import getcwd
-                from pathlib import Path
-
-                env_path = Path(getcwd()) / ".env"
-
-            load_dotenv(dotenv_path=env_path)
-
-        main(senna_path, sent, dep_model, batch, stp_dir)
+    main(senna_path, sent, dep_model, batch, stp_dir)

@@ -25,11 +25,8 @@ except ImportError:
 
 class Annotator:
     """
-    :param str senna_dir: path where is located
-    :param str dep_model: Stanford dependencie mode
-    :param str stp_dir: path of stanford parser jar
-    :param str raise_e: raise exception if stanford-parser.jar
-                        is not found
+    :Class:~pntl.Annotator is a class which
+    holds the nessary function.
     """
 
     def __init__(
@@ -39,14 +36,56 @@ class Annotator:
         dep_model="edu.stanford.nlp.trees." "EnglishGrammaticalStructure",
         raise_e=False,
         save_all=False,
+        env=False,
+        env_path="",
     ):
-        """
-        init function of Annotator class
+        """please replace the path/dirs of yours
+        (according to Operating system's fromat)
+
+    :param str senna_path: path for senna location \n
+    :param str dep_model: stanford dependency parser model \t
+     default='edu.stanford.nlp.trees.EnglishGrammaticalStructure'
+    \n
+    :param str or list sent: the sentence to process with Senna \n
+    :param bool batch:  processing more than one sentence
+       in one row \n
+    :param str stp_dir: location of stanford-parser.jar file
+    :param bool init: downlard files from github.
+    :param bool env: status for reading environment file.
+    :param str env_path: location of the environment file.
+
+    .. note::
+    The default file for environment variable is consider
+    as `.env`. If you have `.env` in diffrent path then is
+    it is good way to pass the location alone with file name.
+
+    .. bash::
+        # for linux
+        # /home/user_name/.env
+
+        # for windows
+        # C://user_name//.env
+
+        # this is a example for idea purpose.
+
         """
         self.senna_path = ""
         self.dep_par_path = ""
         self.end_point = None
         self.save_all = save_all
+
+        if env:
+
+            from dotenv import load_dotenv
+
+            if not env_path:
+
+                from os import getcwd
+                from pathlib import Path
+
+                env_path = Path(getcwd()) / ".env"
+
+            load_dotenv(dotenv_path=env_path)
 
         if not senna_dir:
 
