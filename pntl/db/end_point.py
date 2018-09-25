@@ -15,6 +15,12 @@ class EntryPoint:
         self.db = Package
         self.session = SessionMaker()
 
+    def create_table(self):
+
+        from pntl.db.config import Base, engine
+
+        return Base.metadata.create_all(engine)
+
     def insert(self, tagged=None):
 
         if not isinstance(tagged, dict) and not tagged:

@@ -5,5 +5,4 @@ PyYAML==3.13
 # Task Executor
 huey==1.10.2
 
-# ElasticSearch 
-elasticsearch-dsl>=6.0.0,<7.0.0
+xxhash==1.2.0

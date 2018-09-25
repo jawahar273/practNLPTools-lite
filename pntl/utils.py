@@ -1,6 +1,9 @@
 from __future__ import generators, print_function, unicode_literals
 from itertools import chain, combinations
 
+from hashlib import md5 as hash_
+from os import getenv
+
 # from nltk.util import ngrams
 from colorama import Fore, init
 
@@ -14,6 +17,19 @@ def to_int(value):
         raise TypeError("Wrong data type given..")
 
     return int(value)
+
+
+def env_int(value, default=None):
+    """Intergation of :func:`to_int`
+    and :func:`getenv`.
+    """
+
+    return to_int(getenv(value, default))
+
+
+def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
+
+    return hash_(to_hex.encode()).hexdigest()[:len_]
 
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
