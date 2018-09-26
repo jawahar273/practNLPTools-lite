@@ -1,4 +1,28 @@
-# end point is access point of the api
+"""
+EntryPoint will be act as interface
+medium for acessing the db api (sqlalchemy).
+
+Hash Value's
+-------------
+
+Hash will be saved on to the database based
+on the hash value return by the function.
+As the hash function depends on the system's
+property, so that hash value must be dependent
+on the system's such as seed values.
+To avoid so unnessary general confussion,
+"Is it possible to distribute the db backup for another's system
+without any problem?"
+It is highly recomment not to make any dependency
+based on hash value (such as searching or filtering).
+
+.. note::
+
+    Simplest form of the about paragraph, relay hash value
+    if you and only you be the one to be
+    using db.
+
+"""
 
 from pntl.db.model import Package
 from pntl.db.config import SessionMaker
@@ -8,9 +32,10 @@ class EntryPoint:
 
     """EntryPoint class define as access point
     for the class in `db.model` file.
+
     """
 
-    def __init__(self, tagged=None):
+    def __init__(self):
 
         self.db = Package
         self.session = SessionMaker()

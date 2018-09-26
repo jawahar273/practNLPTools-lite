@@ -14,7 +14,9 @@ def to_int(value):
 
     if not isinstance(value, str):
 
-        raise TypeError("Wrong data type given..")
+        raise TypeError(
+            "Expect to get instance of `int` but actually instance is {}", type(value)
+        )
 
     return int(value)
 
@@ -25,6 +27,23 @@ def env_int(value, default=None):
     """
 
     return to_int(getenv(value, default))
+
+
+def env_str(value, default=None):
+
+    return getenv(value, default)
+
+
+def env_bool(value, default=None):
+
+    return bool(getenv(value, default))
+
+
+def env_json(value, default=None):
+
+    import json
+
+    return json.loads(getenv(value, default))
 
 
 def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):

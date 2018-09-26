@@ -39,7 +39,7 @@ setup(
     author="Jawahar S",
     author_email="jawahar273@gmail.com",
     url="https://github.com/jawahar273/practNLPTools-lite",
-    packages=find_packages(include=["pntl"]),
+    packages=find_packages(include=["pntl.*"]),
     entry_points={"console_scripts": ["pntl=pntl.cli:user_test"]},
     include_package_data=True,
     install_requires=requirements,

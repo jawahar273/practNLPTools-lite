@@ -7,7 +7,7 @@ from sqlalchemy import Column, Integer, String, UnicodeText
 from pntl.db.config import Base
 from pntl.db.json_field import JSONEncodedDict
 
-from pntl.utils import to_int, pntl_hash, env_int
+from pntl.utils import pntl_hash, env_int
 
 
 def _json_field(value):
@@ -30,12 +30,12 @@ class Package(Base):
 
     text = Column(UnicodeText())
     syntax_tree = Column(UnicodeText())
-    pos = Column(_json_field(to_int(getenv("POS_LEN"))))
-    ner = Column(_json_field(to_int(getenv("NER_LEN"))))
-    dep_parse = Column(_json_field(to_int(getenv("DEP_LEN"))), nullable=True)
-    srl = Column(_json_field(to_int(getenv("SRL_LEN"))))
-    chunk = Column(_json_field(to_int(getenv("CHUNK_LEN"))))
-    verb = Column(_json_field(to_int(getenv("VERB_LEN"))))
+    pos = Column(_json_field(env_int("POS_LEN")))
+    ner = Column(_json_field(env_int("NER_LEN")))
+    dep_parse = Column(_json_field(env_int("DEP_LEN")), nullable=True)
+    srl = Column(_json_field(env_int("SRL_LEN")))
+    chunk = Column(_json_field(env_int("CHUNK_LEN")))
+    verb = Column(_json_field(env_int("VERB_LEN")))
     hash_str = Column(String(env_int("HASH_VALUE_LEN", 20)))
 
     def __init__(
