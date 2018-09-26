@@ -14,3 +14,5 @@ command
 
 
 
+.. autofunction:: pntl.cli.user_test
+

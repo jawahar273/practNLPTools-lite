@@ -188,7 +188,7 @@ html_static_path = ["_static"]
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "pntldoc"
+htmlhelp_basename = "pntl-docs"
 
 
 # -- Options for LaTeX output ------------------------------------------
@@ -271,3 +271,4 @@ texinfo_documents = [
 
 
 sys.path.insert(0, os.path.abspath("../.."))
+sys.path.append(os.getcwd().rsplit(os.path.sep)[0])

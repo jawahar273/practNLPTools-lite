@@ -11,9 +11,9 @@ Contents:
    usage
    cli
    api
+   issues
    stanford_installing_issues
    changelog
-   issues
    authors
    contributing
    history
