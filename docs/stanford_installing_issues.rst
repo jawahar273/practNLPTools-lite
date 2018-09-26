@@ -1,5 +1,5 @@
-If there is an issue in stanford parser.
-----------------------------------------
+Stanford parser
+-----------------
 
 If the stanford parser can not be copy into installing location. So for
 quick working on Dependence parser the some possible.
