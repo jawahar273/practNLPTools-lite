@@ -1,16 +1,8 @@
-pip==18.0
-bumpversion==0.5.3
-wheel==0.31.1
-watchdog==0.9.0
-flake8==3.5.0
-tox==3.2.1
-cryptography==2.3.1
-Sphinx==1.8.0
-coverage==4.5.1
+SQLAlchemy>=1.2.11
+# ujson==1.35
 PyYAML==3.13
-pytest==3.8.1
-pytest-runner==4.2
-pytest==3.8.1
 
+# Task Executor
+huey==1.10.2
 
-
+xxhash==1.2.0

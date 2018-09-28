@@ -1,0 +1,4 @@
+[
+  "tests/test_annotator.py::TestAnnotator::()::test_pos",
+  "tests/test_pntl.py::test_content"
+]

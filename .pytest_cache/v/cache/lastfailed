@@ -1,0 +1,5 @@
+{
+  "tests/test_annotator.py::TestAnnotator::()::test_dep_parser": true,
+  "tests/test_annotator.py::TestAnnotator::()::test_pos": true,
+  "tests/test_pntl.py::test_command_line_interface": true
+}
