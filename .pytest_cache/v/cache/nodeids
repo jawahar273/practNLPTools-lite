@@ -1,4 +1,4 @@
 [
-  "tests/test_pntl.py::test_content",
-  "tests/test_pntl.py::test_command_line_interface"
+  "tests/test_annotator.py::TestAnnotator::()::test_pos",
+  "tests/test_pntl.py::test_content"
 ]

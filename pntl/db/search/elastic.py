@@ -1,13 +1,11 @@
 
-from os import getenv
-
 from elasticsearch_dsl import Document, Text, Keyword
 
 
 class AnnotatorElastic(Document):
 
-    text = Text(analyzer="snowball")
     id = Text()
+    text = Text(analyzer="snowball")
     chunk = Text(fields={"raw": Keyword()})
 
     class Index:

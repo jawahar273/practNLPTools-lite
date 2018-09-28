@@ -39,6 +39,7 @@ class EntryPoint:
 
         self.db = Package
         self.session = SessionMaker()
+        self.create_table()
 
     def create_table(self):
 
@@ -51,6 +52,8 @@ class EntryPoint:
         if not isinstance(tagged, dict) and not tagged:
 
             ValueError("given value must `dict` with non empty..")
+
+        tagged["words"] = " ".join(tagged["words"])
 
         self.session.add(self.db(**tagged))
 

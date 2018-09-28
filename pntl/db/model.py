@@ -28,26 +28,24 @@ class Package(Base):
 
     id = Column(Integer, primary_key=True)
 
-    text = Column(UnicodeText())
+    words = Column(UnicodeText())
     syntax_tree = Column(UnicodeText())
     pos = Column(_json_field(env_int("POS_LEN")))
     ner = Column(_json_field(env_int("NER_LEN")))
     dep_parse = Column(_json_field(env_int("DEP_LEN")), nullable=True)
     srl = Column(_json_field(env_int("SRL_LEN")))
     chunk = Column(_json_field(env_int("CHUNK_LEN")))
-    verb = Column(_json_field(env_int("VERB_LEN")))
-    hash_str = Column(String(env_int("HASH_VALUE_LEN", 20)))
+    verbs = Column(_json_field(env_int("VERB_LEN")))
+    hash_str = Column(String(env_int("HASH_VALUE_LEN", 20)), unique=True)
 
-    def __init__(
-        self, text, syntax_tree, pos, ner, dep_parse, srl, chunk, verb, hash_str
-    ):
+    def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
 
-        self.text = text
+        self.words = words
         self.syntax_tree = syntax_tree
         self.pos = pos
         self.ner = ner
         self.dep_parse = dep_parse
         self.srl = srl
         self.chunk = chunk
-        self.verb = verb
-        self.hash_str = pntl_hash(text)
+        self.verbs = verbs
+        self.hash_str = pntl_hash(words)
