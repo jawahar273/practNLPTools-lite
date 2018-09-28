@@ -20,7 +20,7 @@ pytest-runner==4.2
 pytest==3.8.0
 
 # miscellaneous
-pre-commit==1.10.5
+pre-commit==1.11.1
 sphinx_rtd_theme==0.4.1
 black==18.6b4
 python-dotenv==0.9.1
