@@ -24,5 +24,5 @@ pre-commit==1.10.5
 sphinx_rtd_theme==0.4.1
 black==18.6b4
 python-dotenv==0.9.1
-python-dotenv[cli]
+python-dotenv[cli]==0.9.1
 
