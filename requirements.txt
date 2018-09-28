@@ -4,5 +4,3 @@ PyYAML==3.13
 
 # Task Executor
 huey==1.10.2
-
-xxhash==1.2.0
