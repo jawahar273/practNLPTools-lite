@@ -1,9 +1,54 @@
 from __future__ import generators, print_function, unicode_literals
 from itertools import chain, combinations
 
+from hashlib import md5 as hash_
+from os import getenv
+
 # from nltk.util import ngrams
 from colorama import Fore, init
+
 init(autoreset=True)
+
+
+def to_int(value):
+
+    if not isinstance(value, str):
+
+        raise TypeError(
+            "Expect to get instance of `int` but actually instance is {}", type(value)
+        )
+
+    return int(value)
+
+
+def env_int(value, default=None):
+    """Intergation of :func:`to_int`
+    and :func:`getenv`.
+    """
+
+    return to_int(getenv(value, default))
+
+
+def env_str(value, default=None):
+
+    return getenv(value, default)
+
+
+def env_bool(value, default=None):
+
+    return bool(getenv(value, default))
+
+
+def env_json(value, default=None):
+
+    import json
+
+    return json.loads(getenv(value, default))
+
+
+def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
+
+    return hash_(to_hex.encode()).hexdigest()[:len_]
 
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
@@ -14,8 +59,7 @@ def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
     return seq
 
 
-def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
-              pad_sym=None):
+def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False, pad_sym=None):
     sequence_length = len(sequence)
     sequence = iter(sequence)
     sequence = pad_sequence(sequence, n, pad_left, pad_right, pad_sym)
@@ -23,8 +67,9 @@ def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
         raise Exception("The length of sentence + padding(s) < skip")
 
     if n < k:
-        raise Exception(Fore.RED + "Degree of Ngrams (n)"
-                        "needs to be bigger than skip (k)")
+        raise Exception(
+            Fore.RED + "Degree of Ngrams (n)" "needs to be bigger than skip (k)"
+        )
 
     history = []
     nk = n + k
@@ -57,4 +102,3 @@ def skipgrams(sequence, n=2, k=1, pad_left=False, pad_right=False,
     # len(sequence) < n+k
     for ng in list(skipgrams(history, n, k - 1)):
         yield ng
-
