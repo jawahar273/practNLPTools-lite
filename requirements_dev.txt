@@ -8,21 +8,21 @@ psycopg2-binary==2.7.5
 
 pip==18.0
 bumpversion==0.5.3
-wheel==0.31.1
+wheel==0.32.0
 watchdog==0.9.0
 flake8==3.5.0
 tox==3.2.1
 cryptography==2.3.1
 Sphinx==1.8.0
 coverage==4.5.1
-pytest==3.8.0
+pytest==3.8.1
 pytest-runner==4.2
-pytest==3.8.0
+pytest==3.8.1
 
 # miscellaneous
 pre-commit==1.11.1
 sphinx_rtd_theme==0.4.1
-black==18.6b4
+black==18.9b0
 python-dotenv==0.9.1
 python-dotenv[cli]==0.9.1
 
