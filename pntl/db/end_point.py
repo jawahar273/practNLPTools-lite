@@ -22,8 +22,8 @@ based on hash value (such as searching or filtering).
     if you and only you be the one to be
     using db.
 
-Change the class name in the .env to `DistPackage` for
-accessing the table which is relacted how the elasticserach
+Change the class name in the .env to `DistPackage` to
+accessing the table which is related to the elasticserach
 stores and set bash for the enviroment variable
 `ELASTICSEARCH_HOST`
 (follow `link <http://elasticsearch-dsl.readthedocs.io/>`).

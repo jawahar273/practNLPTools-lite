@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, UnicodeText
 
 from pntl.db.config import Base
 from pntl.db.json_field import JSONEncodedDict
+from pntl.search.engine import ElasticEngine
 
 from pntl.utils import pntl_hash, env_int, env_str
 
@@ -55,6 +56,18 @@ class Package(AbstractPackage):
         self.hash_str = pntl_hash(words)
 
 
-class DistPackage(AbstractPackage):
+class ElasticPackage(AbstractPackage):
 
     __tablename__ = env_str("TABLENAME", "dist")
+
+    def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
+
+        # elastic code go here
+        self.words = words
+        self.syntax_tree = syntax_tree
+        self.pos = pos
+        self.ner = ner
+        self.dep_parse = dep_parse
+        self.srl = srl
+        self.chunk = chunk
+        self.verbs = verbs
