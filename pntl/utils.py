@@ -1,4 +1,5 @@
 from __future__ import generators, print_function, unicode_literals
+from importlib import import_module
 from itertools import chain, combinations
 
 from hashlib import md5 as hash_
@@ -49,6 +50,21 @@ def env_json(value, default=None):
 def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
 
     return hash_(to_hex.encode()).hexdigest()[:len_]
+
+
+def import_class(value):
+    """Import the given class based on string.
+    :param value: [path of the class]
+    :type value: [str]
+    :returns: [class object]
+    :rtype: {[Object]}
+    """
+
+    value, class_name = value.rsplit(".", 1)
+    module = import_module(value)
+
+
+return getattr(module, class_name)
 
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):
