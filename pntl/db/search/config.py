@@ -1,11 +1,11 @@
 # Elastic Search is been used as
 # search engine.
-from os import getenv
 from json import loads
 
 from elasticsearch_dsl import connections
+from pntl.utils import env_str
 
 
 def connect():
 
-    connections.create_connection(**loads(getenv("ELASTICSEARCH_HOST")))
+    connections.create_connection(**loads(env_str("ELASTICSEARCH_HOST")))

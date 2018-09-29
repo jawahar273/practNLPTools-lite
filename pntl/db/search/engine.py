@@ -9,6 +9,9 @@ class ElasticEngine(AbstractEngine):
     """docstring for SearchEngine"""
 
     def __init__(self, arg):
+
+        config.connect()
+
         AnnotatorElastic().init()
 
     def insert(self, **kwargs):

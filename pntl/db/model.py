@@ -1,13 +1,12 @@
 """ Database class are declare in the file.
 """
-from os import getenv
 
 from sqlalchemy import Column, Integer, String, UnicodeText
 
 from pntl.db.config import Base
 from pntl.db.json_field import JSONEncodedDict
 
-from pntl.utils import pntl_hash, env_int
+from pntl.utils import pntl_hash, env_int, env_str
 
 
 def _json_field(value):
@@ -22,12 +21,11 @@ def _json_field(value):
     return JSONEncodedDict(value)
 
 
-class Package(Base):
+class AbstractPackage(Base):
 
-    __tablename__ = getenv("TABLENAME", "content")
+    __abstract__ = True
 
     id = Column(Integer, primary_key=True)
-
     words = Column(UnicodeText())
     syntax_tree = Column(UnicodeText())
     pos = Column(_json_field(env_int("POS_LEN")))
@@ -36,6 +34,12 @@ class Package(Base):
     srl = Column(_json_field(env_int("SRL_LEN")))
     chunk = Column(_json_field(env_int("CHUNK_LEN")))
     verbs = Column(_json_field(env_int("VERB_LEN")))
+
+
+class Package(AbstractPackage):
+
+    __tablename__ = env_str("TABLENAME", "same_pc")
+
     hash_str = Column(String(env_int("HASH_VALUE_LEN", 20)), unique=True)
 
     def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
@@ -49,3 +53,8 @@ class Package(Base):
         self.chunk = chunk
         self.verbs = verbs
         self.hash_str = pntl_hash(words)
+
+
+class DistPackage(AbstractPackage):
+
+    __tablename__ = env_str("TABLENAME", "dist")

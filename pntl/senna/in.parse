@@ -1,1 +1,1 @@
-(S1(S(NP(PRP He))(VP(VP(VBD created)(NP(DT the)(NN robot)))(CC and)(VP(VBD broke)(NP(PRP it))(PP(IN after)(S(VP(VBG making)(NP(PRP it)))))))))
+(S1(S(NP(NNP PgAdmin))(VP(VBZ is)(NP(NP(DT the)(VBG leading)(NNP Open)(NNP Source)(NN management)(NN tool))(PP(IN for)(NP(NP(NNP Postgres))(, ,)(NP(DT the)(NN world))(VBZ s)(ADJP(RBS most)(JJ advanced))(NNP Open)(NNP Source)(NN database)))))(. .)))

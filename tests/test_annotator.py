@@ -8,7 +8,7 @@ from pntl.tools import Annotator
 class TestAnnotator:
     def setup(self):
 
-        self.sent = "He created the robot and broke it after making it"
+        self.sent = "PgAdmin is the leading Open Source management tool for Postgres, the world’s most advanced Open Source database."
         args = {"senna_dir": self.get_senna_path("pntl", "senna"), "save_all": True}
         self.annotator = Annotator(**args)
         self.process = self.annotator.get_annoations(self.sent, dep_parse=True)
@@ -18,7 +18,3 @@ class TestAnnotator:
         temp = getcwd()
 
         return join(temp, *value)
-
-    def test_pos(self):
-
-        assert isinstance(list, self.process["pos"])
