@@ -62,3 +62,8 @@ target/
 
 # pyenv python configuration file
 .python-version
+
+# virtual env
+pntl_vir
+.env
+.env.bash

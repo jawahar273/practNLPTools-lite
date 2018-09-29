@@ -199,7 +199,7 @@ various verbs in sentence.
    'dep_parse' Returns dependency Relations as a string. Each relation is in new line. You may require some post processing on this.
 
 .. note::
-   dep_parse may not work properly if stanford dependency parser is not present in practnlptools folder. To change in the output format from edit `lexparser.sh`(self testing only) if you know what you are doing
+   dep_parse may not work properly if stanford dependency parser is not present in practnlptools folder. To change in the output format from edit `lexparser.sh`(self testing only) if you know what you are doing.
 
 To know about ``outputformat`` see the Stanford Parser FAQ `link`_ and
 manuall
