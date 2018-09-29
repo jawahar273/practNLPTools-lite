@@ -54,17 +54,16 @@ def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
 
 def import_class(value):
     """Import the given class based on string.
-    :param value: [path of the class]
-    :type value: [str]
-    :returns: [class object]
-    :rtype: {[Object]}
+    :param value: path of the class
+    :type value: str
+    :returns: class object
+    :rtype: Object
     """
 
     value, class_name = value.rsplit(".", 1)
     module = import_module(value)
 
-
-return getattr(module, class_name)
+    return getattr(module, class_name)
 
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):

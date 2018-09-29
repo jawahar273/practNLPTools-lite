@@ -22,10 +22,18 @@ based on hash value (such as searching or filtering).
     if you and only you be the one to be
     using db.
 
+Change the class name in the .env to `DistPackage` for
+accessing the table which is relacted how the elasticserach
+stores and set bash for the enviroment variable
+`ELASTICSEARCH_HOST`
+(follow `link <http://elasticsearch-dsl.readthedocs.io/>`).
+
 """
 
-from pntl.db.model import Package
 from pntl.db.config import SessionMaker
+from pntl.utils import import_class, env_str
+
+package = "pntl.db.model.{}".format(env_str("CLASS_DB"))
 
 
 class EntryPoint:
@@ -37,7 +45,7 @@ class EntryPoint:
 
     def __init__(self):
 
-        self.db = Package
+        self.db = import_class(package)
         self.session = SessionMaker()
         self.create_table()
 
