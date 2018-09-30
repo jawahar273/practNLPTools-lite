@@ -9,14 +9,9 @@ from setuptools import setup, find_packages
 with open("README.rst") as readme_file:
     readme = readme_file.read()
 
-with open("HISTORY.rst") as history_file:
+with open("CHANGELOG.rst") as history_file:
     history = history_file.read()
 
-requirements = [
-    "Click>=6.0",
-    "colorama>=0.3.9"
-    # TODO: put package requirements here
-]
 
 setup_requirements = [
     "pytest-runner",
@@ -24,10 +19,16 @@ setup_requirements = [
     # (distutils extensions, etc.) here
 ]
 
-test_requirements = [
-    "pytest",
-    # TODO: put package test requirements here
-]
+
+def parse_requirements(filename, session=None):
+    """ load requirements from a pip requirements file
+        refer: `link <https://stackoverflow.com/questions/25192794/no-module-named-pip-req/>`_
+    """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
+
+
+extras_require = {"redis": "redis==2.10.6", "ujson": "ujson==1.35"}
 
 setup(
     name="pntl",
@@ -42,7 +43,7 @@ setup(
     packages=find_packages(include=["pntl.*"]),
     entry_points={"console_scripts": ["pntl=pntl.cli:user_test"]},
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=parse_requirements("requirements.txt", session="requirements"),
     license="MIT license",
     zip_safe=False,
     keywords="practnlptools-lite senna python pntl pysenna".split(),
@@ -58,6 +59,7 @@ setup(
         "Topic :: Scientific/Engineering :: Information Analysis",
     ],
     test_suite="tests",
-    tests_require=test_requirements,
+    tests_require=parse_requirements("requirements_dev.txt", session="test"),
     setup_requires=setup_requirements,
+    extras_require=extras_require,
 )

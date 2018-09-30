@@ -1,4 +1,7 @@
 
+colorama>=0.3.9
+Click>=6.0
+
 SQLAlchemy>=1.2.11
 PyYAML==3.13
 

@@ -1,5 +1,0 @@
-- r ./requirements.txt
-
-redis==2.10.6
-
-ujson==1.35
