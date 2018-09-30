@@ -2,7 +2,9 @@
 practNLPTools-lite
 ==================
 
-.. warning:: CLI is only for example purpose don't use for long running jobs.
+.. warning::
+  
+    CLI is only for example purpose don't use for long running jobs.
 
 Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or old stable code `properbranch`_]
 

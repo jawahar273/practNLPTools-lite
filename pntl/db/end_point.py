@@ -2,6 +2,11 @@
 EntryPoint will be act as interface
 medium for acessing the db api (sqlalchemy).
 
+.. warning::
+
+    Please install `SQL Database driver` for python
+    manully `driver link <https://docs.sqlalchemy.org/en/latest/dialects/>`
+
 Hash Value's
 -------------
 
