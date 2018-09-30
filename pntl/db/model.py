@@ -63,7 +63,8 @@ class ElasticPackage(AbstractPackage):
 
     def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
 
-        self.words = words
+        self.words = words  # check in
+        # elastic search if it is present
         self.syntax_tree = syntax_tree
         self.pos = pos
         self.ner = ner

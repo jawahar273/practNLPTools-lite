@@ -4,9 +4,9 @@ from json import loads
 
 from elasticsearch_dsl import connections
 
-from pntl.utils import env_str
+from pntl.utils import env_json
 
 
 def connect():
 
-    connections.create_connection(**loads(env_str("ELASTICSEARCH_HOST")))
+    connections.create_connection(**env_json("ELASTICSEARCH_HOST"))

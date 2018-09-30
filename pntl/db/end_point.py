@@ -71,13 +71,16 @@ class EntryPoint:
         tagged["words"] = " ".join(tagged["words"])
 
         try:
+
             self.session.add(self.db(**tagged))
+
         except IntegrityError as e:
             print("duplicate sentence")
 
     def filter(self):
         # arg will be selected soon..
-        pass
+        # In RoadMap
+        raise NotImplementedError("This function has not been implemented")
 
     def save(self):
 
