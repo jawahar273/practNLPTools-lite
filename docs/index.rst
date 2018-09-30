@@ -16,7 +16,7 @@ Contents:
    changelog
    authors
    contributing
-   history
+
 
 Indices and tables
 ==================
