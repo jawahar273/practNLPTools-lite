@@ -2,8 +2,15 @@ from __future__ import generators, print_function, unicode_literals
 from importlib import import_module
 from itertools import chain, combinations
 
-from hashlib import md5 as hash_
 from os import getenv
+
+try:
+
+    import ujson as json
+
+except ImportError:
+
+    import json
 
 # from nltk.util import ngrams
 from colorama import Fore, init
@@ -42,14 +49,7 @@ def env_bool(value, default=None):
 
 def env_json(value, default=None):
 
-    import json
-
     return json.loads(getenv(value, default))
-
-
-def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
-
-    return hash_(to_hex.encode()).hexdigest()[:len_]
 
 
 def import_class(value):
@@ -64,6 +64,13 @@ def import_class(value):
     module = import_module(value)
 
     return getattr(module, class_name)
+
+
+def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
+
+    hash_ = import_class(env_str("HASH_CLASS", "hashlib.md5"))
+
+    return hash_(to_hex.encode()).hexdigest()
 
 
 def pad_sequence(seq, n, pad_left=False, pad_right=False, pad_sym=None):

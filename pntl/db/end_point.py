@@ -35,10 +35,12 @@ stores and set bash for the enviroment variable
 
 """
 
+from sqlalchemy.exc import IntegrityError
+
 from pntl.db.config import SessionMaker
 from pntl.utils import import_class, env_str
 
-package = "pntl.db.model.{}".format(env_str("CLASS_DB"))
+package = "pntl.db.model.{}".format(env_str("DB_CLASS"))
 
 
 class EntryPoint:
@@ -68,7 +70,10 @@ class EntryPoint:
 
         tagged["words"] = " ".join(tagged["words"])
 
-        self.session.add(self.db(**tagged))
+        try:
+            self.session.add(self.db(**tagged))
+        except IntegrityError as e:
+            print("duplicate sentence")
 
     def filter(self):
         # arg will be selected soon..

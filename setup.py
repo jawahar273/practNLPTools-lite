@@ -5,6 +5,7 @@
 
 # from distutils.command.install import INSTALL_SCHEMES
 from setuptools import setup, find_packages
+from json import load
 
 with open("README.rst") as readme_file:
     readme = readme_file.read()
@@ -19,6 +20,10 @@ setup_requirements = [
     # (distutils extensions, etc.) here
 ]
 
+# read the `extras_require.json` for getting
+# extras_require depencencys.
+extras_require = load(open("extras_require.json"))
+
 
 def parse_requirements(filename, session=None):
     """ load requirements from a pip requirements file
@@ -27,8 +32,6 @@ def parse_requirements(filename, session=None):
     lineiter = (line.strip() for line in open(filename))
     return [line for line in lineiter if line and not line.startswith("#")]
 
-
-extras_require = {"redis": "redis==2.10.6", "ujson": "ujson==1.35"}
 
 setup(
     name="pntl",

@@ -7,11 +7,11 @@ from pntl.utils import env_bool, env_str
 
 # use of the engine
 engine = create_engine(
-    env_str("DATABASE_URL", "postgres:///"), echo=env_bool("DATABASE_ECHO", True)
+    env_str("DATABASE_URL", "postgres:///"), echo=env_bool("DATABASE_ECHO", False)
 )
 
 # global session
-SessionMaker = sessionmaker(bind=engine)
+SessionMaker = sessionmaker(bind=engine, autoflush=False)
 
 # base of the class DB
 Base = declarative_base()

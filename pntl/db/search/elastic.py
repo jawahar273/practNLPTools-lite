@@ -11,4 +11,4 @@ class AnnotatorElastic(Document):
     class Index:
 
         name = "annotator"
-        settings = {"number_of_shards": 2}
+        # settings = {"number_of_shards": 2}
