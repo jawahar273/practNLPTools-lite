@@ -3,6 +3,7 @@
 from json import loads
 
 from elasticsearch_dsl import connections
+
 from pntl.utils import env_str
 
 
