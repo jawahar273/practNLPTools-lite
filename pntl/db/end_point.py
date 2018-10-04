@@ -5,7 +5,7 @@ medium for acessing the db api (sqlalchemy).
 .. warning::
 
     Please install `SQL Database driver` for python
-    manully `driver link <https://docs.sqlalchemy.org/en/latest/dialects/>`
+    manully `driver link <https://docs.sqlalchemy.org/en/latest/dialects/>`_
 
 Hash Value's
 -------------
@@ -27,11 +27,15 @@ based on hash value (such as searching or filtering).
     if you and only you be the one to be
     using db.
 
-Change the class name in the .env to `DistPackage` to
-accessing the table which is related to the elasticserach
-stores and set bash for the enviroment variable
-`ELASTICSEARCH_HOST`
-(follow `link <http://elasticsearch-dsl.readthedocs.io/>`).
+
+.. todo::
+
+    [In progress]
+    Change the class name in the .env to `DistPackage` to
+    accessing the table which is related to the elasticserach
+    stores and set bash for the enviroment variable
+    `ELASTICSEARCH_HOST`
+    (follow `link <http://elasticsearch-dsl.readthedocs.io/>`_).
 
 """
 
