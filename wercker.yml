@@ -1,5 +1,5 @@
 box:
-  id: python:3.5-slim 
+  id: python:3.6-slim 
   ports:
     - "5000"
 

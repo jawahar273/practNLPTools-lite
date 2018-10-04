@@ -56,6 +56,7 @@ class Annotator:
     :param bool init: downlard files from github.
     :param bool env: status for reading environment file.
     :param str env_path: location of the environment file.
+    :param bool save_all: save into the database
 
     .. note::
     The default file for environment variable is consider

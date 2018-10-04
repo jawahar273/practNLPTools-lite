@@ -60,15 +60,3 @@ class Package(AbstractPackage):
 class ElasticPackage(AbstractPackage):
 
     __tablename__ = env_str("TABLENAME", "dist")
-
-    def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
-
-        self.words = words  # check in
-        # elastic search if it is present
-        self.syntax_tree = syntax_tree
-        self.pos = pos
-        self.ner = ner
-        self.dep_parse = dep_parse
-        self.srl = srl
-        self.chunk = chunk
-        self.verbs = verbs

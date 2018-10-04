@@ -67,3 +67,5 @@ target/
 pntl_vir
 .env
 .env.bash
+main.py
+*.kv
