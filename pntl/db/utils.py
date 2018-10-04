@@ -57,7 +57,7 @@ def import_class(value):
     return getattr(module, class_name)
 
 
-def pntl_hash(to_hex, len_=env_int("HASH_VALUE_LEN", 20)):
+def pntl_hash(to_hex):
 
     hash_ = import_class(env_str("HASH_CLASS", "hashlib.md5"))
 
