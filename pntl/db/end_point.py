@@ -57,13 +57,23 @@ class EntryPoint:
         self.create_table()
 
     def create_table(self):
+        """This method create table in
+        database if it exit then it simply
+        omittes.
 
+        :returns: it create the engine.
+        :rtype: NoneType
+        """
         from pntl.db.config import Base, engine
 
         return Base.metadata.create_all(engine)
 
     def insert(self, tagged=None):
+        """Adding the value into  the database
+        with the session of sqlalchme.
 
+        :param dicit tagged: tagged value from SENNA
+        """
         if not isinstance(tagged, dict) and not tagged:
 
             ValueError("given value must `dict` with non empty..")

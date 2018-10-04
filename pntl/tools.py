@@ -308,61 +308,62 @@ class Annotator:
 
         :param str or list: list of sentences for batch processes
         :param  options list: list of arguments
-+--------------+-----------------------------------------------+
-| options      | desc                                          |
-+==============+===============================================+
-| -verbose     | Display model informations (on the standard   |
-|              | error output, so it does not mess up the tag  |
-|              | outputs).                                     |
-+--------------+-----------------------------------------------+
-| -notokentags | Do not output tokens (first output column).   |
-+--------------+-----------------------------------------------+
-| -offsettags  | Output start/end character offset (in the     |
-|              | sentence), for each token.                    |
-+--------------+-----------------------------------------------+
-| -iobtags     | Output IOB tags instead of IOBES.             |
-+--------------+-----------------------------------------------+
-| -brackettags | Output ‘bracket’ tags instead of IOBES.       |
-+--------------+-----------------------------------------------+
-| -path        | Specify the path to the SENNA data and hash   |
-|              | directories, if you do not run SENNA in its   |
-|              | original directory. The path must end by “/”. |
-+--------------+-----------------------------------------------+
-| -usrtokens   | Use user’s tokens (space separated) instead   |
-|              | of SENNA tokenizer.                           |
-+--------------+-----------------------------------------------+
-| -posvbs      | Use verbs outputed by the POS tagger instead  |
-|              | of SRL style verbs for SRL task. You might    |
-|              | want to use this, as the SRL training task    |
-|              | ignore some verbs (many “be” and “have”)      |
-|              | which might be not what you want.             |
-+--------------+-----------------------------------------------+
-| -usrvbs      | Use user’s verbs (given in ) instead of SENNA |
-|              | verbs for SRL task. The file must contain one |
-|              | line per token, with an empty line between    |
-|              | each sentence. A line which is not a “-”      |
-|              | corresponds to a verb.                        |
-+--------------+-----------------------------------------------+
-| -pos         | Instead of outputing tags for all tasks,      |
-|              | SENNA will output tags for the specified (one |
-|              | or more) tasks.                               |
-+--------------+-----------------------------------------------+
-| -chk         | Instead of outputing tags for all tasks,      |
-|              | SENNA will output tags for the specified (one |
-|              | or more) tasks.                               |
-+--------------+-----------------------------------------------+
-| -ner         | Instead of outputing tags for all tasks,      |
-|              | SENNA will output tags for the specified (one |
-|              | or more) tasks.                               |
-+--------------+-----------------------------------------------+
-| -srl         | Instead of outputing tags for all tasks,      |
-|              | SENNA will output tags for the specified (one |
-|              | or more) tasks.                               |
-+--------------+-----------------------------------------------+
-| -psg         | Instead of outputing tags for all tasks,      |
-|              | SENNA will output tags for the specified (one |
-|              | or more) tasks.                               |
-+--------------+-----------------------------------------------+
+
+        +--------------+-----------------------------------------------+
+        | options      | desc                                          |
+        +==============+===============================================+
+        | -verbose     | Display model informations (on the standard   |
+        |              | error output, so it does not mess up the tag  |
+        |              | outputs).                                     |
+        +--------------+-----------------------------------------------+
+        | -notokentags | Do not output tokens (first output column).   |
+        +--------------+-----------------------------------------------+
+        | -offsettags  | Output start/end character offset (in the     |
+        |              | sentence), for each token.                    |
+        +--------------+-----------------------------------------------+
+        | -iobtags     | Output IOB tags instead of IOBES.             |
+        +--------------+-----------------------------------------------+
+        | -brackettags | Output ‘bracket’ tags instead of IOBES.       |
+        +--------------+-----------------------------------------------+
+        | -path        | Specify the path to the SENNA data and hash   |
+        |              | directories, if you do not run SENNA in its   |
+        |              | original directory. The path must end by “/”. |
+        +--------------+-----------------------------------------------+
+        | -usrtokens   | Use user’s tokens (space separated) instead   |
+        |              | of SENNA tokenizer.                           |
+        +--------------+-----------------------------------------------+
+        | -posvbs      | Use verbs outputed by the POS tagger instead  |
+        |              | of SRL style verbs for SRL task. You might    |
+        |              | want to use this, as the SRL training task    |
+        |              | ignore some verbs (many “be” and “have”)      |
+        |              | which might be not what you want.             |
+        +--------------+-----------------------------------------------+
+        | -usrvbs      | Use user’s verbs (given in ) instead of SENNA |
+        |              | verbs for SRL task. The file must contain one |
+        |              | line per token, with an empty line between    |
+        |              | each sentence. A line which is not a “-”      |
+        |              | corresponds to a verb.                        |
+        +--------------+-----------------------------------------------+
+        | -pos         | Instead of outputing tags for all tasks,      |
+        |              | SENNA will output tags for the specified (one |
+        |              | or more) tasks.                               |
+        +--------------+-----------------------------------------------+
+        | -chk         | Instead of outputing tags for all tasks,      |
+        |              | SENNA will output tags for the specified (one |
+        |              | or more) tasks.                               |
+        +--------------+-----------------------------------------------+
+        | -ner         | Instead of outputing tags for all tasks,      |
+        |              | SENNA will output tags for the specified (one |
+        |              | or more) tasks.                               |
+        +--------------+-----------------------------------------------+
+        | -srl         | Instead of outputing tags for all tasks,      |
+        |              | SENNA will output tags for the specified (one |
+        |              | or more) tasks.                               |
+        +--------------+-----------------------------------------------+
+        | -psg         | Instead of outputing tags for all tasks,      |
+        |              | SENNA will output tags for the specified (one |
+        |              | or more) tasks.                               |
+        +--------------+-----------------------------------------------+
 
         :return: senna tagged output
         :rtype: str
