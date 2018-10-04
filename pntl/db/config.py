@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-from pntl.utils import env_str, env_bool
+from pntl.db.utils import env_str, env_bool
 
 
 # use of the engine

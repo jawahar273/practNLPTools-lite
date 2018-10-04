@@ -38,7 +38,7 @@ stores and set bash for the enviroment variable
 from sqlalchemy.exc import IntegrityError
 
 from pntl.db.config import SessionMaker
-from pntl.utils import import_class, env_str
+from pntl.db.utils import import_class, env_str
 
 package = "pntl.db.model.{}".format(env_str("DB_CLASS"))
 

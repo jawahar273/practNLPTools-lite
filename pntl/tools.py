@@ -19,6 +19,7 @@ try:
     from colorama.Fore import RED, BLUE
 
     init(autoreset=True)
+
 except ImportError:
     RED = " "
     BLUE = " "
