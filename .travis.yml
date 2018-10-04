@@ -25,6 +25,7 @@ install:
 script:
   - python setup.py install
   - git submodule update --init --recursive
+  - git lfs logs last
   - coverage run pntl/tools.py 
   - pntl -SE ./pntl/senna
   - pntl -SE ./pntl/senna -B true
