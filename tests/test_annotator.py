@@ -12,6 +12,7 @@ class TestAnnotator:
         args = {"senna_dir": self.get_senna_path("pntl", "senna"), "save_all": True}
         self.annotator = Annotator(**args)
         self.process = self.annotator.get_annoations(self.sent, dep_parse=True)
+        print(self.process["chumk"])
 
     def get_senna_path(self, *value):
 
