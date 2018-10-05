@@ -25,7 +25,7 @@ setup_requirements = [
 extras_require = load(open("extras_require.json"))
 
 
-def parse_requirements(filename, session=None):
+def parse_requirements(filename):
     """ load requirements from a pip requirements file
         refer: `link <https://stackoverflow.com/questions/25192794/no-module-named-pip-req/>`_
     """
@@ -46,7 +46,7 @@ setup(
     packages=find_packages(include=["pntl.*"]),
     entry_points={"console_scripts": ["pntl=pntl.cli:user_test"]},
     include_package_data=True,
-    install_requires=parse_requirements("requirements.txt", session="requirements"),
+    install_requires=parse_requirements("requirements.txt"),
     license="MIT license",
     zip_safe=False,
     keywords="practnlptools-lite senna python pntl pysenna".split(),
@@ -62,7 +62,7 @@ setup(
         "Topic :: Scientific/Engineering :: Information Analysis",
     ],
     test_suite="tests",
-    tests_require=parse_requirements("requirements_dev.txt", session="test"),
+    tests_require=parse_requirements("requirements_dev.txt"),
     setup_requires=setup_requirements,
     extras_require=extras_require,
 )
