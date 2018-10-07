@@ -1,5 +1,5 @@
 =====
-Usage
+USAGE
 =====
 
 .. include:: example.rst

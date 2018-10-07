@@ -458,11 +458,10 @@ class Annotator:
         :return: stanford dependency universal format
         :rtype: str
         """
-        # print("\nrunning.........")
 
-        package_directory = os.path.dirname(self.dep_par_path)
-        cwd = os.getcwd()
-        os.chdir(package_directory)
+        # package_directory = os.path.dirname(self.dep_par_path)
+        # cwd = os.getcwd()
+        # os.chdir(package_directory)
 
         with open(
             self.senna_path + os.path.sep + "in.parse", "w", encoding="utf-8"
@@ -480,7 +479,7 @@ class Annotator:
 
         stanford_out = pipe.stdout.read()
         # print(stanford_out, "\n", self.default_jar_cli)
-        os.chdir(cwd)
+        # os.chdir(cwd)
 
         return stanford_out.decode("utf-8").strip()
 
