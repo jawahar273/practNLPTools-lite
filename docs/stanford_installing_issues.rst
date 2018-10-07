@@ -1,5 +1,8 @@
-Stanford Parser
+STANFORD PARSER
 ----------------
+
+INTRODUCTION
+=============
 
 If the stanford parser can not be copy into installing location. So for
 quick working on Dependence parser the some possible.
@@ -32,5 +35,7 @@ quick working on Dependence parser the some possible.
     which is present in your system. For windows there is no need to
     ``.``\ (dot) in between version number of Python.
 
-Don’t forget to make ``sudo python setup install`` or admin terminal ``python setup install``
-=============================================================================================
+
+.. note::
+    
+    Don’t forget to make ``sudo python setup install`` or admin terminal ``python setup install``

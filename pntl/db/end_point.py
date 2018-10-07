@@ -11,21 +11,21 @@ Hash Value's
 -------------
 
 Hash will be saved on to the database based
-on the hash value return by the function.
-As the hash function depends on the system's
-property, so that hash value must be dependent
-on the system's such as seed values.
-To avoid so unnessary general confussion,
+on the hash value return by the function which selected
+by you.
+As the hash function may depends on the system's
+property, such as seed values may diffrent from
+system to system.
 "Is it possible to distribute the db backup for another's system
 without any problem?"
-It is highly recomment not to make any dependency
-based on hash value (such as searching or filtering).
+It is highly recommend not to make any dependency
+based on hash value (such as generation).
 
 .. note::
 
-    Simplest form of the about paragraph, relay hash value
-    if you and only you be the one to be
-    using db.
+    But using standard libery of python
+    it possible to get same result on
+    all system.
 
 
 .. todo::
