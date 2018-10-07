@@ -1,6 +1,4 @@
 
-python-dotenv>=0.9.1
-
 # Database
 psycopg2-binary==2.7.5
 
@@ -21,6 +19,7 @@ pytest-cov==2.6.0
 pre-commit==1.11.1
 sphinx_rtd_theme==0.4.1
 black==18.9b0
+
 python-dotenv==0.9.1
 python-dotenv[cli]==0.9.1
 
