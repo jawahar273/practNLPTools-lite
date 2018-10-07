@@ -1,4 +1,4 @@
-Stanford Parser
+STANFORD PARSER
 ----------------
 
 If the stanford parser can not be copy into installing location. So for
