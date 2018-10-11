@@ -7,7 +7,7 @@ bumpversion==0.5.3
 wheel==0.32.1
 watchdog==0.9.0
 flake8==3.5.0
-tox==3.4.0
+tox==3.5.2
 cryptography==2.3.1
 Sphinx==1.8.1
 coverage==4.5.1
@@ -16,9 +16,9 @@ pytest-runner==4.2
 pytest-cov==2.6.0
 
 # miscellaneous
-pre-commit==1.11.1
 sphinx_rtd_theme==0.4.2
 black==18.9b0
+pre-commit==1.11.2
 
 python-dotenv==0.9.1
 python-dotenv[cli]==0.9.1
