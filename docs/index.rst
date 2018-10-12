@@ -11,6 +11,7 @@ Contents:
    usage
    cli
    api
+   settings
    issues
    stanford_installing_issues
    changelog

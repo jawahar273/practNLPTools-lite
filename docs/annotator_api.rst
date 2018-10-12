@@ -1,5 +1,5 @@
 
-ANNOATOR API
+Annoator API
 --------------
 
 System specific binary should be rebuilt. Otherwise this could introduce

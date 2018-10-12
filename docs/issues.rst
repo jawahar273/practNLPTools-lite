@@ -1,4 +1,4 @@
-ISSUES
+Issues
 ------
 
 #. You cannot give sentence with ‘(’ ‘)’, that is left bracket aor right
