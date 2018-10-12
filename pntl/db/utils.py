@@ -61,4 +61,4 @@ def pntl_hash(to_hex):
 
     hash_ = import_class(env_str("HASH_CLASS", "hashlib.md5"))
 
-    return hash_(to_hex.encode()).hexdigest()
+    return hash_(to_hex.encode()).hexdigest()[: env_int("HASH_VALUE_LEN")]
