@@ -1,5 +1,0 @@
-{
-   "huey":["redis==2.10.6", "huey==1.10.2"],
-   "ujson":"ujson==1.35",
-   "xxhash":"xxhash==1.2.0"
-}
