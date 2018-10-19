@@ -10,4 +10,6 @@ value settings can be changed.
 .. toctree::
    :maxdepth: 2
 
-   sub_settings/general.rst
+   environment/general.rst
+   environment/database.rst
+   environment/hash.rst
