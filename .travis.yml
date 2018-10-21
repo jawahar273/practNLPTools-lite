@@ -14,6 +14,9 @@ python:
 notifications:
   email: false
 
+git:
+  submodules: false
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip3 install -r requirements.txt
@@ -25,6 +28,7 @@ install:
 script:
   - python setup.py install
   # - git submodule update --init --recursive
+  - git clone https://github.com/baojie/senna senna
   - git lfs logs last
   - coverage run pntl/tools.py 
   - pntl -SE ./pntl/senna

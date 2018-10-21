@@ -12,7 +12,7 @@ specific property in database.
 |              |              | given name and all the value stored    |
 |              |              | under this table.                      |
 +--------------+--------------+----------------------------------------+
-| DATABASE_ECHO| DEBUG        | Show's what `sqlalchemy`               |
+| DATABASE_ECHO| DEBUG        | Show's what sqlalchemy                 |
 |              |              |  doing inside itself.                  |
 +--------------+--------------+----------------------------------------+
 | DATABASE_URL | db_url       | Set url which is support by DB-driver_ |
