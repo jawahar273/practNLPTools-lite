@@ -24,7 +24,7 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - python setup.py install
-  - git submodule update --init --recursive
+  # - git submodule update --init --recursive
   - git lfs logs last
   - coverage run pntl/tools.py 
   - pntl -SE ./pntl/senna

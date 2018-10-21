@@ -7,9 +7,6 @@ project through **environment variable**.
 By mapping the environment variable with
 value settings can be changed.
 
-.. toctree::
-   :maxdepth: 2
-
-   environment/general.rst
-   environment/database.rst
-   environment/hash.rst
+.. include:: ./environment/general.rst
+.. include:: ./environment/database.rst
+.. include:: ./environment/hash.rst
