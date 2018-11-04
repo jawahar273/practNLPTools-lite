@@ -274,10 +274,3 @@ todo_include_todos = True
 
 sys.path.insert(0, os.path.abspath("../.."))
 sys.path.append(os.getcwd().rsplit(os.path.sep)[0])
-
-
-def setup(app):
-    import IPython
-
-    IPython.embed()
-    app.add_stylesheet("css/table.css")
