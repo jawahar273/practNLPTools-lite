@@ -277,4 +277,7 @@ sys.path.append(os.getcwd().rsplit(os.path.sep)[0])
 
 
 def setup(app):
+    import IPython
+
+    IPython.embed()
     app.add_stylesheet("css/table.css")
