@@ -10,6 +10,6 @@ value settings can be changed.
 .. toctree::
    :maxdepth: 4
 
-   settings/general
-   settings/database
-   settings/hash
+   environment_docs/general
+   environment_docs/database
+   environment_docs/hash

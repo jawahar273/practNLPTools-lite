@@ -1,4 +1,14 @@
 """ Database class are declare in the file.
+    :py:class:`Package` is simple class for only used in
+    accessing and storing the result of the output value.
+    By using the hash string the result can be easly access
+    with out must computing power rather leading database engine
+    searching for as. In worst case the db engine has to look
+    up on the all the row for matching or the sentence might
+    be realy long which inter must of its time.
+    :py:class:`ElasticPackage` is still under construction as
+    it planning to intergate with elastic search engine which
+    intern increase the searching 2x speed(only theroy).
 """
 
 from sqlalchemy import Column, Integer, String, UnicodeText
@@ -40,9 +50,9 @@ class AbstractPackage(Base):
 
 class Package(AbstractPackage):
 
-    __tablename__ = env_str("TABLENAME", "same_pc")
+    __tablename__ = env_str("TABLENAME", default="same_pc")
 
-    hash_str = Column(String(env_int("HASH_VALUE_LEN", 20)), unique=True)
+    hash_str = Column(String(env_int("HASH_VALUE_LEN", default=20)), unique=True)
 
     def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
 

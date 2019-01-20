@@ -58,7 +58,11 @@ def import_class(value):
 
 
 def pntl_hash(to_hex):
-
+    """
+    As the name suggest it wokring based configuration of
+    the user but the default hash string is :py:class:`hashlib.md5` of
+    standard libery
+    """
     hash_ = import_class(env_str("HASH_CLASS", "hashlib.md5"))
 
     return hash_(to_hex.encode()).hexdigest()[: env_int("HASH_VALUE_LEN")]

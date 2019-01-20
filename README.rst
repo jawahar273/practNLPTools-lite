@@ -53,7 +53,12 @@ Dependency Extractor.
 | FOSSA           |   |FOSSA Status||
 +-----------------+-----------------+
 
-* Documentation: https://pntl.readthedocs.io
+* Documentation `docs1`_ 
+.. _docs1: https://pntl.readthedocs.io
+
+.. note::
+  After version 0.3.0+ pntl should able to store the result into
+  database for later usage.
 
 QuickStart 
 ==========
