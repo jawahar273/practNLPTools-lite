@@ -37,14 +37,9 @@ Dependency Extractor.
      :target: https://pyup.io/repos/github/jawahar273/practNLPTools-lite/
      :alt: Python 3
 
-.. |Wercker status| image:: https://app.wercker.com/status/758bf4fa0e3bb9066d118385ee4aac1f/s/master
-   :target: https://app.wercker.com/project/byKey/758bf4fa0e3bb9066d118385ee4aac1f
-
 +-----------------+-----------------+
 |    name         | status          |
 +=================+=================+
-| Wercker status  | |Wercker status||
-+-----------------+-----------------+
 | PyPi            |    |pypi status||
 +-----------------+-----------------+
 | travis          |  |travis status||
