@@ -12,6 +12,7 @@ Contents:
    cli
    api
    environment
+   db/readme
    issues
    stanford_installing_issues
    changelog

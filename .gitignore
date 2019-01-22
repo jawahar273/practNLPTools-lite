@@ -1,3 +1,11 @@
+
+# virtual env
+pntl_vir
+.env
+.env.bash
+temp_test*.py
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -62,10 +70,3 @@ target/
 
 # pyenv python configuration file
 .python-version
-
-# virtual env
-pntl_vir
-.env
-.env.bash
-main.py
-*.kv

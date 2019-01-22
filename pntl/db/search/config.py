@@ -4,7 +4,7 @@ from json import loads
 
 from elasticsearch_dsl import connections
 
-from pntl.utils import env_json
+from pntl.db.utils import env_json
 
 
 def connect():

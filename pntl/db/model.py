@@ -6,18 +6,23 @@
     searching for as. In worst case the db engine has to look
     up on the all the row for matching or the sentence might
     be realy long which inter must of its time.
-    :py:class:`ElasticPackage` is still under construction as
+    .. note::
+        Users can customise the default behaviour using user
+        define class in changing inserting the class in `DB_CLASS`.
+ 
+    :py:class:`ElasticPackage`  is still under construction as
     it planning to intergate with elastic search engine which
     intern increase the searching 2x speed(only theroy).
 """
 
 from sqlalchemy import Column, Integer, String, UnicodeText
+from sqlalchemy.exc import SQLAlchemyError
 
 from pntl.db.config import Base
 from pntl.db.json_field import JSONEncodedDict
-from pntl.db.search.engine import ElasticEngine
 
-from pntl.utils import pntl_hash, env_int, env_str
+from pntl.db.utils import pntl_hash, env_int, env_str
+from pntl.db.search.engine import ElasticEngine
 
 
 def _json_field(value):
@@ -30,6 +35,20 @@ def _json_field(value):
     :rtype: :py:class:JSONEncodedDict
     """
     return JSONEncodedDict(value)
+
+
+class DuplicateAnomaly(SQLAlchemyError):
+    """
+    Rasie when there is duplicate entry (or) anomaly in
+    the database. This exception is just a way to make
+    some adjustment for out-of-box write to database.
+    """
+
+    def __init__(self, *arg, **kw):
+
+        super().__init__(
+            self, f"Duplicate anomaly(or)entry has been detected \n {kw.get('msg')}"
+        )
 
 
 class AbstractPackage(Base):
@@ -46,13 +65,12 @@ class AbstractPackage(Base):
     srl = Column(_json_field(env_int("SRL_LEN")))
     chunk = Column(_json_field(env_int("CHUNK_LEN")))
     verbs = Column(_json_field(env_int("VERB_LEN")))
+    hash_str = Column(String(env_int("HASH_VALUE_LEN", default=20)), unique=True)
 
 
 class Package(AbstractPackage):
 
-    __tablename__ = env_str("TABLENAME", default="same_pc")
-
-    hash_str = Column(String(env_int("HASH_VALUE_LEN", default=20)), unique=True)
+    __tablename__ = env_str("TABLENAME", default="simple_db")
 
     def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
 
@@ -66,7 +84,59 @@ class Package(AbstractPackage):
         self.verbs = verbs
         self.hash_str = pntl_hash(words)
 
+    @classmethod
+    def filter(cls, search_text):
+        """
+        Find the hash value of the given sentence.
+        """
+        return pntl_hash(search_text)
+
 
 class ElasticPackage(AbstractPackage):
 
-    __tablename__ = env_str("TABLENAME", "dist")
+    __tablename__ = env_str("TABLENAME", "elastic_db")
+
+    def __init__(self, words, syntax_tree, pos, ner, dep_parse, srl, chunk, verbs):
+        """
+        In using this class the result will be saved into the database
+        and the result will be saved in elastic search engine.
+        """
+        self.words = words
+        self.syntax_tree = syntax_tree
+        self.pos = pos
+        self.ner = ner
+        self.dep_parse = dep_parse
+        self.srl = srl
+        self.chunk = chunk
+        self.verbs = verbs
+        self.hash_str = pntl_hash(words)
+
+        self.save_elastic({"words": self.words, "verbs": self.verbs})
+
+    @classmethod
+    def save_elastic(cls, kw):
+        """
+        Calling on each time if there is inserting value
+        into the db.
+        .. warning::
+        This work flow don't detect duplicate.
+        """
+
+        ElasticEngine(kw)
+
+    @classmethod
+    def filter(cls, search_text):
+        """
+        Search method is used for searching the elastic server
+        for the given `sentence` and then it is passed to the db
+        to fetch the details result.
+        """
+
+        response = ElasticEngine.query(search_text, "match")
+        # quick ref: must uncomment
+        # if ElasticEngine.detectDuplicate(response.hits):
+        #     raise DuplicateAnomaly(msg="May be Out-of-box write into the server")
+
+        # quick ref: need some kind of warning system if the lenght
+        # of the `hits` more than one.
+        return pntl_hash(response[0].words)

@@ -11,6 +11,6 @@ class AbstractEngine(ABC):
         raise NotImplementedError("Child class has not been implemented")
 
     @abstractmethod
-    def filter(self, *args, **kwargs):
+    def query(self, *args, **kwargs):
 
         return self.__not_implemented()

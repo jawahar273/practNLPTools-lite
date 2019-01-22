@@ -38,27 +38,35 @@ based on hash value (such as generation).
     (follow `link <http://elasticsearch-dsl.readthedocs.io/>`_).
 
 """
+import logging
+
+logging.basicConfig(
+    filename="db.log", filemode="w", format="%(name)s - %(levelname)s - %(message)s"
+)
 
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import event
 
 from pntl.db.config import SessionMaker
 from pntl.db.utils import import_class, env_str
-
-package = "pntl.db.model.{}".format(env_str("DB_CLASS"))
+from pntl.db.model import DuplicateAnomaly
 
 
 class EntryPoint:
 
     """EntryPoint class define as access point
-    for the class in `db.model` file.
+    for the class in :py:class:`pntl.db.model` file.
 
     """
 
     def __init__(self):
 
-        self.db = import_class(package)
+        self.db = import_class(
+            f"{env_str('DB_CLASS', default='pntl.db.model.Package')}"
+        )
         self.session = SessionMaker()
         self.create_table()
+        logging.warning("Don't forget to call `save` method")
 
     def create_table(self):
         """This method create table in
@@ -67,6 +75,9 @@ class EntryPoint:
 
         :returns: it create the engine.
         :rtype: NoneType
+
+        .. note::
+            * add filter function.
         """
         from pntl.db.config import Base, engine
 
@@ -83,22 +94,32 @@ class EntryPoint:
             ValueError("given value must `dict` with non empty..")
 
         tagged["words"] = " ".join(tagged["words"])
+        self.session.add(self.db(**tagged))
 
-        try:
+    def search(self, search_text):
 
-            self.session.add(self.db(**tagged))
+        hash_value = self.db.filter(search_text)
+        temp = self.session.query(self.db).filter(self.db.hash_str == hash_value)
+        temp_len = temp.count()
 
-        except IntegrityError as e:
-            print("duplicate sentence")
+        if temp_len == 1:
 
-    def filter(self):
-        # arg will be selected soon..
-        # In RoadMap
-        raise NotImplementedError("This function has not been implemented")
+            # quick ref: need to add custome dict model.
+            return temp[0].__dict__
+
+        else:
+
+            raise DuplicateAnomaly(msg="May be Out-of-box write has been accessed")
 
     def save(self):
 
-        self.session.commit()
+        try:
+
+            self.session.commit()
+
+        except IntegrityError as e:
+
+            logging.warning(f"{e}")
 
     def roll_back(self):
 

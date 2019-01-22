@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+0.3.2
+-----
+* Saving result in database and searching with/without elastic search
+engine
+
 0.3.0
 -----
 * Storing processed sentence into database.
