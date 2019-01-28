@@ -4,3 +4,12 @@ repos:
     hooks:
     - id: black
       language_version: python3.7
+
+# -   repo: local
+#     hooks:
+#     - id: docs
+#       name: docs
+#       language: system
+#       language_version: bash4.4.19
+#       entry: bash
+#       args: ['make_docs.sh']

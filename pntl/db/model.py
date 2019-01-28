@@ -6,6 +6,7 @@
     searching for as. In worst case the db engine has to look
     up on the all the row for matching or the sentence might
     be realy long which inter must of its time.
+
     .. note::
         Users can customise the default behaviour using user
         define class in changing inserting the class in `DB_CLASS`.

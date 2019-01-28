@@ -5,6 +5,8 @@ pntl_vir
 .env.bash
 temp_test*.py
 
+# Sphinx documentation
+docs_pntl/_build
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -61,9 +63,6 @@ coverage.xml
 
 # Django stuff:
 *.log
-
-# Sphinx documentation
-docs/_build/
 
 # PyBuilder
 target/

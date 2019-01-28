@@ -16,8 +16,6 @@ AnnotatorElastic().init()
 
 
 class ElasticEngine(AbstractEngine):
-    """docstring for SearchEngine"""
-
     def __init__(self, kwargs):
         """
         Insert into the elastic server and return

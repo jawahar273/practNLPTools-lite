@@ -1,0 +1,1 @@
+cd ./docs_pntl/ && make html && cd .. && mv ./docs_pntl/_build/html ./docs

@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pntl.db.model &mdash; practNLPTools-lite 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> practNLPTools-lite
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">practNLPTools-lite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../environment.html">Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../db/readme.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stanford_installing_issues.html">Stanford Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">practNLPTools-lite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>pntl.db.model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pntl.db.model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Database class are declare in the file.</span>
+<span class="sd">    :py:class:`Package` is simple class for only used in</span>
+<span class="sd">    accessing and storing the result of the output value.</span>
+<span class="sd">    By using the hash string the result can be easly access</span>
+<span class="sd">    with out must computing power rather leading database engine</span>
+<span class="sd">    searching for as. In worst case the db engine has to look</span>
+<span class="sd">    up on the all the row for matching or the sentence might</span>
+<span class="sd">    be realy long which inter must of its time.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Users can customise the default behaviour using user</span>
+<span class="sd">        define class in changing inserting the class in `DB_CLASS`.</span>
+<span class="sd"> </span>
+<span class="sd">    :py:class:`ElasticPackage`  is still under construction as</span>
+<span class="sd">    it planning to intergate with elastic search engine which</span>
+<span class="sd">    intern increase the searching 2x speed(only theroy).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">UnicodeText</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="k">import</span> <span class="n">SQLAlchemyError</span>
+
+<span class="kn">from</span> <span class="nn">pntl.db.config</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">pntl.db.json_field</span> <span class="k">import</span> <span class="n">JSONEncodedDict</span>
+
+<span class="kn">from</span> <span class="nn">pntl.db.utils</span> <span class="k">import</span> <span class="n">pntl_hash</span><span class="p">,</span> <span class="n">env_int</span><span class="p">,</span> <span class="n">env_str</span>
+<span class="kn">from</span> <span class="nn">pntl.db.search.engine</span> <span class="k">import</span> <span class="n">ElasticEngine</span>
+
+
+<span class="k">def</span> <span class="nf">_json_field</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Just a proxy name for the :py:class:JSONEncodedDict</span>
+
+<span class="sd">    [description]</span>
+<span class="sd">    :param value: len the field(for now)</span>
+<span class="sd">    :type value: str</span>
+<span class="sd">    :returns: instance of :py:class:JSONEncodedDict</span>
+<span class="sd">    :rtype: :py:class:JSONEncodedDict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">JSONEncodedDict</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DuplicateAnomaly"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.DuplicateAnomaly">[docs]</a><span class="k">class</span> <span class="nc">DuplicateAnomaly</span><span class="p">(</span><span class="n">SQLAlchemyError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rasie when there is duplicate entry (or) anomaly in</span>
+<span class="sd">    the database. This exception is just a way to make</span>
+<span class="sd">    some adjustment for out-of-box write to database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="s2">&quot;Duplicate anomaly(or)entry has been detected </span><span class="se">\n</span><span class="s2"> {kw.get(&#39;msg&#39;)}&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AbstractPackage"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.AbstractPackage">[docs]</a><span class="k">class</span> <span class="nc">AbstractPackage</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+
+    <span class="n">__abstract__</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;extend_existing&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">UnicodeText</span><span class="p">())</span>
+    <span class="n">syntax_tree</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">UnicodeText</span><span class="p">())</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;POS_LEN&quot;</span><span class="p">)))</span>
+    <span class="n">ner</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;NER_LEN&quot;</span><span class="p">)))</span>
+    <span class="n">dep_parse</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;DEP_LEN&quot;</span><span class="p">)),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">srl</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;SRL_LEN&quot;</span><span class="p">)))</span>
+    <span class="n">chunk</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;CHUNK_LEN&quot;</span><span class="p">)))</span>
+    <span class="n">verbs</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">_json_field</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;VERB_LEN&quot;</span><span class="p">)))</span>
+    <span class="n">hash_str</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">env_int</span><span class="p">(</span><span class="s2">&quot;HASH_VALUE_LEN&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Package"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.Package">[docs]</a><span class="k">class</span> <span class="nc">Package</span><span class="p">(</span><span class="n">AbstractPackage</span><span class="p">):</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="n">env_str</span><span class="p">(</span><span class="s2">&quot;TABLENAME&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;simple_db&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">syntax_tree</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ner</span><span class="p">,</span> <span class="n">dep_parse</span><span class="p">,</span> <span class="n">srl</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">verbs</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">syntax_tree</span> <span class="o">=</span> <span class="n">syntax_tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ner</span> <span class="o">=</span> <span class="n">ner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dep_parse</span> <span class="o">=</span> <span class="n">dep_parse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">srl</span> <span class="o">=</span> <span class="n">srl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chunk</span> <span class="o">=</span> <span class="n">chunk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbs</span> <span class="o">=</span> <span class="n">verbs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_str</span> <span class="o">=</span> <span class="n">pntl_hash</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Package.filter"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.Package.filter">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">search_text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the hash value of the given sentence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pntl_hash</span><span class="p">(</span><span class="n">search_text</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ElasticPackage"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.ElasticPackage">[docs]</a><span class="k">class</span> <span class="nc">ElasticPackage</span><span class="p">(</span><span class="n">AbstractPackage</span><span class="p">):</span>
+
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="n">env_str</span><span class="p">(</span><span class="s2">&quot;TABLENAME&quot;</span><span class="p">,</span> <span class="s2">&quot;elastic_db&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">syntax_tree</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">ner</span><span class="p">,</span> <span class="n">dep_parse</span><span class="p">,</span> <span class="n">srl</span><span class="p">,</span> <span class="n">chunk</span><span class="p">,</span> <span class="n">verbs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In using this class the result will be saved into the database</span>
+<span class="sd">        and the result will be saved in elastic search engine.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">syntax_tree</span> <span class="o">=</span> <span class="n">syntax_tree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ner</span> <span class="o">=</span> <span class="n">ner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dep_parse</span> <span class="o">=</span> <span class="n">dep_parse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">srl</span> <span class="o">=</span> <span class="n">srl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chunk</span> <span class="o">=</span> <span class="n">chunk</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbs</span> <span class="o">=</span> <span class="n">verbs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_str</span> <span class="o">=</span> <span class="n">pntl_hash</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_elastic</span><span class="p">({</span><span class="s2">&quot;words&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span><span class="p">,</span> <span class="s2">&quot;verbs&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbs</span><span class="p">})</span>
+
+<div class="viewcode-block" id="ElasticPackage.save_elastic"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.ElasticPackage.save_elastic">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">save_elastic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calling on each time if there is inserting value</span>
+<span class="sd">        into the db.</span>
+<span class="sd">        .. warning::</span>
+<span class="sd">        This work flow don&#39;t detect duplicate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ElasticEngine</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ElasticPackage.filter"><a class="viewcode-back" href="../../../db/readme.html#pntl.db.model.ElasticPackage.filter">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">search_text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search method is used for searching the elastic server</span>
+<span class="sd">        for the given `sentence` and then it is passed to the db</span>
+<span class="sd">        to fetch the details result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">ElasticEngine</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">search_text</span><span class="p">,</span> <span class="s2">&quot;match&quot;</span><span class="p">)</span>
+        <span class="c1"># quick ref: must uncomment</span>
+        <span class="c1"># if ElasticEngine.detectDuplicate(response.hits):</span>
+        <span class="c1">#     raise DuplicateAnomaly(msg=&quot;May be Out-of-box write into the server&quot;)</span>
+
+        <span class="c1"># quick ref: need some kind of warning system if the lenght</span>
+        <span class="c1"># of the `hits` more than one.</span>
+        <span class="k">return</span> <span class="n">pntl_hash</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">words</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jawahar S
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pntl.db.end_point &mdash; practNLPTools-lite 0.2.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> practNLPTools-lite
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">practNLPTools-lite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../environment.html">Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../db/readme.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Issues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stanford_installing_issues.html">Stanford Parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">practNLPTools-lite</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>pntl.db.end_point</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pntl.db.end_point</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">EntryPoint will be act as interface</span>
+<span class="sd">medium for acessing the db api (sqlalchemy).</span>
+
+<span class="sd">.. warning::</span>
+
+<span class="sd">    Please install `SQL Database driver` for python</span>
+<span class="sd">    manully `driver link &lt;https://docs.sqlalchemy.org/en/latest/dialects/&gt;`_</span>
+
+<span class="sd">Hash Value&#39;s</span>
+<span class="sd">-------------</span>
+
+<span class="sd">Hash will be saved on to the database based</span>
+<span class="sd">on the hash value return by the function which selected</span>
+<span class="sd">by you.</span>
+<span class="sd">As the hash function may depends on the system&#39;s</span>
+<span class="sd">property, such as seed values may diffrent from</span>
+<span class="sd">system to system.</span>
+<span class="sd">&quot;Is it possible to distribute the db backup for another&#39;s system</span>
+<span class="sd">without any problem?&quot;</span>
+<span class="sd">It is highly recommend not to make any dependency</span>
+<span class="sd">based on hash value (such as generation).</span>
+
+<span class="sd">.. note::</span>
+
+<span class="sd">    But using standard libery of python</span>
+<span class="sd">    it possible to get same result on</span>
+<span class="sd">    all system.</span>
+
+
+<span class="sd">.. todo::</span>
+
+<span class="sd">    [In progress]</span>
+<span class="sd">    Change the class name in the .env to `DistPackage` to</span>
+<span class="sd">    accessing the table which is related to the elasticserach</span>
+<span class="sd">    stores and set bash for the enviroment variable</span>
+<span class="sd">    `ELASTICSEARCH_HOST`</span>
+<span class="sd">    (follow `link &lt;http://elasticsearch-dsl.readthedocs.io/&gt;`_).</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;db.log&quot;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy.exc</span> <span class="k">import</span> <span class="n">IntegrityError</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">event</span>
+
+<span class="kn">from</span> <span class="nn">pntl.db.config</span> <span class="k">import</span> <span class="n">SessionMaker</span>
+<span class="kn">from</span> <span class="nn">pntl.db.utils</span> <span class="k">import</span> <span class="n">import_class</span><span class="p">,</span> <span class="n">env_str</span>
+<span class="kn">from</span> <span class="nn">pntl.db.model</span> <span class="k">import</span> <span class="n">DuplicateAnomaly</span>
+
+
+<div class="viewcode-block" id="EntryPoint"><a class="viewcode-back" href="../../../end_point.html#pntl.db.end_point.EntryPoint">[docs]</a><span class="k">class</span> <span class="nc">EntryPoint</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;EntryPoint class define as access point</span>
+<span class="sd">    for the class in :py:class:`pntl.db.model` file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">import_class</span><span class="p">(</span>
+            <span class="n">f</span><span class="s2">&quot;{env_str(&#39;DB_CLASS&#39;, default=&#39;pntl.db.model.Package&#39;)}&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">SessionMaker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_table</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Don&#39;t forget to call `save` method&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="EntryPoint.create_table"><a class="viewcode-back" href="../../../end_point.html#pntl.db.end_point.EntryPoint.create_table">[docs]</a>    <span class="k">def</span> <span class="nf">create_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method create table in</span>
+<span class="sd">        database if it exit then it simply</span>
+<span class="sd">        omittes.</span>
+
+<span class="sd">        :returns: it create the engine.</span>
+<span class="sd">        :rtype: NoneType</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            * add filter function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pntl.db.config</span> <span class="k">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">engine</span>
+
+        <span class="k">return</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EntryPoint.insert"><a class="viewcode-back" href="../../../end_point.html#pntl.db.end_point.EntryPoint.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tagged</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adding the value into  the database</span>
+<span class="sd">        with the session of sqlalchme.</span>
+
+<span class="sd">        :param dicit tagged: tagged value from SENNA</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tagged</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tagged</span><span class="p">:</span>
+
+            <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;given value must `dict` with non empty..&quot;</span><span class="p">)</span>
+
+        <span class="n">tagged</span><span class="p">[</span><span class="s2">&quot;words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tagged</span><span class="p">[</span><span class="s2">&quot;words&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">(</span><span class="o">**</span><span class="n">tagged</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_text</span><span class="p">):</span>
+
+        <span class="n">hash_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">search_text</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">hash_str</span> <span class="o">==</span> <span class="n">hash_value</span><span class="p">)</span>
+        <span class="n">temp_len</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">temp_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="c1"># quick ref: need to add custome dict model.</span>
+            <span class="k">return</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="n">DuplicateAnomaly</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;May be Out-of-box write has been accessed&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{e}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">roll_back</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Jawahar S
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
