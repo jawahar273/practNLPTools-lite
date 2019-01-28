@@ -112,7 +112,7 @@ class ElasticPackage(AbstractPackage):
         self.verbs = verbs
         self.hash_str = pntl_hash(words)
 
-        self.save_elastic({"words": self.words, "verbs": self.verbs})
+        ElasticEngine({"words": self.words, "verbs": self.verbs}).save()
 
     @classmethod
     def save_elastic(cls, kw):
@@ -122,7 +122,6 @@ class ElasticPackage(AbstractPackage):
         .. warning::
         This work flow don't detect duplicate.
         """
-
         ElasticEngine(kw)
 
     @classmethod

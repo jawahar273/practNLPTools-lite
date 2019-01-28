@@ -22,10 +22,9 @@ class ElasticEngine(AbstractEngine):
         `True` if success.
         """
         self.elastic = AnnotatorElastic(**kwargs)
-        self.save(self.elastic.words)
 
-    @classmethod
-    def save(cls, search_text):
+    # @classmethod
+    def save(self):
         """
         Save function make a request to the elastic server
         and making custom check constrain on the server.
@@ -38,12 +37,16 @@ class ElasticEngine(AbstractEngine):
         # quick ref: using async/concurrent concept for speeding
         # the process
 
-        response = cls.query(search_text, matching_type="match", status=True)
+        response = self.query(self.elastic.words, matching_type="match")
 
-        if response:
-            return AnnotatorElastic.save()
+        if self.detectDuplicate(response.hits):
 
-        return
+            from pntl.db.search.elastic_model import DuplicateAnomalyElastic
+
+            raise DuplicateAnomalyElastic(f"This sentence saved already.")
+        else:
+
+            return self.elastic.save()
 
     @classmethod
     def detectDuplicate(cls, hits):
