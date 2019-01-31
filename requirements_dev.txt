@@ -1,6 +1,6 @@
 
 # Database
-psycopg2-binary==2.7.6.1
+psycopg2-binary==2.7.7
 
 pip==19.0.1
 bumpversion==0.5.3
