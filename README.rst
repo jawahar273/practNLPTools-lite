@@ -2,6 +2,8 @@
 practNLPTools-lite
 ==================
 
+**pntl.db** module have moved as new python package.
+
 .. warning::
   
     CLI is only for example purpose don't use for long running jobs.

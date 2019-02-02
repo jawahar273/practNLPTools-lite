@@ -19,6 +19,5 @@ pytest-cov==2.6.1
 sphinx_rtd_theme==0.4.2
 pre-commit==1.14.2
 
-python-dotenv==0.10.1
 python-dotenv[cli]==0.10.1
 
