@@ -5,6 +5,10 @@ pntl_vir
 .env.bash
 temp_test*.py
 
+# pntl.db {==>} snowbase new pip file
+
+snowbase/*
+
 # Sphinx documentation
 docs_pntl/_build/*
 

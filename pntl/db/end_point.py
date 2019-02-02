@@ -88,6 +88,8 @@ class EntryPoint:
         with the session of sqlalchme.
 
         :param dicit tagged: tagged value from SENNA
+
+        # quick ref: json schema validations.
         """
         if not isinstance(tagged, dict) and not tagged:
 

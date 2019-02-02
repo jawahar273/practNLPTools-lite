@@ -1,4 +1,3 @@
-
 # encoding: utf-8
 # Practical Natural Language Processing Tools (practNLPTools-lite):
 #               Combination of Senna and Stanford dependency Extractor
@@ -23,8 +22,6 @@ try:
 except ImportError:
     RED = " "
     BLUE = " "
-
-from pntl.db.end_point import EntryPoint
 
 
 class Annotator:
@@ -680,6 +677,11 @@ class Annotator:
 
         if self.save_all:
 
+            from importlib import import_module
+
+            end_point = import_module(
+                f"{os.getenv('ENDPOINT_CLASS', default='snowbase.end_point.EntryPoint')}"
+            )
             end_point = EntryPoint()
             self.__to_sql(annotations, end_point)
 
