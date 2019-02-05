@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.3.2
+0.3.3
 -----
 * Bug fixed in saving result in elastic server.
 0.3.2
