@@ -1,23 +1,23 @@
 
 # Database
-psycopg2-binary==2.7.6.1
+psycopg2-binary==2.7.7
 
-pip==18.1
+pip==19.0.1
 bumpversion==0.5.3
 wheel==0.32.3
 watchdog==0.9.0
-flake8==3.6.0
+flake8==3.7.5
 tox==3.7.0
-cryptography==2.4.2
-Sphinx==1.8.3
+cryptography==2.5
+Sphinx==1.8.4
 coverage==4.5.2
-pytest==4.1.1
+pytest==4.2.0
 pytest-runner==4.2
 pytest-cov==2.6.1
 
 # miscellaneous
 sphinx_rtd_theme==0.4.2
-pre-commit==1.14.2
+pre-commit==1.14.3
 
 python-dotenv[cli]==0.10.1
 
