@@ -13,6 +13,8 @@ snowbase*
 
 # Sphinx documentation
 docs_pntl/_build/*
+docs/_modules
+docs/_sources
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -5,6 +5,7 @@ CHANGELOG
 0.3.3
 -----
 * Bug fixed in saving result in elastic server.
+
 0.3.2
 -----
 * Saving result in database and searching with/without elastic search

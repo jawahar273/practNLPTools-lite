@@ -1,5 +1,6 @@
 Endpoint API
 ------------
 
-.. automodule:: pntl.db.end_point
-   :members:
+The Endpoint API is moved to new repo `snowbase`_
+
+.. _snowbase: https://github.com/jawahar273/snowbase 

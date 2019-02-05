@@ -156,8 +156,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for pntl.tools</h1><div class="highlight"><pre>
-<span></span>
-<span class="c1"># encoding: utf-8</span>
+<span></span><span class="c1"># encoding: utf-8</span>
 <span class="c1"># Practical Natural Language Processing Tools (practNLPTools-lite):</span>
 <span class="c1">#               Combination of Senna and Stanford dependency Extractor</span>
 <span class="c1"># Copyright (C) 2018 PractNLP-lite Project</span>
@@ -181,8 +180,6 @@
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">RED</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
     <span class="n">BLUE</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
-
-<span class="kn">from</span> <span class="nn">pntl.db.end_point</span> <span class="k">import</span> <span class="n">EntryPoint</span>
 
 
 <div class="viewcode-block" id="Annotator"><a class="viewcode-back" href="../../annotator_api.html#pntl.tools.Annotator">[docs]</a><span class="k">class</span> <span class="nc">Annotator</span><span class="p">:</span>
@@ -237,6 +234,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">end_point</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save_all</span> <span class="o">=</span> <span class="n">save_all</span>
 
+        <span class="c1"># quick ref:- review needed</span>
         <span class="k">if</span> <span class="n">env</span><span class="p">:</span>
 
             <span class="kn">from</span> <span class="nn">dotenv</span> <span class="k">import</span> <span class="n">load_dotenv</span>
@@ -838,6 +836,11 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_all</span><span class="p">:</span>
 
+            <span class="kn">from</span> <span class="nn">importlib</span> <span class="k">import</span> <span class="n">import_module</span>
+
+            <span class="n">end_point</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span>
+                <span class="n">f</span><span class="s2">&quot;{os.getenv(&#39;ENDPOINT_CLASS&#39;, default=&#39;snowbase.end_point.EntryPoint&#39;)}&quot;</span>
+            <span class="p">)</span>
             <span class="n">end_point</span> <span class="o">=</span> <span class="n">EntryPoint</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__to_sql</span><span class="p">(</span><span class="n">annotations</span><span class="p">,</span> <span class="n">end_point</span><span class="p">)</span>
 
