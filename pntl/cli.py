@@ -2,13 +2,14 @@
 
 """Console script for practnlptools_lite."""
 import os.path
-import click
+import subprocess
 import urllib.request
+
+from colorama import Fore, init
+import click
 
 from pntl.tools import Annotator
 from pntl.utils import skipgrams
-
-from colorama import Fore, init
 
 init(autoreset=True)
 
@@ -32,12 +33,12 @@ def download_files():
     import pntl
 
     file_loc = os.path.split(pntl.__file__)[0]
-    print(
+    click.echo(
         ("location {} and \n list of files \n \t{}" "\n \t{}" "\n \t{}").format(
             file_loc, "stanford-parser", "dependency sh", "lexparser sh"
         )
     )
-    print(Fore.GREEN + "downloading depend on the Network speed \n\n")
+    click.echo(Fore.GREEN + "downloading depend on the Network speed \n\n")
 
     with urllib.request.urlopen(stanford_parser_url) as spl:
 
@@ -45,7 +46,7 @@ def download_files():
 
             file.write(spl.read())
 
-    print(Fore.GREEN + "downloading stanford-parser done..")
+    click.echo(Fore.GREEN + "downloading stanford-parser done..")
 
     with urllib.request.urlopen(lexparser_url) as lpl:
 
@@ -53,7 +54,7 @@ def download_files():
 
             file.write(lpl.read())
 
-    print(Fore.GREEN + "downloading lexparser parse sh done..")
+    click.echo(Fore.GREEN + "downloading lexparser parse sh done..")
 
     with urllib.request.urlopen(dep_parse_url) as dpl:
 
@@ -61,7 +62,14 @@ def download_files():
 
             file.write(dpl.read())
 
-    print(Fore.GREEN + "downloading dependency parse sh done..")
+    click.echo(Fore.GREEN + "downloading dependency parse sh done..")
+
+    click.echo(Fore.GREEN + "downloading senna for pntl")
+    subprocess.call(
+        "git clone https://github.com/baojie/senna.git ./pntl/senna".split(),
+        shell=True,
+        stdout=subprocess.PIPE,
+    )
 
 
 def main(senna_path="", sent="", dep_model="", batch=False, stp_dir="", init=False):
@@ -82,40 +90,40 @@ def main(senna_path="", sent="", dep_model="", batch=False, stp_dir="", init=Fal
 
     if not batch:
 
-        print("\n", sent, "\n")
+        click.echo("\n", sent, "\n")
 
         sent = sent.split()
         args = "-srl -pos".strip().split()
 
-        print("conll:\n", annotator.get_conll_format(sent, args))
+        click.echo("conll:\n", annotator.get_conll_format(sent, args))
 
         temp = annotator.get_annoations(sent, dep_parse=True)
 
-        print("dep_parse:\n", temp["dep_parse"])
+        click.echo("dep_parse:\n", temp["dep_parse"])
 
-        print("chunk:\n", temp["chunk"])
+        click.echo("chunk:\n", temp["chunk"])
 
-        print("pos:\n", temp["pos"])
+        click.echo("pos:\n", temp["pos"])
 
-        print("ner:\n", temp["ner"])
+        click.echo("ner:\n", temp["ner"])
 
-        print("srl:\n", temp["srl"])
+        click.echo("srl:\n", temp["srl"])
 
-        print("syntaxTree:\n", temp["syntax_tree"])
+        click.echo("syntaxTree:\n", temp["syntax_tree"])
 
-        print("words:\n", temp["words"])
+        click.echo("words:\n", temp["words"])
 
-        print("skip gram\n", list(skipgrams(sent, n=3, k=2)))
+        click.echo("skip gram\n", list(skipgrams(sent, n=3, k=2)))
 
     else:
 
-        print("\n\nrunning batch process", "\n", "=" * 20, "\n", sent, "\n")
+        click.echo("\n\nrunning batch process", "\n", "=" * 20, "\n", sent, "\n")
 
         args = "-srl -pos".strip().split()
 
-        print("conll:\n", annotator.get_conll_format(sent, args))
+        click.echo("conll:\n", annotator.get_conll_format(sent, args))
 
-        print(Fore.BLUE + "CoNLL format is recommented for batch process")
+        click.echo(Fore.BLUE + "CoNLL format is recommented for batch process")
 
 
 @click.command()

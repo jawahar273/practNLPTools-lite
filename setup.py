@@ -39,7 +39,7 @@ extras_require = {
 
 setup(
     name="pntl",
-    version="'0.3.6'",
+    version="0.3.6",
     description=(
         "used to interface with Senna and" " stanford-parser.jar for dependency parsing"
     ),
@@ -53,13 +53,12 @@ setup(
     install_requires=parse_requirements("requirements.txt"),
     license="MIT license",
     zip_safe=False,
-    keywords="practnlptools-lite senna python pntl pysenna".split(),
+    keywords="practnlptools-lite senna python pntl".split(),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
-        "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
