@@ -1,7 +1,7 @@
 # encoding: utf-8
 # Practical Natural Language Processing Tools (practNLPTools-lite):
 #               Combination of Senna and Stanford dependency Extractor
-# Copyright (C) 2018 PractNLP-lite Project
+# Copyright (C) 2017-19 PractNLP-lite Project
 # Current Author: Jawahar S <jawahar273@gmail.com>
 # URL: https://github.com/jawahar273
 
@@ -680,10 +680,11 @@ class Annotator:
 
             from importlib import import_module
 
+            # Initalizating the `EndPoint` Method
             end_point = import_module(
                 f"{os.getenv('ENDPOINT_CLASS', default='snowbase.end_point.EntryPoint')}"
-            )
-            end_point = EntryPoint()
+            )()
+
             self.__to_sql(annotations, end_point)
 
         return annotations
@@ -695,6 +696,6 @@ class Annotator:
 
     def save(self, end_point):
         """Save is wrapper function build on
-        the top of :Class:~pntl.db.EntryPoint.
+        the top of :Class:~snowbase.end_point.EntryPoint.
         """
         end_point.save()

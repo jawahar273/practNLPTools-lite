@@ -39,7 +39,7 @@ extras_require = {
 
 setup(
     name="pntl",
-    version="version='version='0.3.5''",
+    version="version='version=''0.3.5'''",
     description=(
         "used to interface with Senna and" " stanford-parser.jar for dependency parsing"
     ),
