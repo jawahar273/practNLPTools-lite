@@ -11,7 +11,7 @@ tox==3.7.0
 cryptography==2.5
 Sphinx==1.8.4
 coverage==4.5.2
-pytest==4.2.0
+pytest==4.2.1
 pytest-runner==4.2
 pytest-cov==2.6.1
 
