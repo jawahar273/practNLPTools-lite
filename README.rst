@@ -60,7 +60,11 @@ Dependency Extractor.
 
 .. note::
   After version 0.3.0+ pntl should able to store the result into
-  database for later usage.
+  database for later usage. To save the result to database use the
+  following dependency:
+
+  `pip install git+https://github.com/jawahar273/snowbase.git`
+
 
 QuickStart 
 ==========
