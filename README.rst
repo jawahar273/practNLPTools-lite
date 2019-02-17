@@ -10,7 +10,7 @@ practNLPTools-lite
 
 Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or oldest stable code `properbranch`_]
 
-|Author| |python_version|
+|Author| |python_version| |HitCount|
 
 |Build Status| - on click this built this might take you to build of
 `practNLPTools`_ which is testing ground for this repository so don’t
@@ -20,6 +20,10 @@ worry.
 Practical Natural Language Processing Tools for Humans.
 practNLPTools is a pythonic library over `SENNA`_ and Stanford
 Dependency Extractor.
+
+
+.. |HitCount| image:: http://hits.dwyl.io/jawahar273/practNLPTools-lite.svg
+   :target: http://hits.dwyl.io/jawahar273/practNLPTools-lite
 
 .. |pypi status| image:: https://img.shields.io/pypi/v/practNLPTools-lite.svg
         :target: https://pypi.python.org/pypi/pntl
