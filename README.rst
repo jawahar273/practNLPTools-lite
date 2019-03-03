@@ -59,8 +59,10 @@ Dependency Extractor.
 | FOSSA           |   |FOSSA Status||
 +-----------------+-----------------+
 
-* Documentation `docs1`_ 
+* Documentation `docs1`_ and `docs2`_
+
 .. _docs1: https://pntl.readthedocs.io
+.. _docs2:  https://htmlpreview.github.io/?https://raw.githubusercontent.com/jawahar273/practNLPTools-lite/master/docs/index.html
 
 .. note::
   After version 0.3.0+ pntl should able to store the result into
