@@ -2,7 +2,9 @@
 practNLPTools-lite
 ==================
 
-**pntl.db** module have moved as new python package.
+**pntl.db** module have moved as new python package as `snowbase`_. 
+
+.. _snowbase: https://github.com/jawahar273/snowbase
 
 .. warning::
   
