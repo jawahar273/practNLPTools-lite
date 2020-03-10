@@ -2,19 +2,19 @@
 practNLPTools-lite
 ==================
 
-**pntl.db** module have moved as new python package as `snowbase`_. 
+This project is a fork of `biplab-iitb`_
 
-.. _snowbase: https://github.com/jawahar273/snowbase
+.. _biplab-iitb: https://github.com/biplab-iitb/practNLPTools
 
 .. warning::
   
     CLI is only for example purpose don't use for long running jobs.
 
-Creating practNLPTools in lite mode.[ get the old coding in `devbranch`_  or oldest stable code `properbranch`_]
+Get the very old code in `devbranch`_  or prior stable version `oldVersion`_.
 
 |Author| |python_version| |HitCount|
 
-|Build Status| - on click this built this might take you to build of
+|Build Status| - this built might take you to
 `practNLPTools`_ which is testing ground for this repository so don’t
 worry.
 
@@ -68,8 +68,7 @@ Dependency Extractor.
 
 .. note::
   After version 0.3.0+ pntl should able to store the result into
-  database for later usage. To save the result to database use the
-  following dependency:
+  database for later usage if needed by installing below dependency.
 
   `pip install git+https://github.com/jawahar273/snowbase.git`
 
@@ -223,14 +222,12 @@ this `link`_ and along with ``tools.py`` on ``pntl``
 
 .. note:: 
 
-   this bench mark may differt accouding to system’s working and to restult present here is exact same result in my system ububtu 4Gb RAM
-   and i3 process. If I find another good benchmark techinque then I will
-   change to it.
-
+   This benchmark may diffrent from system to sytem. The result produced here is from ububtu 4Gb RAM
+   and i3 process.
 
 .. _practNLPTools: https://github.com/jawahar273/practNLPTools-lite
 .. _SENNA: http://ronan.collobert.com/senna/
-.. _properbranch: https://github.com/jawahar273/practNLPTools-lite/tree/pyup-update-pytest-3.2.2-to-3.2.3
+.. _oldVersion: https://github.com/jawahar273/practNLPTools-lite/tree/pyup-update-pytest-3.2.2-to-3.2.3
 .. _devbranch: https://github.com/jawahar273/practNLPTools-lite/tree/dev
 
 .. |Author| image:: https://img.shields.io/badge/Author-jawahar-blue.svg
