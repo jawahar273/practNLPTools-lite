@@ -12,7 +12,7 @@ tox==3.14.3
 coverage==4.5.4
 Sphinx==2.3.1
 pytest-runner==5.1
-pytest==5.1.0
+pytest==5.4.0
 pytest-cov==2.7.1
 
 # miscellaneous
