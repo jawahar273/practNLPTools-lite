@@ -1,6 +1,6 @@
 
 # Database
-psycopg2-binary==2.8.5
+psycopg2-binary==2.8.6
 
 pip==20.2.2
 wheel==0.35.1
