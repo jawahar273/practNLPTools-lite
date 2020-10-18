@@ -2,7 +2,7 @@
 # Database
 psycopg2-binary==2.8.5
 
-pip==20.2.2
+pip==20.2.4
 wheel==0.35.1
 bumpversion==0.6.0
 watchdog==0.10.3
