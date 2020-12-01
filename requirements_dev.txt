@@ -3,7 +3,7 @@
 psycopg2-binary==2.8.5
 
 pip==20.2.2
-wheel==0.35.1
+wheel==0.36.0
 bumpversion==0.6.0
 watchdog==0.10.3
 flake8==3.7.8
